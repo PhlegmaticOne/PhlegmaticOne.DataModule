@@ -8,7 +8,6 @@
 .idea/
 [Aa]ssets/Plugins/Editor/JetBrains*
 [Aa]ssets/GeneratedLocalRepo/
-[Aa]ssets/Firebase/Plugins/
 
 # Visual Studio cache directory
 .vs/
@@ -46,9 +45,6 @@ ExportedObj/
 /*.csproj
 /Assembly-CSharp.sln
 /Assembly-CSharp.userprefs
-FillwordsSea.sln.DotSettings
-/.vs/FillwordsSea/v16/.suo
-/.vs/FillwordsSea/v16/.suo
 /dlTest.dat
 GeneratedLocalRepo
 /Assets/Resources/buildNumber.txt
