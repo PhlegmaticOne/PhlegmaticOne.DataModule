@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "495078283376",
+    "firebase_url": "https://datamodulegame-default-rtdb.firebaseio.com",
+    "project_id": "datamodulegame",
+    "storage_bucket": "datamodulegame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495078283376:android:91f49017a0e74cc263fcb5",
+        "android_client_info": {
+          "package_name": "com.phlegmaticone.datamodulegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495078283376-5pr6ak3j4kb92mlv4epg1qjgv9nsm3hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phlegmaticone.datamodulegame",
+            "certificate_hash": "5123bd5b092ee703e10d3a1b6cafdfbee94ac334"
+          }
+        },
+        {
+          "client_id": "495078283376-hul3qqag290jrgke2sm4crmmrake6e0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANDFyHuuQOtO5lWh_Whgtzsi-TJHdfl2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495078283376-brt5ofe4a3c21uciq5acvuqpb8f6sgiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

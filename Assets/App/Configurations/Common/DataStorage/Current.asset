@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bee2bf5f9ae472ea2f4ee9b2367d506, type: 3}
+  m_Name: Current
+  m_EditorClassIdentifier: 
+  _defaultOperationType: 2
+  _localStorage:
+    _storageType: 1
+    _fileConfiguration:
+      _savesDirectoryPath: Saves
+      _keyResolverConfiguration: {fileID: 11400000, guid: 6e8a71728806c0f439774e8d3e609d47, type: 2}
+      _serializationType: 0
+    _playerPrefsConfiguration:
+      _converterType: 0
+      _keyResolverConfiguration: {fileID: 11400000, guid: 6e8a71728806c0f439774e8d3e609d47, type: 2}
+    _firebaseConfiguration:
+      _keyResolverConfiguration: {fileID: 0}
+      _testUserId: 
+  _onlineStorage:
+    _storageType: 3
+    _fileConfiguration:
+      _savesDirectoryPath: 
+      _keyResolverConfiguration: {fileID: 0}
+      _serializationType: 0
+    _playerPrefsConfiguration:
+      _converterType: 0
+      _keyResolverConfiguration: {fileID: 0}
+    _firebaseConfiguration:
+      _keyResolverConfiguration: {fileID: 11400000, guid: 6e8a71728806c0f439774e8d3e609d47, type: 2}
+      _testUserId: test_id

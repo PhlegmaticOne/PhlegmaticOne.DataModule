@@ -1,0 +1,20 @@
+{
+    "name": "PhlegmaticOne.Auth",
+    "rootNamespace": "PhlegmaticOne.Auth",
+    "references": [
+        "GUID:1ac857d6b9336724c804d8481f4f7ca8",
+        "GUID:4691cd353eff1264fb85afac77a3bcff"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Firebase.Auth.dll",
+        "Firebase.Analytics.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

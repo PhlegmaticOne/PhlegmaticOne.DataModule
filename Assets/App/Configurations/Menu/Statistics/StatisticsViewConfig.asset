@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46295a45a18a48d7ad9b79adca0bfeeb, type: 3}
+  m_Name: StatisticsViewConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _blockTypeSprites:
+  - BlockType: 0
+    Sprite: {fileID: 21300000, guid: fc50cacf78989e444a63b31083767470, type: 3}
+  - BlockType: 1
+    Sprite: {fileID: 21300000, guid: 2fed058a61aa02e49a8876dbf1099980, type: 3}
+  - BlockType: 2
+    Sprite: {fileID: 21300000, guid: 4ffa1823624fa2040823a566a80421dd, type: 3}
+  - BlockType: 3
+    Sprite: {fileID: 21300000, guid: 17dfeae97a4e42743a817e9c371bdc44, type: 3}
+  - BlockType: 4
+    Sprite: {fileID: 21300000, guid: caf01b8335d43d84390f7f07568dcd20, type: 3}
+  - BlockType: 5
+    Sprite: {fileID: 21300000, guid: e710b518c90eacd4a85fc46c487b621d, type: 3}
+  - BlockType: 6
+    Sprite: {fileID: 21300000, guid: 97366217850367046b6723d367436b8b, type: 3}
+  - BlockType: 7
+    Sprite: {fileID: 21300000, guid: fb2c54396d7e7c74a9e7450bcee4ec38, type: 3}
+  - BlockType: 8
+    Sprite: {fileID: 21300000, guid: 581ddab19d25d7646865cbea9c71e6ee, type: 3}
+  - BlockType: 10
+    Sprite: {fileID: 21300000, guid: 06df96b5245102b4badd47e6873b4f0f, type: 3}
+  - BlockType: 11
+    Sprite: {fileID: 21300000, guid: 66b37c652685b464e86d622732a8beaa, type: 3}
+  - BlockType: 12
+    Sprite: {fileID: 21300000, guid: 06aac458c8516fb47a424e4b0f7cf58d, type: 3}
+  - BlockType: 13
+    Sprite: {fileID: 21300000, guid: 7fe3ab11c5b5ef643840ac8f13531a4a, type: 3}
+  - BlockType: 14
+    Sprite: {fileID: 21300000, guid: 72c331137cf408f4ba1d4abf2a6a4f50, type: 3}
+  - BlockType: 15
+    Sprite: {fileID: 21300000, guid: 779477683c7c10349bf967ba8ce0f1a3, type: 3}
+  - BlockType: 9
+    Sprite: {fileID: 21300000, guid: b3e6227a938b01a4793a4e7160bbc94b, type: 3}
