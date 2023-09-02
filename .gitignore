@@ -8,7 +8,7 @@
 .idea/
 [Aa]ssets/Plugins/Editor/JetBrains*
 [Aa]ssets/GeneratedLocalRepo/
-[Aa]ssets/Firebase/
+[Aa]ssets/Firebase/Plugins/
 
 # Visual Studio cache directory
 .vs/
