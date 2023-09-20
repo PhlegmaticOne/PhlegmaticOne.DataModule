@@ -24,13 +24,7 @@ namespace PhlegmaticOne.DataStorage.Infrastructure {
             _internetProvider = internetProvider;
             _defaultOperationType = defaultOperationType;
         }
-
-        public IEnumerable<IDataSource> AllSources(StorageOperationType operationType) {
-            var type = operationType == StorageOperationType.Auto ? _defaultOperationType : operationType;
-            var nodesSet = GetSourceSet(type);
-            return nodesSet.Sources;
-        }
-
+        
         public DataSourceBase<T> GetSource<T>(StorageOperationType operationType) {
             var type = operationType == StorageOperationType.Auto ? _defaultOperationType : operationType;
             EnsureStorageAvailable(type);

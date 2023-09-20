@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bee2bf5f9ae472ea2f4ee9b2367d506, type: 3}
   m_Name: Current
   m_EditorClassIdentifier: 
-  _defaultOperationType: 2
+  _defaultOperationType: 1
   _localStorage:
     _storageType: 1
     _fileConfiguration:
