@@ -1,10 +1,10 @@
 ﻿using PhlegmaticOne.DataStorage.Configuration.Storage;
-using PhlegmaticOne.DataStorage.Migrations.Base;
-using PhlegmaticOne.DataStorage.Migrations.Version;
+using PhlegmaticOne.DataStorageMigrations.Base;
+using PhlegmaticOne.DataStorageMigrations.Version;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PhlegmaticOne.DataStorage.Configuration {
+namespace PhlegmaticOne.DataStorageMigrations {
     [CreateAssetMenu(menuName = "Data Storage/Data Storage Migration Configuration", fileName = "DataStorageMigrationConfiguration")]
     public class DataStorageMigrationConfiguration : ScriptableObject, IDataStorageMigrationData {
         [Header("Configuration")]

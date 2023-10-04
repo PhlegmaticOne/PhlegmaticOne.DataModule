@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace PhlegmaticOne.DataStorage.DataSources.FileSource.Serializers {
     internal sealed class XmlFileSerializer : IFileSerializer {

@@ -5,11 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using PhlegmaticOne.DataStorage.Configuration.Storage;
 using PhlegmaticOne.DataStorage.Contracts;
-using PhlegmaticOne.DataStorage.Migrations.Base;
-using PhlegmaticOne.DataStorage.Migrations.Version;
 using PhlegmaticOne.DataStorage.Storage.Base;
+using PhlegmaticOne.DataStorageMigrations.Base;
+using PhlegmaticOne.DataStorageMigrations.Version;
 
-namespace PhlegmaticOne.DataStorage.Migrations {
+namespace PhlegmaticOne.DataStorageMigrations {
     public class DataStorageMigration : IDataStorageMigration {
         private readonly IList<IService> _services;
         private readonly IDataStorageMigrationData _migrationData;
@@ -57,8 +57,8 @@ namespace PhlegmaticOne.DataStorage.Migrations {
             return services.Values.ToList();
         }
 
-        private Storage.DataStorage GetStorage(DataStorageConfiguration configuration) {
-            return new Storage.DataStorage(configuration.GetSourceContainer(), _services);
+        private DataStorage.Storage.DataStorage GetStorage(DataStorageConfiguration configuration) {
+            return new DataStorage.Storage.DataStorage(configuration.GetSourceContainer(), _services);
         }
 
         private static async Task ReadFromCurrentStorage(IDataStorage currentStorage, IList<IService> services, CancellationToken ct) {

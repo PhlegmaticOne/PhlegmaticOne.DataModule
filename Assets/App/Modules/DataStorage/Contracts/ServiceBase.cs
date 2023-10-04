@@ -25,7 +25,6 @@ namespace PhlegmaticOne.DataStorage.Contracts {
             return dataStorage.DeleteAsync<T>(ct, OperationType);
         }
 
-
         public Task InitializeAsync(IDataStorage dataStorage, CancellationToken ct) {
             DataStorage = dataStorage;
             return OnInitializingAsync(ct);

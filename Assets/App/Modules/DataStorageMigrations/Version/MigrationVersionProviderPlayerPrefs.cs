@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PhlegmaticOne.DataStorage.Migrations.Version {
+namespace PhlegmaticOne.DataStorageMigrations.Version {
     public class MigrationVersionProviderPlayerPrefs : IMigrationVersionProvider {
         private const string MigrationVersionKey = "_DataStorage_MigrationVersion";
         

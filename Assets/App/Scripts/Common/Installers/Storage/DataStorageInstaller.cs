@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using App.Scripts.Common.Storage;
-using PhlegmaticOne.DataStorage.Configuration;
 using PhlegmaticOne.DataStorage.Contracts;
-using PhlegmaticOne.DataStorage.Migrations;
-using PhlegmaticOne.DataStorage.Migrations.Base;
-using PhlegmaticOne.DataStorage.Migrations.Version;
 using PhlegmaticOne.DataStorage.Storage;
 using PhlegmaticOne.DataStorage.Storage.Base;
+using PhlegmaticOne.DataStorageMigrations;
+using PhlegmaticOne.DataStorageMigrations.Base;
+using PhlegmaticOne.DataStorageMigrations.Version;
 using UnityEngine;
 using Zenject;
 using Assembly = System.Reflection.Assembly;

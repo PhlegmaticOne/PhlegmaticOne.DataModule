@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using App.Scripts.Common.Localization.Base;
 using App.Scripts.Splash.Services.Firebase;
 using PhlegmaticOne.Auth;
-using PhlegmaticOne.DataStorage.Migrations.Base;
 using PhlegmaticOne.DataStorage.Storage.Base;
+using PhlegmaticOne.DataStorageMigrations.Base;
 
 namespace App.Scripts.Splash.Services.Initializer {
     public class AppInitializer : IAppInitializer {

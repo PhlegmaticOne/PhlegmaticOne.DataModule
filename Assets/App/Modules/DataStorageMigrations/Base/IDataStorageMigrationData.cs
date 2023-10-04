@@ -1,6 +1,6 @@
 ﻿using PhlegmaticOne.DataStorage.Configuration.Storage;
 
-namespace PhlegmaticOne.DataStorage.Migrations.Base {
+namespace PhlegmaticOne.DataStorageMigrations.Base {
     public interface IDataStorageMigrationData {
         int MigrationVersion { get; }
         DataStorageConfiguration PreviousStorage { get; }

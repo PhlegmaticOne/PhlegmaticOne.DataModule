@@ -1,4 +1,4 @@
-﻿namespace PhlegmaticOne.DataStorage.Migrations.Version {
+﻿namespace PhlegmaticOne.DataStorageMigrations.Version {
     public interface IMigrationVersionProvider {
         int GetVersion();
         void SetVersion(int version);

@@ -21,7 +21,6 @@ namespace App.Scripts.Common.Dialogs.Animators {
         public TweenAnimationInfo MoveShow => _moveShow;
         public Vector2 PositionShow => _showPosition;
         public float BackgroundAlphaShow => _showBackgroundAlpha;
-        
         public TweenAnimationInfo BackgroundHide => _backgroundHide;
         public TweenAnimationInfo ContentHide => _contentHide;
         public TweenAnimationInfo MoveHide => _moveHide;

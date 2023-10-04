@@ -1,0 +1,16 @@
+{
+    "name": "PhlegmaticOne.DataStorageMigrations",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ec95e06eb93708f4f96396634ac87d7f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

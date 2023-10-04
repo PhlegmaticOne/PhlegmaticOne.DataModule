@@ -13,8 +13,6 @@ namespace PhlegmaticOne.DataStorage.DataSources {
             _sources = new Dictionary<Type, IDataSource>();
         }
 
-        public IEnumerable<IDataSource> Sources => _sources.Values;
-
         public DataSourceBase<T> Source<T>() {
             if (_sources.TryGetValue(typeof(T), out var dataNode)) {
                 return (DataSourceBase<T>)dataNode;
