@@ -2,7 +2,7 @@
   "dependencies": {
     "com.bgtools.playerprefseditor": "https://github.com/Dysman/bgTools-playerPrefsEditor.git#upm",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.scellecs.morpeh": "https://github.com/scellecs/morpeh.git",
+    "com.phlegmaticone.datastorage": "https://github.com/PhlegmaticOne/PhlegmaticOne.DataStorage.git",
     "com.unity.2d.animation": "7.0.11",
     "com.unity.2d.pixel-perfect": "5.0.3",
     "com.unity.2d.psdimporter": "6.0.7",

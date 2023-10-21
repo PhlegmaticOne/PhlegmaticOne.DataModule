@@ -13,13 +13,13 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - FruitEffects
+  - Shadows
+  - Fruits
+  - CuttingEffects
+  - UIElements
+  - Popups
   - 
   - 
   - 
@@ -40,9 +40,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4108468377
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Loading
-    uniqueID: 4108468377
+  - name: FruitEffects
+    uniqueID: 1477949433
+    locked: 0
+  - name: Shadows
+    uniqueID: 4215885877
+    locked: 0
+  - name: Fruits
+    uniqueID: 2496782979
+    locked: 0
+  - name: CuttingEffects
+    uniqueID: 3817661769
+    locked: 0
+  - name: UIElements
+    uniqueID: 205310243
     locked: 0

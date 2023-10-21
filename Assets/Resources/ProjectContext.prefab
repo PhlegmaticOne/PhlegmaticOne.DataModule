@@ -212,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2823350337798260162}
   - component: {fileID: 1825988501822173850}
+  - component: {fileID: 8725396940667974225}
   m_Layer: 0
   m_Name: DataStorageInstaller
   m_TagString: Untagged
@@ -246,5 +247,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacb708c062d4a42a2d8c397224c1d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataStorageConfiguration: {fileID: 11400000, guid: ff6878d84b9ac5e429e6d8a5a47deb11, type: 2}
-  _dataStorageMigrationConfiguration: {fileID: 11400000, guid: e67b1f6dfde4812448eba113c8841b61, type: 2}
+  _dataStorageProvider: {fileID: 8725396940667974225}
+--- !u!114 &8725396940667974225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864750901887609546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f058a2be28640f2acc8e39af954380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dataStorageProviderConfig: {fileID: 11400000, guid: 8af7af693098b4448be52cb15bffd2e8, type: 2}

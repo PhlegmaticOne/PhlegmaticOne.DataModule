@@ -14,12 +14,14 @@
       "dependencies": {},
       "hash": "d210e3d76adc0cce77f4ad2af1ade88dad6b1d5a"
     },
-    "com.scellecs.morpeh": {
-      "version": "https://github.com/scellecs/morpeh.git",
+    "com.phlegmaticone.datastorage": {
+      "version": "https://github.com/PhlegmaticOne/PhlegmaticOne.DataStorage.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "46f35461fba414213dae80a96e6bb527c40f92dc"
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "6939f06ad31be4649293494a3e8c1e34fca00807"
     },
     "com.unity.2d.animation": {
       "version": "7.0.11",

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using PhlegmaticOne.DataStorage.Contracts;
 
 namespace App.Scripts.Menu.Features.Progress.Models {
     [Serializable]
     [DataContract]
-    public class PlayerProgress {
+    public class PlayerProgress : IModel {
         
         [JsonConstructor]
         public PlayerProgress(int maxScore, int coinsCount) {
