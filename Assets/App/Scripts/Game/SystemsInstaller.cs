@@ -1,14 +1,13 @@
-﻿using App.Scripts.Game.BlocksState;
+﻿using App.Scripts.Game.Features.BoardState.Systems;
+using App.Scripts.Game.Features.Network.Systems;
+using App.Scripts.Game.Features.Physics.Systems;
+using App.Scripts.Game.Features.Spawning.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
-using App.Scripts.Game.Network;
-using App.Scripts.Game.Physics;
-using App.Scripts.Game.Spawning.Systems;
 using Zenject;
 
 namespace App.Scripts.Game {
     public class SystemsInstaller : MonoInstaller {
         public override void InstallBindings() {
-            Container.Bind<NetworkService>().AsSingle();
             BindSystems();
         }
 
@@ -16,7 +15,7 @@ namespace App.Scripts.Game {
             Container.Bind<ISystem>().To<SystemGravity>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawnByTime>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawning>().AsSingle();
-            Container.Bind<ISystem>().To<SystemBlocksStateCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemBoardStateCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemTimers>().AsSingle();
             Container.Bind<ISystem>().To<SystemNetwork>().AsSingle();
         }

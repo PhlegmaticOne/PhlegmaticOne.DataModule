@@ -10,10 +10,14 @@ namespace App.Scripts.Game.Infrastructure.Ecs.World {
         private readonly List<Entity> _entities;
         private readonly List<ISystem> _systems;
         
-        public World(IEnumerable<ISystem> systems) {
+        public World() {
             _entities = new List<Entity>();
             _frameCacheEntities = new List<Entity>();
-            _systems = systems.ToList();
+            _systems = new List<ISystem>();
+        }
+
+        public void Initialize(IEnumerable<ISystem> systems) {
+            _systems.AddRange(systems);
         }
 
         public void Construct() {
@@ -49,16 +53,8 @@ namespace App.Scripts.Game.Infrastructure.Ecs.World {
         }
 
         public void Update(float deltaTime) {
-            if (_frameCacheEntities.Count > 0) {
-                _entities.AddRange(_frameCacheEntities);
-                _frameCacheEntities.Clear();
-            }
-            
-            foreach (var system in _systems) {
-                system.OnUpdate(deltaTime);
-            }
-            
-            RemoveEntitiesEndOfFrame();
+            UpdateSystems(deltaTime);
+            CommitChanges();
         }
         
         public void FixedUpdate(float deltaTime) {
@@ -70,6 +66,24 @@ namespace App.Scripts.Game.Infrastructure.Ecs.World {
         public void Dispose() {
             foreach (var system in _systems) {
                 system.OnDispose();
+            }
+        }
+
+        private void CommitChanges() {
+            RemoveEntitiesEndOfFrame();
+            AddFrameCachedEntities();
+        }
+
+        private void UpdateSystems(float deltaTime) {
+            foreach (var system in _systems) {
+                system.OnUpdate(deltaTime);
+            }
+        }
+
+        private void AddFrameCachedEntities() {
+            if (_frameCacheEntities.Count > 0) {
+                _entities.AddRange(_frameCacheEntities);
+                _frameCacheEntities.Clear();
             }
         }
 

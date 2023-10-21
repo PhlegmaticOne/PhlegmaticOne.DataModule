@@ -8,10 +8,11 @@ namespace App.Scripts.Game.Infrastructure.Ecs.World {
         [SerializeField] private bool _isRunGame;
         
         private World _world;
-        
+
         [Inject]
-        private void Construct(IEnumerable<ISystem> systems) {
-            _world = new World(systems);
+        private void Construct(World world, IEnumerable<ISystem> systems) {
+            _world = world;
+            _world.Initialize(systems);
         }
 
         private void Awake() {
