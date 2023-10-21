@@ -14,8 +14,6 @@ namespace App.Scripts.Game {
             };
             _client.OnData = message => {
                 var str = Encoding.UTF8.GetString(message);
-                var value = JsonConvert.DeserializeObject<GameState>(str);
-                HandleMessage(value);
             };
             _client.OnDisconnected = () => {
                 Debug.Log("Client Disconnected");
@@ -36,14 +34,6 @@ namespace App.Scripts.Game {
 
         private void OnApplicationQuit() {
             _client.Disconnect();
-        }
-        
-        private void HandleMessage(GameState gameState) {
-            foreach (var command in gameState.GetCommands()) {
-                if (command == "Spawn") {
-                    Debug.Log("Spawn");
-                }
-            }
         }
     }
 }
