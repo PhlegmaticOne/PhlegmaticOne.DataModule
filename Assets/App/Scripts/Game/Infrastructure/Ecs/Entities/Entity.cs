@@ -9,17 +9,13 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Entities {
         [JsonProperty]
         private readonly Dictionary<Type, IComponent> _components;
         
-        public Entity() {
-            _components = new Dictionary<Type, IComponent>();
-        }
+        public Entity() => _components = new Dictionary<Type, IComponent>();
 
         [JsonConstructor]
-        public Entity(Dictionary<Type, IComponent> components) {
-            _components = components;
-        }
+        public Entity(Dictionary<Type, IComponent> components) => _components = components;
 
-        public bool HasAnyComponent() => _components.Count > 0;
         public int ComponentsCount => _components.Count;
+        public bool HasAnyComponent() => _components.Count > 0;
 
         public Entity WithComponent<T>(T component) where T : IComponent {
             AddComponent(component);
@@ -31,7 +27,11 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Entities {
         }
 
         public bool HasComponent<T>() where T : IComponent {
-            return _components.ContainsKey(typeof(T));
+            return HasComponentOfType(typeof(T));
+        }
+
+        public bool HasComponentOfType(Type type) {
+            return _components.ContainsKey(type);
         }
 
         public T GetComponent<T>() where T : IComponent {

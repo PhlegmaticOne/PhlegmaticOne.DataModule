@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Game.Features.Blocks;
 using App.Scripts.Game.Features.Blocks.Views;
 using App.Scripts.Game.Infrastructure.Random;
 

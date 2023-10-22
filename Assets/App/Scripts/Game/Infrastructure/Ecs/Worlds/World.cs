@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 
-namespace App.Scripts.Game.Infrastructure.Ecs.World {
+namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
     public class World {
         private readonly List<Entity> _frameCacheEntities;
         private readonly List<Entity> _entities;

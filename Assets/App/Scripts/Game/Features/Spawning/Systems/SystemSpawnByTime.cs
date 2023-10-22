@@ -2,12 +2,14 @@
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
+using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using UnityEngine;
 
 namespace App.Scripts.Game.Features.Spawning.Systems {
     public class SystemSpawnByTime : SystemBase {
         private readonly SpawnerConfiguration _spawnerConfiguration;
+        private IComponentsFilter _filter;
 
         public SystemSpawnByTime(SpawnerConfiguration spawnerConfiguration) {
             _spawnerConfiguration = spawnerConfiguration;
@@ -20,16 +22,21 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                     Time = 5
                 })
                 .WithComponent(new ComponentSpawner());
+
+            _filter = ComponentsFilter.Builder
+                .With<ComponentSpawner>()
+                .With<ComponentTimer>()
+                .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
-            foreach (var entity in World.GetEntities()) {
-                if (!entity.HasComponent<ComponentSpawner>() ||
-                    !entity.TryGetComponent<ComponentTimer>(out var componentTimer) ||
-                    !componentTimer.IsEnd) {
+            foreach (var entity in _filter.Apply(World)) {
+                var componentTimer = entity.GetComponent<ComponentTimer>();
+
+                if (!componentTimer.IsEnd) {
                     continue;
                 }
-                
+
                 var info = _spawnerConfiguration.GetRandomInfo();
                 entity.AddComponent(new ComponentSpawnInfo {
                     Acceleration = 8 * Vector3.down,

@@ -1,5 +1,5 @@
 ﻿using App.Scripts.Game.Features.Blocks.Models;
-using App.Scripts.Game.Infrastructure.Ecs.Components.Base;
+using App.Scripts.Game.Features.Common;
 using App.Scripts.Game.Infrastructure.Serialization;
 
 namespace App.Scripts.Game.Features.Spawning.Components {
@@ -8,14 +8,14 @@ namespace App.Scripts.Game.Features.Spawning.Components {
         public Vector3Tiny Speed;
         public Vector3Tiny Position;
         public BlockType BlockType;
-        
-        public override ComponentSpawnInfo Clone() {
+
+        public override ComponentSpawnInfo ToRemote() {
             return new ComponentSpawnInfo {
                 Acceleration = Acceleration,
-                Position = Position,
-                Speed = Speed,
+                Position = new Vector3Tiny(-Position.x, Position.y, Position.z),
+                Speed = new Vector3Tiny(-Speed.x, Speed.y, Speed.z),
                 BlockType = BlockType,
-                IsRemote = IsRemote
+                IsRemote = true
             };
         }
     }

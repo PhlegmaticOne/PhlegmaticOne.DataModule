@@ -4,7 +4,7 @@ using App.Scripts.Game.Features.Physics.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
-using App.Scripts.Game.Infrastructure.Ecs.Components.Base;
+using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using UnityEngine;
 
@@ -13,23 +13,32 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
         private readonly SpawnerConfiguration _spawnerConfiguration;
         private readonly INetworkService _networkService;
 
+        private IComponentsFilter _filter;
+
         public SystemSpawning(SpawnerConfiguration spawnerConfiguration, INetworkService networkService) {
             _spawnerConfiguration = spawnerConfiguration;
             _networkService = networkService;
         }
-        
+
+        public override void OnAwake() {
+            _filter = ComponentsFilter.Builder
+                .With<ComponentSpawnInfo>()
+                .Without<ComponentNetwork>()
+                .Build();
+        }
+
         public override void OnUpdate(float deltaTime) {
-            foreach (var entity in World.GetEntities()) {
-                if (entity.HasComponent<ComponentNetwork>() ||
-                    entity.TryGetComponent<ComponentSpawnInfo>(out var componentSpawnInfo) == false) {
+            foreach (var entity in _filter.Apply(World)) {
+                var componentSpawnInfo = entity.GetComponent<ComponentSpawnInfo>();
+                SpawnBlock(componentSpawnInfo);
+                entity.RemoveComponent<ComponentSpawnInfo>();
+                
+                if (componentSpawnInfo.IsRemote) {
                     continue;
                 }
                 
-                SpawnBlock(componentSpawnInfo);
-                entity.RemoveComponent<ComponentSpawnInfo>();
-                if (!componentSpawnInfo.IsRemote) {
-                    _networkService.NetworkEntity.AddComponent(componentSpawnInfo.AsRemote());
-                }
+                var remoteComponent = componentSpawnInfo.ToRemote();
+                _networkService.NetworkEntity.AddComponent(remoteComponent);
             }
         }
 

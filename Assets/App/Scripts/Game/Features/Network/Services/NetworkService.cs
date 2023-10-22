@@ -2,7 +2,7 @@
 using System.Text;
 using App.Scripts.Game.Features.Network.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
-using App.Scripts.Game.Infrastructure.Ecs.World;
+using App.Scripts.Game.Infrastructure.Ecs.Worlds;
 using Newtonsoft.Json;
 
 namespace App.Scripts.Game.Features.Network.Services {

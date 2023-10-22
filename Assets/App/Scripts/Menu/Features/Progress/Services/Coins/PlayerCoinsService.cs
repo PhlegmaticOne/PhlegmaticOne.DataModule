@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
-using App.Scripts.Menu.Features.Progress.Models;
 using Common.Models;
-using PhlegmaticOne.DataStorage.Contracts;
 using PhlegmaticOne.DataStorage.Storage.Base;
 
 namespace App.Scripts.Menu.Features.Progress.Services.Coins {

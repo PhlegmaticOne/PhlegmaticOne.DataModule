@@ -3,7 +3,7 @@ using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using UnityEngine;
 using Zenject;
 
-namespace App.Scripts.Game.Infrastructure.Ecs.World {
+namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
     public class WorldRunner : MonoBehaviour {
         [SerializeField] private bool _isRunGame;
         

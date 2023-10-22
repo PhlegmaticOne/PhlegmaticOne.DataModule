@@ -1,5 +1,4 @@
 ﻿using App.Scripts.Common.Animations;
-using DG.Tweening;
 using UnityEngine;
 
 namespace App.Scripts.Common.Dialogs.Animators {

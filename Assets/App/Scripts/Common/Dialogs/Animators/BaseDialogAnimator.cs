@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 
 namespace App.Scripts.Common.Dialogs.Animators {

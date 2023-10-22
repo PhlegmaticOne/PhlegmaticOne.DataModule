@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using App.Scripts.Common.Pools;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace App.Scripts.Common.Dialogs.Manager {
     public class DialogsManager : IDialogsManager {
