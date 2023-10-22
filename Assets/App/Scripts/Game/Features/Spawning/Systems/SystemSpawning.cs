@@ -31,7 +31,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
             foreach (var entity in _filter.Apply(World)) {
                 var componentSpawnInfo = entity.GetComponent<ComponentSpawnInfo>();
                 SpawnBlock(componentSpawnInfo);
-                entity.RemoveComponent<ComponentSpawnInfo>();
+                entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
                 
                 if (componentSpawnInfo.IsRemote) {
                     continue;
@@ -43,7 +43,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
         }
 
         private void SpawnBlock(ComponentSpawnInfo componentSpawnInfo) {
-            var view = Object.Instantiate(_spawnerConfiguration.Prefab);
+            var view = Object.Instantiate(_spawnerConfiguration.Prefab, _spawnerConfiguration.SpawnTransform);
             view.transform.position = componentSpawnInfo.Position;
             
             var entity = World.AppendEntity();

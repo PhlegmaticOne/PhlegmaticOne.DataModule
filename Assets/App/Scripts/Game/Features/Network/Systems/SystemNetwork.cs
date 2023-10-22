@@ -48,9 +48,7 @@ namespace App.Scripts.Game.Features.Network.Systems {
         }
 
         private void OnData(ArraySegment<byte> message) {
-            var entity = _networkService
-                .CreateEntityFromRemoteMessage(message)
-                .WithComponent(new ComponentRemoveEntityEndOfFrame());
+            var entity = _networkService.CreateEntityFromRemoteMessage(message);
             World.AppendEntity(entity);
         }
 

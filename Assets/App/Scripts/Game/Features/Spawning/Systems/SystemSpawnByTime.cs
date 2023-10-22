@@ -38,12 +38,13 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                 }
 
                 var info = _spawnerConfiguration.GetRandomInfo();
-                entity.AddComponent(new ComponentSpawnInfo {
-                    Acceleration = 8 * Vector3.down,
-                    Position = info.GetSpawnPoint(),
-                    Speed = info.GetInitialSpeed(),
-                    BlockType = BlockType.Feijoa
-                });
+                World.AppendEntity()
+                    .WithComponent(new ComponentSpawnInfo {
+                        Acceleration = 8 * Vector3.down,
+                        Position = info.GetSpawnPoint(),
+                        Speed = info.GetInitialSpeed(),
+                        BlockType = BlockType.Feijoa
+                    });
                 componentTimer.CurrentTime = 0;
             }
         }

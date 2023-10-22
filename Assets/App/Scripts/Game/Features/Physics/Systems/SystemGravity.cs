@@ -5,22 +5,17 @@ using App.Scripts.Game.Infrastructure.Ecs.Systems;
 
 namespace App.Scripts.Game.Features.Physics.Systems {
     public class SystemGravity : SystemBase {
-        private IComponentsFilter _moveFilter;
-        private IComponentsFilter _speedFilter;
+        private IComponentsFilter _filter;
         
         public override void OnAwake() {
-            _moveFilter = ComponentsFilter.Builder
+            _filter = ComponentsFilter.Builder
                 .With<ComponentTransform>()
-                .With<ComponentGravity>()
-                .Build();
-
-            _speedFilter = ComponentsFilter.Builder
                 .With<ComponentGravity>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
-            foreach (var entity in _moveFilter.Apply(World)) {
+            foreach (var entity in _filter.Apply(World)) {
                 var transformComponent = entity.GetComponent<ComponentTransform>();
                 var gravityComponent = entity.GetComponent<ComponentGravity>();
                 var speed = gravityComponent.Speed;
@@ -30,7 +25,7 @@ namespace App.Scripts.Game.Features.Physics.Systems {
         }
 
         public override void OnFixedUpdate(float deltaTime) {
-            foreach (var entity in _speedFilter.Apply(World)) {
+            foreach (var entity in _filter.Apply(World)) {
                 var gravityComponent = entity.GetComponent<ComponentGravity>();
                 var acceleration = gravityComponent.Acceleration;
                 gravityComponent.Speed += acceleration * deltaTime;
