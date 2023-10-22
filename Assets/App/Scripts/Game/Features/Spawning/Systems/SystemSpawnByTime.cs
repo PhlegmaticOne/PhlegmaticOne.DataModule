@@ -1,4 +1,5 @@
-﻿using App.Scripts.Game.Features.Blocks.Models;
+﻿using System;
+using App.Scripts.Game.Features.Blocks.Models;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
@@ -43,7 +44,8 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                         Acceleration = 8 * Vector3.down,
                         Position = info.GetSpawnPoint(),
                         Speed = info.GetInitialSpeed(),
-                        BlockType = BlockType.Feijoa
+                        BlockType = BlockType.Feijoa,
+                        BlockId = Guid.NewGuid()
                     });
                 componentTimer.CurrentTime = 0;
             }

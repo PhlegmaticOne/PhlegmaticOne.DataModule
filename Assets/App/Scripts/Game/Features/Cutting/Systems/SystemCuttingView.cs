@@ -2,15 +2,16 @@
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Cutting.Factories;
 using App.Scripts.Game.Features.Cutting.Views;
-using App.Scripts.Game.Features.Network.Components;
+using App.Scripts.Game.Features.Network.Services;
+using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
+using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
-using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using App.Scripts.Game.Infrastructure.Input;
 using UnityEngine;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
-    public class SystemCuttingView : SystemBase {
+    public class SystemCuttingView : NetworkSystemBase<ComponentCuttingPoint> {
         private readonly IBladeFactory _bladeFactory;
         private readonly CameraProvider _cameraProvider;
 
@@ -19,7 +20,8 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
         private BladeView _local;
         private BladeView _remote;
 
-        public SystemCuttingView(IBladeFactory bladeFactory, CameraProvider cameraProvider) {
+        public SystemCuttingView(IBladeFactory bladeFactory, CameraProvider cameraProvider,
+            INetworkService networkService) : base(networkService) {
             _bladeFactory = bladeFactory;
             _cameraProvider = cameraProvider;
         }
@@ -27,47 +29,55 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
         public override void OnAwake() {
             _local = _bladeFactory.Create(false);
             _remote = _bladeFactory.Create(true);
-            _filter = ComponentsFilter.Builder
-                .With<ComponentCuttingPoint>()
-                .Without<ComponentNetwork>()
-                .Build();
+            base.OnAwake();
         }
 
-        public override void OnUpdate(float deltaTime) {
-            foreach (var entity in _filter.Apply(World)) {
-                var cuttingPoint = entity.GetComponent<ComponentCuttingPoint>();
-                var blade = cuttingPoint.IsRemote ? _remote : _local;
-                var inputData = cuttingPoint.InputData;
-                var slicePoint = GetSlicePoint(inputData.Position);
-                
-                switch (inputData.InputState)
-                {
-                    case InputState.Started:
-                        blade.StartSlicing(slicePoint);
-                        break;
-                    case InputState.Ended:
-                        blade.EndSlicing();
-                        break;
-                }
+        protected override void OnLocalUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+            ProcessCutEvents(_local, componentRemote);
+        }
+
+        protected override void OnRemoteUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+            ProcessCutEvents(_remote, componentRemote);
+            
+            if (componentRemote.InputData.IsValid == false) {
+                return;
             }
+            
+            var slicePoint = GetSlicePoint(componentRemote.InputData.Position);
+            _remote.SliceTo(slicePoint);
         }
 
-        public override void OnFixedUpdate(float deltaTime) {
-            foreach (var entity in _filter.Apply(World)) {
-                var cuttingPoint = entity.GetComponent<ComponentCuttingPoint>();
-                var inputData = cuttingPoint.InputData;
+        protected override void OnLocalFixedUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+            var inputData = componentRemote.InputData;
                 
-                if (inputData.IsValid == false) {
-                    continue;
-                }
+            if (inputData.IsValid == false) {
+                return;
+            }
+            
+            var slicePoint = GetSlicePoint(inputData.Position);
+            var cuttingVector = _local.SliceTo(slicePoint);
+            
+            if (cuttingVector.magnitude == 0) {
+                return;
+            }
                 
-                var blade = cuttingPoint.IsRemote ? _remote : _local;
-                var slicePoint = GetSlicePoint(inputData.Position);
-                blade.SliceTo(slicePoint);
+            entity.AddComponent(new ComponentCuttingVector {
+                CuttingVector = cuttingVector,
+                CuttingPoint = slicePoint
+            });
+        }
 
-                if (cuttingPoint.IsRemote) {
-                    entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
-                }
+        private void ProcessCutEvents(BladeView blade, ComponentCuttingPoint componentCuttingPoint) {
+            var inputData = componentCuttingPoint.InputData;
+            var slicePoint = GetSlicePoint(inputData.Position);
+                
+            switch (inputData) {
+                case { InputState: InputState.Started }:
+                    blade.StartSlicing(slicePoint);
+                    break;
+                case { InputState: InputState.Ended }:
+                    blade.EndSlicing();
+                    break;
             }
         }
 

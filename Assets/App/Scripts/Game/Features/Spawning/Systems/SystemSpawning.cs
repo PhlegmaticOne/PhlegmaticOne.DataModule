@@ -1,45 +1,33 @@
-﻿using App.Scripts.Game.Features.Network.Components;
+﻿using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.Network.Services;
+using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Physics.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
-using App.Scripts.Game.Infrastructure.Ecs.Filters;
-using App.Scripts.Game.Infrastructure.Ecs.Systems;
-using UnityEngine;
+using App.Scripts.Game.Infrastructure.Ecs.Entities;
+using App.Scripts.Game.Infrastructure.Serialization;
+using Object = UnityEngine.Object;
 
 namespace App.Scripts.Game.Features.Spawning.Systems {
-    public class SystemSpawning : SystemBase {
+    public class SystemSpawning : NetworkSystemBase<ComponentSpawnInfo> {
         private readonly SpawnerConfiguration _spawnerConfiguration;
-        private readonly INetworkService _networkService;
+        private readonly IBlockService _blockService;
 
-        private IComponentsFilter _filter;
-
-        public SystemSpawning(SpawnerConfiguration spawnerConfiguration, INetworkService networkService) {
+        public SystemSpawning(SpawnerConfiguration spawnerConfiguration,
+            INetworkService networkService, IBlockService blockService) : base(networkService) {
             _spawnerConfiguration = spawnerConfiguration;
-            _networkService = networkService;
+            _blockService = blockService;
         }
 
-        public override void OnAwake() {
-            _filter = ComponentsFilter.Builder
-                .With<ComponentSpawnInfo>()
-                .Without<ComponentNetwork>()
-                .Build();
+        protected override void OnLocalUpdate(Entity entity, ComponentSpawnInfo componentRemote, float deltaTime) {
+            SpawnBlock(componentRemote);
+            entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
+            AddRemoteComponent(ToRemote(componentRemote));
         }
 
-        public override void OnUpdate(float deltaTime) {
-            foreach (var entity in _filter.Apply(World)) {
-                var componentSpawnInfo = entity.GetComponent<ComponentSpawnInfo>();
-                SpawnBlock(componentSpawnInfo);
-                entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
-                
-                if (componentSpawnInfo.IsRemote) {
-                    continue;
-                }
-                
-                var remoteComponent = componentSpawnInfo.ToRemote();
-                _networkService.NetworkEntity.AddComponent(remoteComponent);
-            }
+        protected override void OnRemoteUpdate(Entity entity, ComponentSpawnInfo componentRemote, float deltaTime) {
+            SpawnBlock(componentRemote);
         }
 
         private void SpawnBlock(ComponentSpawnInfo componentSpawnInfo) {
@@ -51,9 +39,27 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                 Acceleration = componentSpawnInfo.Acceleration,
                 Speed = componentSpawnInfo.Speed
             });
-            entity.AddComponent(new ComponentTransform {
-                Transform = view.transform
+            entity.AddComponent(new ComponentBlockView {
+                BlockView = view,
+                BlockId = componentSpawnInfo.BlockId
             });
+
+            view.Entity = entity;
+            _blockService.AddBlock(view);
+        }
+
+        private static ComponentSpawnInfo ToRemote(ComponentSpawnInfo spawnInfo) {
+            var position = spawnInfo.Position;
+            var speed = spawnInfo.Speed;
+            
+            return new ComponentSpawnInfo {
+                Acceleration = spawnInfo.Acceleration,
+                Position = new Vector3Tiny(-position.x, position.y, position.z),
+                Speed = new Vector3Tiny(-speed.x, speed.y, speed.z),
+                BlockType = spawnInfo.BlockType,
+                BlockId = spawnInfo.BlockId,
+                IsRemote = true
+            };
         }
     }
 }

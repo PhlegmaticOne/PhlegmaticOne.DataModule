@@ -1,4 +1,5 @@
-﻿using App.Scripts.Game.Features.BoardState.Systems;
+﻿using App.Scripts.Game.Features.Blocks.Systems;
+using App.Scripts.Game.Features.BoardState.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Physics.Systems;
@@ -18,8 +19,11 @@ namespace App.Scripts.Game {
             Container.Bind<ISystem>().To<SystemSpawning>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingInput>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingView>().AsSingle();
+            Container.Bind<ISystem>().To<SystemCuttingAction>().AsSingle();
+            Container.Bind<ISystem>().To<SystemCuttingDestroyBlocks>().AsSingle();
             Container.Bind<ISystem>().To<SystemBoardStateCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemTimers>().AsSingle();
+            Container.Bind<ISystem>().To<SystemRemoveBlocks>().AsSingle();
             Container.Bind<ISystem>().To<SystemNetwork>().AsSingle();
         }
     }

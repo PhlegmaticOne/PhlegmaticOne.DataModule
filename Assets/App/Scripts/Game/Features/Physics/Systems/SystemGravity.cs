@@ -9,17 +9,17 @@ namespace App.Scripts.Game.Features.Physics.Systems {
         
         public override void OnAwake() {
             _filter = ComponentsFilter.Builder
-                .With<ComponentTransform>()
+                .With<ComponentBlockView>()
                 .With<ComponentGravity>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _filter.Apply(World)) {
-                var transformComponent = entity.GetComponent<ComponentTransform>();
+                var transformComponent = entity.GetComponent<ComponentBlockView>();
                 var gravityComponent = entity.GetComponent<ComponentGravity>();
                 var speed = gravityComponent.Speed;
-                var transform = transformComponent.Transform;
+                var transform = transformComponent.BlockView.transform;
                 transform.position += speed * deltaTime;
             }
         }

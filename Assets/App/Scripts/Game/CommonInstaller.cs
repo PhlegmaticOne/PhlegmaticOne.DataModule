@@ -1,4 +1,5 @@
-﻿using App.Scripts.Game.Features.Common;
+﻿using App.Scripts.Game.Features.Blocks.Services;
+using App.Scripts.Game.Features.Common;
 using App.Scripts.Game.Infrastructure.Input;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,11 @@ namespace App.Scripts.Game {
         public override void InstallBindings() {
             BindCameraProvider();
             BindInputSystem();
+            BindBlockService();
+        }
+
+        private void BindBlockService() {
+            Container.Bind<IBlockService>().To<BlockService>().AsSingle();
         }
 
         private void BindInputSystem() {

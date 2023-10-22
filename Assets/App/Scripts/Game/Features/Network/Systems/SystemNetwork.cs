@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using App.Scripts.Game.Features.Network.Configs;
 using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
+using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using Telepathy;
 using UnityEngine;
@@ -14,11 +17,14 @@ namespace App.Scripts.Game.Features.Network.Systems {
         private readonly ILogger _logger;
         private readonly INetworkService _networkService;
 
+        private ConcurrentBag<Entity> _incomeEntities;
+
         public SystemNetwork(INetworkService networkService, NetworkClientConfig config, ILogger logger) {
             _networkService = networkService;
             _config = config;
             _logger = logger;
             _client = new Client(config.MaxMessageSize);
+            _incomeEntities = new ConcurrentBag<Entity>();
         }
         
         public override void OnAwake() {
@@ -49,7 +55,7 @@ namespace App.Scripts.Game.Features.Network.Systems {
 
         private void OnData(ArraySegment<byte> message) {
             var entity = _networkService.CreateEntityFromRemoteMessage(message);
-            World.AppendEntity(entity);
+            World.AppendEntity(entity).WithComponent(new ComponentRemoveEntityEndOfFrame());
         }
 
         private void OnConnected() {
