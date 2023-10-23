@@ -18,15 +18,15 @@ namespace App.Scripts.Game.Features.Blocks.Systems {
         public override void OnAwake() {
             _filter = ComponentsFilter.Builder
                 .With<ComponentRemoveBlockEndOfFrame>()
-                .With<ComponentBlockView>()
+                .With<ComponentBlock>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _filter.Apply(World)) {
-                var blockView = entity.GetComponent<ComponentBlockView>();
-                _blockService.RemoveBlock(blockView.BlockView);
-                Object.Destroy(blockView.BlockView.gameObject);
+                var blockView = entity.GetComponent<ComponentBlock>();
+                _blockService.RemoveBlock(blockView.Block);
+                Object.Destroy(blockView.Block.gameObject);
                 entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
             }
         }

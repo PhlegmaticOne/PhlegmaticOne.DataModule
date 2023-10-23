@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace App.Scripts.Game.Infrastructure.Serialization {
     [Serializable]
-    public class MinMaxInfo<T> {
+    public class MinMaxRange<T> {
         [SerializeField] private T _min;
         [SerializeField] private T _max;
 

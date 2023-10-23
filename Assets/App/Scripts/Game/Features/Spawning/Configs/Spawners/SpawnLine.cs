@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Game.Features.Spawning.Configs {
+namespace App.Scripts.Game.Features.Spawning.Configs.Spawners {
     public class SpawnLine : MonoBehaviour {
         [SerializeField] private RectTransform _fromPoint;
         [SerializeField] private RectTransform _toPoint;

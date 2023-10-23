@@ -18,7 +18,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 .Build();
 
             _blocksFilter = ComponentsFilter.Builder
-                .With<ComponentBlockView>()
+                .With<ComponentBlock>()
                 .Build();
         }
 
@@ -38,8 +38,8 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
 
         private void CutBlocks(Vector3 cuttingPoint) {
             foreach (var entity in _blocksFilter.Apply(World)) {
-                var blockTransform = entity.GetComponent<ComponentBlockView>();
-                var distance = (blockTransform.BlockView.transform.position - cuttingPoint).WithZ(0).magnitude;
+                var blockTransform = entity.GetComponent<ComponentBlock>();
+                var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
                 
                 if (distance <= 1.4f) {
                     entity.AddComponent(new ComponentDestroyAfterCut());

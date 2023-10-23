@@ -2,12 +2,12 @@
 using App.Scripts.Game.Infrastructure.Serialization;
 using UnityEngine;
 
-namespace App.Scripts.Game.Features.Spawning.Configs {
-    public class SpawnerInfo : MonoBehaviour, IPrioritized {
+namespace App.Scripts.Game.Features.Spawning.Configs.Spawners {
+    public class SpawnerData : MonoBehaviour, IPrioritized {
         [SerializeField] private SpawnLine _spawnLine;
-        [SerializeField] private MinMaxInfo<float> _anglesRange;
-        [SerializeField] private MinMaxInfo<float> _initialSpeedMultiplierRangeX;
-        [SerializeField] private MinMaxInfo<float> _initialSpeedMultiplierRangeY;
+        [SerializeField] private MinMaxRange<float> _anglesRange;
+        [SerializeField] private MinMaxRange<float> _initialSpeedMultiplierRangeX;
+        [SerializeField] private MinMaxRange<float> _initialSpeedMultiplierRangeY;
         [SerializeField] private int _priority;
         public float Priority => _priority;
 

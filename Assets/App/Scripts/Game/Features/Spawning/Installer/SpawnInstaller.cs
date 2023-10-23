@@ -1,13 +1,13 @@
-﻿using App.Scripts.Game.Features.Spawning.Configs;
+﻿using App.Scripts.Game.Features.Spawning.Configs.Spawners;
 using UnityEngine;
 using Zenject;
 
 namespace App.Scripts.Game.Features.Spawning.Installer {
     public class SpawnInstaller : MonoInstaller {
-        [SerializeField] private SpawnerConfiguration _spawnerConfiguration;
+        [SerializeField] private SpawnersConfiguration _spawnersConfiguration;
         public override void InstallBindings() {
-            Container.Bind<SpawnerConfiguration>()
-                .FromInstance(_spawnerConfiguration)
+            Container.Bind<SpawnersConfiguration>()
+                .FromInstance(_spawnersConfiguration)
                 .AsSingle();
         }
     }

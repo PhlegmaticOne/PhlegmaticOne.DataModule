@@ -7,7 +7,7 @@ using App.Scripts.Game.Features.Spawning.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using Zenject;
 
-namespace App.Scripts.Game {
+namespace App.Scripts.Game.Installers {
     public class SystemsInstaller : MonoInstaller {
         public override void InstallBindings() {
             BindSystems();

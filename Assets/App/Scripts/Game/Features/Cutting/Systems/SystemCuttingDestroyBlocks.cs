@@ -10,20 +10,20 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
     public class SystemCuttingDestroyBlocks : NetworkSystemBase<ComponentDestroyAfterCut> {
         private readonly IBlockService _blockService;
 
-        protected SystemCuttingDestroyBlocks(INetworkService networkService,
-            IBlockService blockService) : base(networkService) {
+        protected SystemCuttingDestroyBlocks(INetworkService networkService, IBlockService blockService) : 
+            base(networkService) {
             _blockService = blockService;
         }
         
         protected override void OnLocalUpdate(Entity entity, ComponentDestroyAfterCut componentRemote, float deltaTime) {
-            if (entity.TryGetComponent<ComponentBlockView>(out var blockView) == false) {
+            if (entity.TryGetComponent<ComponentBlock>(out var block) == false) {
                 return;
             }
             
             entity.AddComponent(new ComponentRemoveBlockEndOfFrame());
             AddRemoteComponent(new ComponentDestroyAfterCut {
                 IsRemote = true,
-                BlockId = blockView.BlockId
+                BlockId = block.Block.BlockData.Id
             });
         }
 

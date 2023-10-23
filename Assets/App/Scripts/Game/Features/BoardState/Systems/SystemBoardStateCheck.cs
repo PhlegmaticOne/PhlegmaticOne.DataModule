@@ -16,14 +16,14 @@ namespace App.Scripts.Game.Features.BoardState.Systems {
 
         public override void OnAwake() {
             _componentsFilter = ComponentsFilter.Builder
-                .With<ComponentBlockView>()
+                .With<ComponentBlock>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _componentsFilter.Apply(World)) {
-                var blockView = entity.GetComponent<ComponentBlockView>();
-                var transform = blockView.BlockView.transform;
+                var blockView = entity.GetComponent<ComponentBlock>();
+                var transform = blockView.Block.transform;
                 
                 if (transform.position.y > _minPointMarker.DestroyBlocksY) {
                     continue;

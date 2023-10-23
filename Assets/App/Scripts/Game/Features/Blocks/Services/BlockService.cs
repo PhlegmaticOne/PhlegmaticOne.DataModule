@@ -2,33 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using App.Scripts.Game.Features.Blocks.Views;
-using App.Scripts.Game.Infrastructure.Ecs.Components;
 
 namespace App.Scripts.Game.Features.Blocks.Services {
     public class BlockService : IBlockService {
-        private readonly List<BlockView> _blockViews;
+        private readonly List<Block> _blockViews;
         
         public BlockService() {
-            _blockViews = new List<BlockView>();
+            _blockViews = new List<Block>();
         }
         
-        public IReadOnlyList<BlockView> BlockOnField() {
+        public IReadOnlyList<Block> BlockOnField() {
             return _blockViews;
         }
 
-        public void AddBlock(BlockView blockView) {
-            _blockViews.Add(blockView);
+        public void AddBlock(Block block) {
+            _blockViews.Add(block);
         }
 
-        public void RemoveBlock(BlockView blockView) {
-            _blockViews.Remove(blockView);
+        public void RemoveBlock(Block block) {
+            _blockViews.Remove(block);
         }
 
-        public BlockView FindById(Guid id) {
-            return _blockViews.FirstOrDefault(x => {
-                var component = x.Entity.GetComponent<ComponentBlockView>();
-                return component.BlockId == id;
-            });
+        public Block FindById(Guid id) {
+            return _blockViews.FirstOrDefault(x => x.BlockData.Id == id);
         }
     }
 }

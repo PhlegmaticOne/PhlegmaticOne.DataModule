@@ -1,10 +1,11 @@
 ﻿using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.Common;
+using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
 using UnityEngine;
 using Zenject;
 
-namespace App.Scripts.Game {
+namespace App.Scripts.Game.Installers {
     public class CommonInstaller : MonoInstaller {
         [SerializeField] private Camera _camera;
         
@@ -16,6 +17,7 @@ namespace App.Scripts.Game {
 
         private void BindBlockService() {
             Container.Bind<IBlockService>().To<BlockService>().AsSingle();
+            Container.Bind<IBlockFactory>().To<BlockFactory>().AsSingle();
         }
 
         private void BindInputSystem() {

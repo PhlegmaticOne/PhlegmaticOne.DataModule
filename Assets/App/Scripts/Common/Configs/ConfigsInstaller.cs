@@ -9,6 +9,7 @@ namespace App.Scripts.Common.Configs {
     public class ConfigsInstaller : ScriptableObjectInstaller {
         [SerializeField] private List<ScriptableObject> _configs;
         [SerializeField] private Object _folder;
+        [SerializeField] private Object[] _excludeFolders;
 
         public override void InstallBindings() => BindConfigs(_configs);
 
@@ -23,7 +24,7 @@ namespace App.Scripts.Common.Configs {
             [Button]
             private void UpdateConfigs() {
                 _configs.Clear();
-                foreach (var scriptableObject in AssetUtils.LoadAssets<ScriptableObject>(_folder)) {
+                foreach (var scriptableObject in AssetUtils.LoadAssets<ScriptableObject>(_folder, _excludeFolders)) {
                     if (scriptableObject == this) {
                         continue;
                     }
