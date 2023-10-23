@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2410286856984366468}
   - component: {fileID: 4274115293314647478}
-  - component: {fileID: 5200111150668114879}
+  - component: {fileID: 2934058816796044867}
   m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5200111150668114879
+--- !u!114 &2934058816796044867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,13 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 648341439989126181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbcf4e580051498eb6cc6546c49ab72b, type: 3}
+  m_Script: {fileID: 11500000, guid: d3b35e959aa14d63872d8a52356f6f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 4274115293314647478}
   _shadowMaterial: {fileID: 2100000, guid: 0d3868e8f4f7682439e94e2bd8718728, type: 2}
   _shadowOffset: {x: 0.06, y: -0.15}
   _transform: {fileID: 153257125030111158}
+  _blockTransform: {fileID: 6820620187468085041}
 --- !u!1 &4356448235253842276
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871306473779736244}
   - component: {fileID: 1949571592828680826}
+  - component: {fileID: 2209437763286546524}
   m_Layer: 9
   m_Name: Trail
   m_TagString: Untagged
@@ -206,7 +208,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -272,6 +274,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2209437763286546524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675329852629813706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3dd460a59ce4f2c97088e0016cdf009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trailRenderer: {fileID: 1949571592828680826}
 --- !u!1 &8112969903419499984
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,10 +296,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6820620187468085041}
-  - component: {fileID: 7011591629119432391}
+  - component: {fileID: 4813569206442034459}
+  - component: {fileID: 3111295626857305751}
+  - component: {fileID: 6016313823073701043}
   - component: {fileID: 8623482291342484930}
   m_Layer: 9
-  m_Name: Block
+  m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +325,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7011591629119432391
+--- !u!114 &4813569206442034459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,11 +334,79 @@ MonoBehaviour:
   m_GameObject: {fileID: 8112969903419499984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e31f4b6a5a4a79a2fa836605b5d914, type: 3}
+  m_Script: {fileID: 11500000, guid: 05109ac34c95415993386e785065a277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _blockView: {fileID: 3111295626857305751}
+  _juiceParticles: {fileID: 9172851939602091670, guid: 060c973529f27814a92848d2ab9bf39c, type: 3}
+--- !u!114 &3111295626857305751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112969903419499984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06662980eb543dfabc91ac182749c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 6016313823073701043}
+    - {fileID: 2209437763286546524}
+    - {fileID: 2934058816796044867}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _blockViewComponents
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[App.Scripts.Game.Features.Blocks.Views.Components.Base.IBlockViewComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &6016313823073701043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112969903419499984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0285512fa04e4d1296f1ebb0a65f3e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 8623482291342484930}
-  _shadowEffect: {fileID: 5200111150668114879}
 --- !u!212 &8623482291342484930
 SpriteRenderer:
   m_ObjectHideFlags: 0

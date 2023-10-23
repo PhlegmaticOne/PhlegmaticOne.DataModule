@@ -51,6 +51,7 @@ namespace App.Scripts.Game.Features.Network.Systems {
         protected virtual void OnRemoteFixedUpdate(Entity entity, T componentRemote, float deltaTime) { }
 
         protected void AddRemoteComponent(T remoteComponent) {
+            remoteComponent.IsRemote = true;
             _networkService.NetworkEntity.AddComponent(remoteComponent);
         }
 

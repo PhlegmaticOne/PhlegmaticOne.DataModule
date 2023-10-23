@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a2150b1aa74b3dbcaf9cfe8115aa74, type: 3}
   m_Name: Pear
   m_EditorClassIdentifier: 
-  _destroyOnCut: 1
-  _isCuttable: 1
   _sprite: {fileID: 21300000, guid: caf01b8335d43d84390f7f07568dcd20, type: 3}
+  _prefab: {fileID: 4813569206442034459, guid: 61051c87c576c7144be189f0890fe92d, type: 3}
   _particleEffectColor: {r: 0.9450981, g: 0.8862746, b: 0.24313727, a: 1}
   _radius: 1.4
   _scoreForSlicing: 50
-  _comboBehavior: 1
-  _fallenBehaviour: 1
-  _magnetBehaviour: 1

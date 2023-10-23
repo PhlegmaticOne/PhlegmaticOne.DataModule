@@ -7,7 +7,7 @@ using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
-    public class SystemCuttingDestroyBlocks : NetworkSystemBase<ComponentDestroyAfterCut> {
+    public class SystemCuttingDestroyBlocks : NetworkSystemBase<ComponentBlockCut> {
         private readonly IBlockService _blockService;
 
         protected SystemCuttingDestroyBlocks(INetworkService networkService, IBlockService blockService) : 
@@ -15,19 +15,19 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             _blockService = blockService;
         }
         
-        protected override void OnLocalUpdate(Entity entity, ComponentDestroyAfterCut componentRemote, float deltaTime) {
+        protected override void OnLocalUpdate(Entity entity, ComponentBlockCut componentRemote, float deltaTime) {
             if (entity.TryGetComponent<ComponentBlock>(out var block) == false) {
                 return;
             }
             
             entity.AddComponent(new ComponentRemoveBlockEndOfFrame());
-            AddRemoteComponent(new ComponentDestroyAfterCut {
+            AddRemoteComponent(new ComponentBlockCut {
                 IsRemote = true,
                 BlockId = block.Block.BlockData.Id
             });
         }
 
-        protected override void OnRemoteUpdate(Entity entity, ComponentDestroyAfterCut componentRemote, float deltaTime) {
+        protected override void OnRemoteUpdate(Entity entity, ComponentBlockCut componentRemote, float deltaTime) {
             var blockView = _blockService.FindById(componentRemote.BlockId);
             blockView.Entity.AddComponent(new ComponentRemoveBlockEndOfFrame());
         }

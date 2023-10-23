@@ -8,8 +8,6 @@ namespace App.Scripts.Game.Features.Blocks.Configs {
     public class BlockConfigsProvider : SerializedScriptableObject {
         [SerializeField] private Dictionary<BlockType, BlockConfigScriptableObject> _blockConfigs;
 
-        public IBlockConfig GetConfig(BlockType blockType) {
-            return _blockConfigs[blockType];
-        }
+        public BlockConfigScriptableObject GetConfig(BlockType blockType) => _blockConfigs[blockType];
     }
 }

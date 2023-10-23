@@ -42,7 +42,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
                 
                 if (distance <= 1.4f) {
-                    entity.AddComponent(new ComponentDestroyAfterCut());
+                    entity.AddComponent(new ComponentBlockCut());
                 }
             }
         }
