@@ -1,18 +1,18 @@
-﻿using App.Scripts.Game.Features.Blocks.Components;
-using App.Scripts.Game.Features.Blocks.Services;
+﻿using App.Scripts.Game.Features.Blocks.Services;
+using App.Scripts.Game.Features.RemoveBlocks.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using UnityEngine;
 
-namespace App.Scripts.Game.Features.Blocks.Systems {
+namespace App.Scripts.Game.Features.RemoveBlocks.Systems {
     public class SystemRemoveBlocks : SystemBase {
-        private readonly IBlockService _blockService;
+        private readonly IBlockContainer _blockContainer;
         
         private IComponentsFilter _filter;
 
-        public SystemRemoveBlocks(IBlockService blockService) {
-            _blockService = blockService;
+        public SystemRemoveBlocks(IBlockContainer blockContainer) {
+            _blockContainer = blockContainer;
         }
         
         public override void OnAwake() {
@@ -25,7 +25,7 @@ namespace App.Scripts.Game.Features.Blocks.Systems {
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _filter.Apply(World)) {
                 var blockView = entity.GetComponent<ComponentBlock>();
-                _blockService.RemoveBlock(blockView.Block);
+                _blockContainer.RemoveBlock(blockView.Block);
                 Object.Destroy(blockView.Block.gameObject);
                 entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
             }

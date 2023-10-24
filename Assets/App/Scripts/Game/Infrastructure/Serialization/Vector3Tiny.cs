@@ -12,6 +12,8 @@ namespace App.Scripts.Game.Infrastructure.Serialization {
             this.z = z;
         }
 
+        public Vector3 ToUnityVector() => this;
+
         public static implicit operator Vector3(Vector3Tiny vector3Tiny) {
             return new Vector3(vector3Tiny.x, vector3Tiny.y, vector3Tiny.z);
         }

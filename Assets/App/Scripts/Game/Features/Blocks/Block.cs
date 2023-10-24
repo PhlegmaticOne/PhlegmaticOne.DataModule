@@ -12,13 +12,13 @@ namespace App.Scripts.Game.Features.Blocks {
         public Entity Entity { get; private set; }
         public BlockData BlockData { get; private set; }
 
-        public void Initialize(Entity entity, BlockData blockData, ComponentSpawnBlockData spawnBlockData) {
+        public void Initialize(Entity entity, BlockData blockData, ComponentBlockSpawnData blockSpawnData) {
             Entity = entity;
             BlockData = blockData;
             _blockView.SetupBlockView(blockData.BlockConfig);
-            AddComponentsToBlockEntity(Entity, spawnBlockData);
+            AddComponentsToBlockEntity(Entity, blockSpawnData);
         }
 
-        protected virtual void AddComponentsToBlockEntity(Entity entity, ComponentSpawnBlockData spawnBlockData) { }
+        protected virtual void AddComponentsToBlockEntity(Entity entity, ComponentBlockSpawnData blockSpawnData) { }
     }
 }

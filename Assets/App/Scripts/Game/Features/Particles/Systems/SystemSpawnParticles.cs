@@ -6,34 +6,39 @@ using App.Scripts.Game.Features.Particles.Components;
 using App.Scripts.Game.Features.Particles.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
+using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using UnityEngine;
 
 namespace App.Scripts.Game.Features.Particles.Systems {
     public class SystemSpawnParticles : NetworkSystemBase<ComponentSpawnParticle> {
         private readonly ParticleSystemConfig _config;
-        private readonly IBlockService _blockService;
+        private readonly IBlockContainer _blockContainer;
 
         protected SystemSpawnParticles(INetworkService networkService, ParticleSystemConfig config,
-            IBlockService blockService) :
+            IBlockContainer blockContainer) :
             base(networkService) {
             _config = config;
-            _blockService = blockService;
+            _blockContainer = blockContainer;
         }
 
-        protected override void OnLocalUpdate(Entity entity, ComponentSpawnParticle componentRemote, float deltaTime) {
-            if (entity.TryGetComponent<ComponentSpawnParticleOnCut>(out var spawnParticleOnCut) == false ||
-                entity.TryGetComponent<ComponentBlock>(out var componentBlock) == false) {
-                return;
-            }
+        protected override IComponentsFilterBuilder SetupLocalFilter(IComponentsFilterBuilder builder) {
+            return builder
+                .With<ComponentSpawnParticleOnCut>()
+                .With<ComponentBlock>();
+        }
 
-            PlayParticles(spawnParticleOnCut, componentBlock.Block);
+        protected override void OnLocalUpdate(Entity entity, float deltaTime) {
+            var componentSpawnParticleOnCut = entity.GetComponent<ComponentSpawnParticleOnCut>();
+            var componentBlock = entity.GetComponent<ComponentBlock>();
+
+            PlayParticles(componentSpawnParticleOnCut, componentBlock.Block);
             AddRemoteComponent(new ComponentSpawnParticle {
                 BlockId = componentBlock.Block.BlockData.Id,
             });
         }
 
         protected override void OnRemoteUpdate(Entity entity, ComponentSpawnParticle componentRemote, float deltaTime) {
-            var block = _blockService.FindById(componentRemote.BlockId);
+            var block = _blockContainer.FindById(componentRemote.BlockId);
             var spawnParticlesOfCut = block.Entity.GetComponent<ComponentSpawnParticleOnCut>();
             PlayParticles(spawnParticlesOfCut, block);
         }

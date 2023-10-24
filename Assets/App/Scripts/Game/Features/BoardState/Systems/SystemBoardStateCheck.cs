@@ -1,5 +1,5 @@
-﻿using App.Scripts.Game.Features.Blocks.Components;
-using App.Scripts.Game.Features.BoardState.Configs;
+﻿using App.Scripts.Game.Features.BoardState.Configs;
+using App.Scripts.Game.Features.RemoveBlocks.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;

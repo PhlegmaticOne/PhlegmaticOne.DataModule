@@ -22,12 +22,13 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             });
         }
 
-        protected override void OnLocalUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+        protected override void OnLocalUpdate(Entity entity, float deltaTime) {
             var inputData = _inputSystem.ReadInput();
-            componentRemote.InputData = inputData;
+            var componentCuttingPoint = entity.GetComponent<ComponentCuttingPoint>();
+            componentCuttingPoint.InputData = inputData;
             
             if (inputData.IsValid) {
-                AddRemoteComponent(ToRemote(componentRemote));
+                AddRemoteComponent(ToRemote(componentCuttingPoint));
             }
         }
 
@@ -37,7 +38,6 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             var position = new Vector3Tiny(Screen.width - p.x, p.y, p.z);
             
             return new ComponentCuttingPoint {
-                IsRemote = true,
                 InputData = new InputData(position, inputData.InputState, inputData.IsValid)
             };
         }

@@ -33,10 +33,10 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                     CurrentTime = 0,
                     Time = 5
                 })
-                .WithComponent(new ComponentSpawner());
+                .WithComponent(new ComponentBlockSpawner());
 
             _filter = ComponentsFilter.Builder
-                .With<ComponentSpawner>()
+                .With<ComponentBlockSpawner>()
                 .With<ComponentTimer>()
                 .Build();
         }
@@ -53,7 +53,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                 var fruit = _spawnSystemConfiguration.FruitSpawnData.GetRandomItemBasedOnProbabilities();
                 
                 World.AppendEntity()
-                    .WithComponent(new ComponentSpawnBlockData {
+                    .WithComponent(new ComponentBlockSpawnData {
                         Acceleration = Gravity * Vector3.down,
                         Position = spawnerData.GetSpawnPoint(),
                         Speed = spawnerData.GetInitialSpeed(),

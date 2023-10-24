@@ -4,7 +4,7 @@ using App.Scripts.Game.Features.Network.Components;
 using App.Scripts.Game.Infrastructure.Serialization;
 
 namespace App.Scripts.Game.Features.Spawning.Components {
-    public class ComponentSpawnBlockData : ComponentRemoteBase {
+    public class ComponentBlockSpawnData : ComponentRemoteBase {
         public Guid BlockId;
         public BlockType BlockType;
         public Vector3Tiny Speed;

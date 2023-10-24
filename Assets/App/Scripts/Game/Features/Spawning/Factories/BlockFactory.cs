@@ -11,31 +11,27 @@ using UnityEngine;
 
 namespace App.Scripts.Game.Features.Spawning.Factories {
     public class BlockFactory : IBlockFactory {
-        private readonly BlockConfigsProvider _blockConfigsProvider;
         private readonly SpawnersConfiguration _spawnersConfiguration;
         private readonly World _world;
 
         public BlockFactory(
-            BlockConfigsProvider blockConfigsProvider,
             SpawnersConfiguration spawnersConfiguration, 
             World world) {
-            _blockConfigsProvider = blockConfigsProvider;
             _spawnersConfiguration = spawnersConfiguration;
             _world = world;
         }
         
-        public Block CreateBlock(ComponentSpawnBlockData spawnBlockData) {
-            var block = CreateBlockPrivate(spawnBlockData);
-            var data = CreateBlockData(spawnBlockData);
+        public Block CreateBlock(ComponentBlockSpawnData blockSpawnData, IBlockConfig blockConfig) {
+            var block = CreateBlockPrivate(blockSpawnData, blockConfig);
             var entity = CreateBlockEntity(block);
-            block.Initialize(entity, data, spawnBlockData);
+            var data = CreateBlockData(blockSpawnData, blockConfig);
+            block.Initialize(entity, data, blockSpawnData);
             return block;
         }
 
-        private Block CreateBlockPrivate(ComponentSpawnBlockData spawnBlockData) {
-            var config = _blockConfigsProvider.GetConfig(spawnBlockData.BlockType);
-            var block = Object.Instantiate(config.Prefab, _spawnersConfiguration.SpawnTransform);
-            block.transform.position = spawnBlockData.Position;
+        private Block CreateBlockPrivate(ComponentBlockSpawnData blockSpawnData, IBlockConfig blockConfig) {
+            var block = Object.Instantiate(blockConfig.Prefab, _spawnersConfiguration.SpawnTransform);
+            block.transform.position = blockSpawnData.Position;
             return block;
         }
 
@@ -45,9 +41,8 @@ namespace App.Scripts.Game.Features.Spawning.Factories {
             });
         }
 
-        private BlockData CreateBlockData(ComponentSpawnBlockData spawnBlockData) {
-            var config = _blockConfigsProvider.GetConfig(spawnBlockData.BlockType);
-            return new BlockData(spawnBlockData.BlockId, spawnBlockData.BlockType, config);
+        private static BlockData CreateBlockData(ComponentBlockSpawnData blockSpawnData, IBlockConfig config) {
+            return new BlockData(blockSpawnData.BlockId, blockSpawnData.BlockType, config);
         }
     }
 }

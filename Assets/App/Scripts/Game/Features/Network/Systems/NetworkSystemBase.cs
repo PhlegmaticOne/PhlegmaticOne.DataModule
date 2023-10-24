@@ -8,55 +8,60 @@ namespace App.Scripts.Game.Features.Network.Systems {
     public class NetworkSystemBase<T> : SystemBase where T : ComponentRemoteBase {
         private readonly INetworkService _networkService;
 
-        private IComponentsFilter _filter;
+        private IComponentsFilter _localFilter;
+        private IComponentsFilter _remoteFilter;
 
         protected NetworkSystemBase(INetworkService networkService) {
             _networkService = networkService;
         }
 
         public override void OnAwake() {
-            var filter = ComponentsFilter.Builder.With<T>().Without<ComponentNetwork>();
-            _filter = SetupFilter(filter).Build();
+            _localFilter = SetupLocalFilter(ComponentsFilter.Builder.Without<ComponentNetwork>()).Build();
+            _remoteFilter = SetupRemoteFilter(ComponentsFilter.Builder.With<T>().Without<ComponentNetwork>()).Build();
         }
 
-        public override void OnUpdate(float deltaTime) {
-            foreach (var entity in _filter.Apply(World)) {
+        public sealed override void OnUpdate(float deltaTime) {
+            foreach (var entity in _remoteFilter.Apply(World)) {
                 var remoteComponent = entity.GetComponent<T>();
-
+                
                 if (remoteComponent.IsRemote) {
                     OnRemoteUpdate(entity, remoteComponent, deltaTime);
                 }
-                else {
-                    OnLocalUpdate(entity, remoteComponent, deltaTime);
+                else if(_localFilter.FitEntity(entity)) {
+                    OnLocalUpdate(entity, deltaTime);
                 }
             }
         }
 
-        public override void OnFixedUpdate(float deltaTime) {
-            foreach (var entity in _filter.Apply(World)) {
+        public sealed override void OnFixedUpdate(float deltaTime) {
+            foreach (var entity in _remoteFilter.Apply(World)) {
                 var remoteComponent = entity.GetComponent<T>();
-
+                
                 if (remoteComponent.IsRemote) {
                     OnRemoteFixedUpdate(entity, remoteComponent, deltaTime);
                 }
-                else {
-                    OnLocalFixedUpdate(entity, remoteComponent, deltaTime);
+                else if(_localFilter.FitEntity(entity)) {
+                    OnLocalFixedUpdate(entity, deltaTime);
                 }
             }
         }
 
-        protected virtual void OnLocalUpdate(Entity entity, T componentRemote, float deltaTime) { }
-        protected virtual void OnLocalFixedUpdate(Entity entity, T componentRemote, float deltaTime) { }
+        protected virtual IComponentsFilterBuilder SetupLocalFilter(IComponentsFilterBuilder builder) {
+            return builder;
+        }
+
+        protected virtual IComponentsFilterBuilder SetupRemoteFilter(IComponentsFilterBuilder builder) {
+            return builder;
+        }
+
+        protected virtual void OnLocalUpdate(Entity entity, float deltaTime) { }
+        protected virtual void OnLocalFixedUpdate(Entity entity, float deltaTime) { }
         protected virtual void OnRemoteUpdate(Entity entity, T componentRemote, float deltaTime) { }
         protected virtual void OnRemoteFixedUpdate(Entity entity, T componentRemote, float deltaTime) { }
 
         protected void AddRemoteComponent(T remoteComponent) {
             remoteComponent.IsRemote = true;
             _networkService.NetworkEntity.AddComponent(remoteComponent);
-        }
-
-        protected virtual IComponentsFilterBuilder SetupFilter(IComponentsFilterBuilder filterBuilder) {
-            return filterBuilder;
         }
     }
 }

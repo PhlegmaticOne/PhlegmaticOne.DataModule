@@ -17,34 +17,36 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Filters {
 
         public IEnumerable<Entity> Apply(World world) {
             foreach (var entity in world.GetEntities()) {
-                var isMatch = true;
-
-                for (var i = 0; i < _with.Count; i++) {
-                    var with = _with[i];
-                    if (entity.HasComponentOfType(with) == false) {
-                        isMatch = false;
-                        break;
-                    }
+                if (FitEntity(entity)) {
+                    yield return entity;
                 }
-
-                if (isMatch == false) {
-                    continue;
-                }
-
-                for (var i = 0; i < _without.Count; i++) {
-                    var without = _without[i];
-                    if (entity.HasComponentOfType(without)) {
-                        isMatch = false;
-                        break;
-                    }
-                }
-
-                if (isMatch == false) {
-                    continue;
-                }
-
-                yield return entity;
             }
+        }
+
+        public bool FitEntity(Entity entity) {
+            var isMatch = true;
+
+            for (var i = 0; i < _with.Count; i++) {
+                var with = _with[i];
+                if (entity.HasComponentOfType(with) == false) {
+                    isMatch = false;
+                    break;
+                }
+            }
+
+            if (isMatch == false) {
+                return false;
+            }
+
+            for (var i = 0; i < _without.Count; i++) {
+                var without = _without[i];
+                if (entity.HasComponentOfType(without)) {
+                    isMatch = false;
+                    break;
+                }
+            }
+
+            return isMatch;
         }
 
         public IComponentsFilterBuilder With<T>() {

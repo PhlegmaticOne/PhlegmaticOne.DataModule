@@ -4,7 +4,6 @@ using App.Scripts.Game.Features.Cutting.Factories;
 using App.Scripts.Game.Features.Cutting.Views;
 using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
-using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Input;
@@ -32,7 +31,8 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             base.OnAwake();
         }
 
-        protected override void OnLocalUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+        protected override void OnLocalUpdate(Entity entity, float deltaTime) {
+            var componentRemote = entity.GetComponent<ComponentCuttingPoint>();
             ProcessCutEvents(_local, componentRemote);
         }
 
@@ -47,7 +47,8 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             _remote.SliceTo(slicePoint);
         }
 
-        protected override void OnLocalFixedUpdate(Entity entity, ComponentCuttingPoint componentRemote, float deltaTime) {
+        protected override void OnLocalFixedUpdate(Entity entity, float deltaTime) {
+            var componentRemote = entity.GetComponent<ComponentCuttingPoint>();
             var inputData = componentRemote.InputData;
                 
             if (inputData.IsValid == false) {

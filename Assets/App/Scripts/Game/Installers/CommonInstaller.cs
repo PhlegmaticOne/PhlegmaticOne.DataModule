@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Game.Features.Blocks.Services;
+using App.Scripts.Game.Features.BlocksSplit.Factories;
 using App.Scripts.Game.Features.Common;
 using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
@@ -16,8 +17,9 @@ namespace App.Scripts.Game.Installers {
         }
 
         private void BindBlockService() {
-            Container.Bind<IBlockService>().To<BlockService>().AsSingle();
+            Container.Bind<IBlockContainer>().To<BlockContainer>().AsSingle();
             Container.Bind<IBlockFactory>().To<BlockFactory>().AsSingle();
+            Container.Bind<IBlockSplitter>().To<BlockSplitter>().AsSingle();
         }
 
         private void BindInputSystem() {

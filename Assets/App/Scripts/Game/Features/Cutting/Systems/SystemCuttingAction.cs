@@ -3,7 +3,6 @@ using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
-using UnityEngine;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
     public class SystemCuttingAction : SystemBase {
@@ -19,6 +18,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
 
             _blocksFilter = ComponentsFilter.Builder
                 .With<ComponentBlock>()
+                .With<ComponentBlockCuttable>()
                 .Build();
         }
 
@@ -29,20 +29,24 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 var speed = slicingVector.magnitude / deltaTime;
                 
                 if (speed > MinSpeedToSlice) {
-                    CutBlocks(componentCuttingVector.CuttingPoint);
+                    CutBlocks(componentCuttingVector);
                 }
 
                 entity.RemoveComponent<ComponentCuttingVector>();
             }
         }
 
-        private void CutBlocks(Vector3 cuttingPoint) {
+        private void CutBlocks(ComponentCuttingVector componentCuttingVector) {
+            var cuttingPoint = componentCuttingVector.CuttingPoint;
+            
             foreach (var entity in _blocksFilter.Apply(World)) {
                 var blockTransform = entity.GetComponent<ComponentBlock>();
                 var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
                 
                 if (distance <= 1.4f) {
-                    entity.AddComponent(new ComponentBlockCut());
+                    entity.AddComponent(new ComponentBlockCut {
+                        CuttingVector = componentCuttingVector.CuttingVector
+                    });
                 }
             }
         }
