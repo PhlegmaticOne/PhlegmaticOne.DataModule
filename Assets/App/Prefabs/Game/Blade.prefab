@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2211744195591073103}
   - component: {fileID: 1410574208776906208}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1847298053593840420}
   - component: {fileID: 8639582588961652294}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,8 +117,8 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -982326073
-  m_SortingLayer: 0
+  m_SortingLayerID: -477305527
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_Time: 0.2
   m_Parameters:

@@ -43,7 +43,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 var blockTransform = entity.GetComponent<ComponentBlock>();
                 var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
                 
-                if (distance <= 1.4f) {
+                if (distance <= blockTransform.Block.BlockData.BlockConfig.Radius) {
                     entity.AddComponent(new ComponentBlockCut {
                         CuttingVector = componentCuttingVector.CuttingVector
                     });

@@ -6,7 +6,6 @@ using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
-using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Serialization;
 
 namespace App.Scripts.Game.Features.Spawning.Systems {
@@ -50,7 +49,8 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                 Position = new Vector3Tiny(-position.x, position.y, position.z),
                 Speed = new Vector3Tiny(-speed.x, speed.y, speed.z),
                 BlockType = blockSpawnData.BlockType,
-                BlockId = blockSpawnData.BlockId
+                BlockId = blockSpawnData.BlockId,
+                AnimationType = blockSpawnData.AnimationType
             };
         }
     }

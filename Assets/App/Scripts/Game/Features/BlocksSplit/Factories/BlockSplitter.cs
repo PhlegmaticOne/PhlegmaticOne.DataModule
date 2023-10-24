@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Scripts.Game.Features.Animations.Models;
 using App.Scripts.Game.Features.Blocks;
 using App.Scripts.Game.Features.Blocks.Configs;
 using App.Scripts.Game.Features.BlocksSplit.Components;
@@ -41,13 +42,16 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
             ComponentSplitBlock componentSplitBlock, float additionalNewBlockAngle) 
         {
             var spawnBlockData = CreateSpawnBlockData(original, componentSplitBlock, additionalNewBlockAngle);
-            return _blockFactory.CreateBlock(spawnBlockData, new BlockConfigModel {
+            var block = _blockFactory.CreateBlock(spawnBlockData, new BlockConfigModel {
                 Sprite = CreateSprite(originalSprite, fruitPart, pivot),
                 Radius = 0,
                 ParticleEffectColor = Color.clear,
                 ScoreForSlicing = 0,
                 Prefab = _config.Prefab
             });
+            block.transform.rotation = original.transform.rotation;
+            block.transform.localScale = original.transform.localScale;
+            return block;
         }
 
         private ComponentBlockSpawnData CreateSpawnBlockData(
@@ -64,7 +68,8 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
                 Acceleration = componentGravity.Acceleration,
                 Speed = (Vector3)speed,
                 BlockId = Guid.Empty,
-                Position = (Vector3)position
+                Position = (Vector3)position,
+                AnimationType = BlockAnimationType.Rotation
             };
         }
 
@@ -75,7 +80,7 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
 
         private static Vector2 GetBlockPartOffsetFromCenter(Block original, float additionalNewBlockAngle) {
             var originalTransform = original.transform;
-            var halfRadius = originalTransform.localScale.x * 1.4f / 2;
+            var halfRadius = originalTransform.localScale.x * original.BlockData.BlockConfig.Radius / 2;
             var zRotation = (originalTransform.rotation.eulerAngles.z + additionalNewBlockAngle) * Mathf.Deg2Rad;
             var dx = halfRadius * Mathf.Cos(zRotation);
             var dy = halfRadius * Mathf.Sin(zRotation);

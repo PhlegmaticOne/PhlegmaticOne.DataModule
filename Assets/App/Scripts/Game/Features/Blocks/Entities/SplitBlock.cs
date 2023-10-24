@@ -7,7 +7,8 @@ namespace App.Scripts.Game.Features.Blocks.Entities {
         protected override void AddComponentsToBlockEntity(Entity entity, ComponentBlockSpawnData blockSpawnData) {
             entity.AddComponent(new ComponentGravity {
                 Acceleration = blockSpawnData.Acceleration,
-                Speed = blockSpawnData.Speed
+                Speed = blockSpawnData.Speed,
+                StartSpeed = blockSpawnData.Speed
             });
         }
     }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
-using App.Scripts.Game.Features.Blocks.Models;
+using App.Scripts.Game.Features.Animations.Models;
 using App.Scripts.Game.Features.Spawning.Components;
-using App.Scripts.Game.Features.Spawning.Configs;
 using App.Scripts.Game.Features.Spawning.Configs.Blocks;
 using App.Scripts.Game.Features.Spawning.Configs.Spawners;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
@@ -58,7 +56,8 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                         Position = spawnerData.GetSpawnPoint(),
                         Speed = spawnerData.GetInitialSpeed(),
                         BlockType = fruit.Key,
-                        BlockId = Guid.NewGuid()
+                        BlockId = Guid.NewGuid(),
+                        AnimationType = BlockAnimationType.Scale
                     });
                 componentTimer.CurrentTime = 0;
             }

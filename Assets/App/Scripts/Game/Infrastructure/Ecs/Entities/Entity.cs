@@ -26,6 +26,10 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Entities {
             _components.TryAdd(typeof(T), component);
         }
 
+        public void AddComponentRaw(IComponent component) {
+            _components.Add(component.GetType(), component);
+        }
+
         public bool HasComponent<T>() where T : IComponent {
             return HasComponentOfType(typeof(T));
         }

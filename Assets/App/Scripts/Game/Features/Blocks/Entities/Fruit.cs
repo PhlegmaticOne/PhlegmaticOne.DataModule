@@ -17,7 +17,8 @@ namespace App.Scripts.Game.Features.Blocks.Entities {
             });
             entity.AddComponent(new ComponentGravity {
                 Acceleration = blockSpawnData.Acceleration,
-                Speed = blockSpawnData.Speed
+                Speed = blockSpawnData.Speed,
+                StartSpeed = blockSpawnData.Speed
             });
             entity.AddComponent(new ComponentSplitBlockOnCut {
                 Sprite = BlockData.BlockConfig.Sprite

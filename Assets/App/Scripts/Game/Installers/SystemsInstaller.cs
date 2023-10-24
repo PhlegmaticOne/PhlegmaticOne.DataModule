@@ -1,4 +1,6 @@
-﻿using App.Scripts.Game.Features.BlocksSplit.Systems;
+﻿using App.Scripts.Game.Features.Animations.Systems.Rotation;
+using App.Scripts.Game.Features.Animations.Systems.Scale;
+using App.Scripts.Game.Features.BlocksSplit.Systems;
 using App.Scripts.Game.Features.BoardState.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
 using App.Scripts.Game.Features.Network.Systems;
@@ -17,6 +19,8 @@ namespace App.Scripts.Game.Installers {
 
         private void BindSystems() {
             Container.Bind<ISystem>().To<SystemGravity>().AsSingle();
+            Container.Bind<ISystem>().To<SystemDoAnimationScale>().AsSingle();
+            Container.Bind<ISystem>().To<SystemDoAnimationRotation>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawnByTime>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawning>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingInput>().AsSingle();

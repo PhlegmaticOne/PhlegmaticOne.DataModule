@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: ConfigsInstaller
   m_EditorClassIdentifier: 
   _configs:
+  - {fileID: 11400000, guid: c600bc69209099c49826883d6ffd635d, type: 2}
   - {fileID: 11400000, guid: 05a8eb09ad99af142ad789a4acf36d05, type: 2}
   - {fileID: 11400000, guid: 162fb326e76365642a5efd0cb9752fd5, type: 2}
   - {fileID: 11400000, guid: d854e9b1cd22a8d4d96d35f5d10b0253, type: 2}
   _folder: {fileID: 102900000, guid: 0bfc703795ee5cd45b26c2c5aecde588, type: 3}
   _excludeFolders:
   - {fileID: 102900000, guid: 4661e4e8d4f5cb446b71a1f6a591e344, type: 3}
+  - {fileID: 102900000, guid: e3fe5f01c8f828d4e81c4a0e746ff607, type: 3}
