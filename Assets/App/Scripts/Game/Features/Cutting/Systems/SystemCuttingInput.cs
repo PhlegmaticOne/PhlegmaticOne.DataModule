@@ -3,7 +3,6 @@ using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Input;
-using App.Scripts.Game.Infrastructure.Serialization;
 using UnityEngine;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
@@ -34,9 +33,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
 
         private static ComponentCuttingPoint ToRemote(ComponentCuttingPoint local) {
             var inputData = local.InputData;
-            var p = inputData.Position;
-            var position = new Vector3Tiny(Screen.width - p.x, p.y, p.z);
-            
+            var position = inputData.Position.SubtractedX(Screen.width);
             return new ComponentCuttingPoint {
                 InputData = new InputData(position, inputData.InputState, inputData.IsValid)
             };

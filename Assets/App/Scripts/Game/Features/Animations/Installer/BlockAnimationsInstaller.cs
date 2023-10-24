@@ -11,6 +11,7 @@ namespace App.Scripts.Game.Features.Animations.Installer {
 
         private void BindAnimationsFactory() {
             Container.Bind<IBlockAnimationFactory>().To<BlockAnimationFactory>().AsSingle();
+            Container.Bind<IBlockAnimationTypeFactory>().To<BlockAnimationTypeFactory>().AsSingle();
         }
 
         private void BindScaleResolvers() {

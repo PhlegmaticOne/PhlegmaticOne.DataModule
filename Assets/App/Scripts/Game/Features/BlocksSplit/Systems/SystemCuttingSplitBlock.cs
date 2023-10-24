@@ -2,7 +2,7 @@
 using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.BlocksSplit.Components;
 using App.Scripts.Game.Features.BlocksSplit.Factories;
-using App.Scripts.Game.Features.Cutting.Configs;
+using App.Scripts.Game.Features.BlocksSplit.Factories.Data;
 using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Spawning.Factories;
@@ -15,7 +15,6 @@ namespace App.Scripts.Game.Features.BlocksSplit.Systems {
         private readonly IBlockContainer _blockContainer;
         private readonly IBlockSplitter _blockSplitter;
         private readonly IBlockFactory _blockFactory;
-        private readonly SplitBlocksConfig _splitBlocksConfig;
 
         protected SystemCuttingSplitBlock(
             INetworkService networkService,
@@ -26,18 +25,16 @@ namespace App.Scripts.Game.Features.BlocksSplit.Systems {
         }
         
         protected override IComponentsFilterBuilder SetupLocalFilter(IComponentsFilterBuilder builder) {
-            return builder
-                .With<ComponentBlock>()
-                .With<ComponentSplitBlockOnCut>();
+            return builder.With<ComponentBlock>().With<ComponentSplitBlockOnCut>();
         }
 
         protected override void OnLocalUpdate(Entity entity, float deltaTime) {
-            var block = entity.GetComponent<ComponentBlock>().Block;
+            var componentBlock = entity.GetComponent<ComponentBlock>();
             var componentSplitBlock = entity.GetComponent<ComponentSplitBlock>();
             
-            SplitBlock(block, componentSplitBlock);
+            SplitBlock(componentBlock.Block, componentSplitBlock);
             AddRemoteComponent(new ComponentSplitBlock {
-                BlockId = block.BlockData.Id,
+                BlockId = componentBlock.BlockId,
                 CuttingVector = componentSplitBlock.CuttingVector.InvertX()
             });
         }
@@ -60,6 +57,5 @@ namespace App.Scripts.Game.Features.BlocksSplit.Systems {
                 _blockContainer.AddBlock(splitBlock);
             }
         }
-        
     }
 }

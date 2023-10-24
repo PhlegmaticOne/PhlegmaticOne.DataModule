@@ -1,4 +1,6 @@
-﻿using App.Scripts.Game.Features.Blocks.Models;
+﻿using System;
+using App.Scripts.Game.Features.Blocks.Configs;
+using App.Scripts.Game.Features.Blocks.Models;
 using App.Scripts.Game.Features.Blocks.Views;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
@@ -11,6 +13,9 @@ namespace App.Scripts.Game.Features.Blocks {
         
         public Entity Entity { get; private set; }
         public BlockData BlockData { get; private set; }
+        public IBlockConfig Config => BlockData.BlockConfig;
+        public Guid Id => BlockData.Id;
+        public BlockType Type => BlockData.Type;
 
         public void Initialize(Entity entity, BlockData blockData, ComponentBlockSpawnData blockSpawnData) {
             Entity = entity;

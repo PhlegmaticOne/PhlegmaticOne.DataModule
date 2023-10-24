@@ -1,16 +1,21 @@
 ﻿using App.Scripts.Common.Extensions;
 using App.Scripts.Game.Features.Cutting.Components;
+using App.Scripts.Game.Features.Cutting.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
     public class SystemCuttingAction : SystemBase {
-        private const int MinSpeedToSlice = 20;
+        private readonly CuttingConfig _config;
         
         private IComponentsFilter _filter;
         private IComponentsFilter _blocksFilter;
 
+        public SystemCuttingAction(CuttingConfig config) {
+            _config = config;
+        }
+        
         public override void OnAwake() {
             _filter = ComponentsFilter.Builder
                 .With<ComponentCuttingVector>()
@@ -28,7 +33,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 var slicingVector = componentCuttingVector.CuttingVector;
                 var speed = slicingVector.magnitude / deltaTime;
                 
-                if (speed > MinSpeedToSlice) {
+                if (speed > _config.MinCutSpeed) {
                     CutBlocks(componentCuttingVector);
                 }
 
@@ -43,7 +48,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 var blockTransform = entity.GetComponent<ComponentBlock>();
                 var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
                 
-                if (distance <= blockTransform.Block.BlockData.BlockConfig.Radius) {
+                if (distance <= blockTransform.BlockConfig.Radius) {
                     entity.AddComponent(new ComponentBlockCut {
                         CuttingVector = componentCuttingVector.CuttingVector
                     });

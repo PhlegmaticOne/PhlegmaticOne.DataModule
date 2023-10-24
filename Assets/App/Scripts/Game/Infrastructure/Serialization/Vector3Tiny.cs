@@ -15,6 +15,7 @@ namespace App.Scripts.Game.Infrastructure.Serialization {
         public Vector3 ToUnityVector() => this;
 
         public Vector3Tiny InvertX() => new(-x, y, z);
+        public Vector3Tiny SubtractedX(float from) => new(from - x, y, z);
 
         public static implicit operator Vector3(Vector3Tiny vector3Tiny) {
             return new Vector3(vector3Tiny.x, vector3Tiny.y, vector3Tiny.z);

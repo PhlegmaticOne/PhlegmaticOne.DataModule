@@ -1,9 +1,11 @@
 ﻿using System;
+using App.Scripts.Common.Extensions;
 using App.Scripts.Game.Features.Animations.Models;
 using App.Scripts.Game.Features.Blocks;
 using App.Scripts.Game.Features.Blocks.Configs;
 using App.Scripts.Game.Features.BlocksSplit.Components;
-using App.Scripts.Game.Features.Cutting.Configs;
+using App.Scripts.Game.Features.BlocksSplit.Configs;
+using App.Scripts.Game.Features.BlocksSplit.Factories.Data;
 using App.Scripts.Game.Features.Physics.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Factories;
@@ -12,9 +14,9 @@ using UnityEngine;
 namespace App.Scripts.Game.Features.BlocksSplit.Factories {
     public class BlockSplitter : IBlockSplitter {
         private readonly IBlockFactory _blockFactory;
-        private readonly SplitBlocksConfig _config;
+        private readonly BlockSplitConfig _config;
 
-        public BlockSplitter(IBlockFactory blockFactory, SplitBlocksConfig config) {
+        public BlockSplitter(IBlockFactory blockFactory, BlockSplitConfig config) {
             _blockFactory = blockFactory;
             _config = config;
         }
@@ -23,74 +25,38 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
             var block = factoryData.Original;
             var blockSprite = factoryData.ComponentSplitBlockOnCut.Sprite;
             var componentRemote = factoryData.ComponentSplitBlock;
-            
-            var texture = blockSprite.texture;
-            var xPos = texture.width / 2.0f;
-            var rightPivot = (texture.width - xPos) / texture.width;
-            var leftPivot = 1.0f - rightPivot;
-            var leftFruitPart = new Rect(0, 0, xPos, texture.height);
-            var rightFruitPart = new Rect(xPos, 0, texture.width - xPos, texture.height);
-            
+            var splitSprites = blockSprite.Split();
             return new[] {
-                SpawnBlock(blockSprite, rightFruitPart, rightPivot, block, componentRemote, 0),
-                SpawnBlock(blockSprite, leftFruitPart, leftPivot, block, componentRemote, 180)
+                SpawnBlock(splitSprites[0], block, componentRemote, 0),
+                SpawnBlock(splitSprites[1], block, componentRemote, 180)
             };
         }
         
-        private Block SpawnBlock(
-            Sprite originalSprite, Rect fruitPart, float pivot, Block original,
-            ComponentSplitBlock componentSplitBlock, float additionalNewBlockAngle) 
-        {
-            var spawnBlockData = CreateSpawnBlockData(original, componentSplitBlock, additionalNewBlockAngle);
-            var block = _blockFactory.CreateBlock(spawnBlockData, new BlockConfigModel {
-                Sprite = CreateSprite(originalSprite, fruitPart, pivot),
-                Radius = 0,
-                ParticleEffectColor = Color.clear,
-                ScoreForSlicing = 0,
-                Prefab = _config.Prefab
-            });
-            block.transform.rotation = original.transform.rotation;
-            block.transform.localScale = original.transform.localScale;
-            return block;
+        private Block SpawnBlock(Sprite newSprite, Block original, ComponentSplitBlock componentSplitBlock, float addAngle) {
+            var spawnBlockData = CreateSpawnBlockData(original, componentSplitBlock, addAngle);
+            var config = BlockConfigModel.WithNewSpriteAndPrefab(newSprite, _config.Prefab);
+            var block = _blockFactory.CreateBlock(spawnBlockData, config);
+            return block.TakeTransformValues(original.transform);
         }
 
-        private ComponentBlockSpawnData CreateSpawnBlockData(
-            Block original, ComponentSplitBlock componentSplitBlock, float additionalNewBlockAngle) 
-        {
+        private ComponentBlockSpawnData CreateSpawnBlockData(Block original, ComponentSplitBlock splitBlock, float addAngle) {
             var componentGravity = original.Entity.GetComponent<ComponentGravity>();
-            var speed = (Vector2)componentGravity.Speed + 
-                        CalculateAdditionalSpeed(componentSplitBlock);
-            var position = (Vector2)original.transform.position + 
-                           GetBlockPartOffsetFromCenter(original, additionalNewBlockAngle);
+            var newSpeed = GetSplitBlockSpeed(componentGravity.Speed, splitBlock);
+            var newPosition = original.transform.GetSplitOffsetFromCenter(original.Config.Radius, addAngle);
             
             return new ComponentBlockSpawnData {
+                BlockId = Guid.Empty,
+                Speed = (Vector3)newSpeed,
+                Position = (Vector3)newPosition,
                 BlockType = original.BlockData.Type,
                 Acceleration = componentGravity.Acceleration,
-                Speed = (Vector3)speed,
-                BlockId = Guid.Empty,
-                Position = (Vector3)position,
                 AnimationType = BlockAnimationType.Rotation
             };
         }
 
-        private static int GetDirectionBasedOnSlicingVectorAngleToXAxis(Vector2 slicingVector) {
-            var angle = Vector3.Angle(slicingVector, Vector3.right);
-            return angle >= 90 ? 1 : -1;
+        private Vector2 GetSplitBlockSpeed(Vector3 currentSpeed, ComponentSplitBlock componentSplitBlock) {
+            var direction = componentSplitBlock.CuttingVector.ToUnityVector().normalized;
+            return currentSpeed + direction * _config.SliceDirectionForce;
         }
-
-        private static Vector2 GetBlockPartOffsetFromCenter(Block original, float additionalNewBlockAngle) {
-            var originalTransform = original.transform;
-            var halfRadius = originalTransform.localScale.x * original.BlockData.BlockConfig.Radius / 2;
-            var zRotation = (originalTransform.rotation.eulerAngles.z + additionalNewBlockAngle) * Mathf.Deg2Rad;
-            var dx = halfRadius * Mathf.Cos(zRotation);
-            var dy = halfRadius * Mathf.Sin(zRotation);
-            return new Vector2(dx, dy);
-        }
-
-        private static Vector2 CalculateAdditionalSpeed(ComponentSplitBlock componentSplitBlock) => 
-            componentSplitBlock.CuttingVector.ToUnityVector().normalized;
-
-        private static Sprite CreateSprite(Sprite originalSprite, Rect fruitPart, float pivot) => 
-            Sprite.Create(originalSprite.texture, fruitPart, Vector2.one * pivot, originalSprite.pixelsPerUnit);
     }
 }

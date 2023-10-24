@@ -1,23 +1,22 @@
-﻿using App.Scripts.Game.Features.Blocks;
-using App.Scripts.Game.Features.Blocks.Services;
+﻿using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Particles.Components;
-using App.Scripts.Game.Features.Particles.Configs;
+using App.Scripts.Game.Features.Particles.Factory;
+using App.Scripts.Game.Features.Particles.Factory.Data;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
-using UnityEngine;
 
 namespace App.Scripts.Game.Features.Particles.Systems {
     public class SystemSpawnParticles : NetworkSystemBase<ComponentSpawnParticle> {
-        private readonly ParticleSystemConfig _config;
+        private readonly IParticlesFactory _particlesFactory;
         private readonly IBlockContainer _blockContainer;
 
-        protected SystemSpawnParticles(INetworkService networkService, ParticleSystemConfig config,
+        protected SystemSpawnParticles(INetworkService networkService, IParticlesFactory particlesFactory,
             IBlockContainer blockContainer) :
             base(networkService) {
-            _config = config;
+            _particlesFactory = particlesFactory;
             _blockContainer = blockContainer;
         }
 
@@ -31,26 +30,25 @@ namespace App.Scripts.Game.Features.Particles.Systems {
             var componentSpawnParticleOnCut = entity.GetComponent<ComponentSpawnParticleOnCut>();
             var componentBlock = entity.GetComponent<ComponentBlock>();
 
-            PlayParticles(componentSpawnParticleOnCut, componentBlock.Block);
+            _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
+                Particles = componentSpawnParticleOnCut.Particles,
+                Color = componentBlock.BlockConfig.ParticleEffectColor,
+                Position = componentBlock.Block.transform.position
+            });
             AddRemoteComponent(new ComponentSpawnParticle {
-                BlockId = componentBlock.Block.BlockData.Id,
+                BlockId = componentBlock.BlockId,
             });
         }
 
         protected override void OnRemoteUpdate(Entity entity, ComponentSpawnParticle componentRemote, float deltaTime) {
             var block = _blockContainer.FindById(componentRemote.BlockId);
             var spawnParticlesOfCut = block.Entity.GetComponent<ComponentSpawnParticleOnCut>();
-            PlayParticles(spawnParticlesOfCut, block);
-        }
-
-        private void PlayParticles(ComponentSpawnParticleOnCut spawnParticleOnCut, Block block) {
-            var particles = Object.Instantiate(spawnParticleOnCut.Particles, _config.SpawnTransform, true);
-            var blockConfig = block.BlockData.BlockConfig;
-            var module = particles.main;
-            module.startColor = new ParticleSystem.MinMaxGradient(blockConfig.ParticleEffectColor);
-            particles.transform.position = block.transform.position;
-            particles.Play();
-            Object.Destroy(particles.gameObject, particles.main.duration + 1);
+            
+            _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
+                Particles = spawnParticlesOfCut.Particles,
+                Color = block.Config.ParticleEffectColor,
+                Position = block.transform.position
+            });
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using App.Scripts.Game.Features.Animations.Models;
+using App.Scripts.Game.Features.Animations.Factories;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs.Blocks;
 using App.Scripts.Game.Features.Spawning.Configs.Spawners;
@@ -13,6 +13,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
     public class SystemSpawnByTime : SystemBase {
         private readonly SpawnersConfiguration _spawnersConfiguration;
         private readonly SpawnSystemConfiguration _spawnSystemConfiguration;
+        private readonly IBlockAnimationTypeFactory _blockAnimationTypeFactory;
 
         private const float Gravity = 8;
         
@@ -20,9 +21,11 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
 
         public SystemSpawnByTime(
             SpawnersConfiguration spawnersConfiguration, 
-            SpawnSystemConfiguration spawnSystemConfiguration) {
+            SpawnSystemConfiguration spawnSystemConfiguration,
+            IBlockAnimationTypeFactory blockAnimationTypeFactory) {
             _spawnersConfiguration = spawnersConfiguration;
             _spawnSystemConfiguration = spawnSystemConfiguration;
+            _blockAnimationTypeFactory = blockAnimationTypeFactory;
         }
         
         public override void OnAwake() {
@@ -57,7 +60,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                         Speed = spawnerData.GetInitialSpeed(),
                         BlockType = fruit.Key,
                         BlockId = Guid.NewGuid(),
-                        AnimationType = BlockAnimationType.Scale
+                        AnimationType = _blockAnimationTypeFactory.CreateBlockAnimationType()
                     });
                 componentTimer.CurrentTime = 0;
             }
