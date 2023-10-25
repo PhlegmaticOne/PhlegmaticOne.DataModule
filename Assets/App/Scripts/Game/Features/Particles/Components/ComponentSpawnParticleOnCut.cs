@@ -3,6 +3,6 @@ using UnityEngine;
 
 namespace App.Scripts.Game.Features.Particles.Components {
     public class ComponentSpawnParticleOnCut : IComponent {
-        public ParticleSystem Particles;
+        public ParticleSystem[] Particles;
     }
 }

@@ -13,7 +13,6 @@ namespace App.Scripts.Game.Infrastructure.Serialization {
         }
 
         public Vector3 ToUnityVector() => this;
-
         public Vector3Tiny InvertX() => new(-x, y, z);
         public Vector3Tiny SubtractedX(float from) => new(from - x, y, z);
 

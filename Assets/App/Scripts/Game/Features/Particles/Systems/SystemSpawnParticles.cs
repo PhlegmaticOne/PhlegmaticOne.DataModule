@@ -30,25 +30,29 @@ namespace App.Scripts.Game.Features.Particles.Systems {
             var componentSpawnParticleOnCut = entity.GetComponent<ComponentSpawnParticleOnCut>();
             var componentBlock = entity.GetComponent<ComponentBlock>();
 
-            _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
-                Particles = componentSpawnParticleOnCut.Particles,
-                Color = componentBlock.BlockConfig.ParticleEffectColor,
-                Position = componentBlock.Block.transform.position
-            });
-            AddRemoteComponent(new ComponentSpawnParticle {
-                BlockId = componentBlock.BlockId,
-            });
+            foreach (var particleSystem in componentSpawnParticleOnCut.Particles) {
+                _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
+                    Particles = particleSystem,
+                    Color = componentBlock.BlockConfig.ParticleEffectColor,
+                    Position = componentBlock.Block.transform.position
+                });
+                AddRemoteComponent(new ComponentSpawnParticle {
+                    BlockId = componentBlock.BlockId,
+                });
+            }
         }
 
         protected override void OnRemoteUpdate(Entity entity, ComponentSpawnParticle componentRemote, float deltaTime) {
             var block = _blockContainer.FindById(componentRemote.BlockId);
             var spawnParticlesOfCut = block.Entity.GetComponent<ComponentSpawnParticleOnCut>();
             
-            _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
-                Particles = spawnParticlesOfCut.Particles,
-                Color = block.Config.ParticleEffectColor,
-                Position = block.transform.position
-            });
+            foreach (var particleSystem in spawnParticlesOfCut.Particles) {
+                _particlesFactory.PlayNewParticles(new ParticlesFactoryData {
+                    Particles = particleSystem,
+                    Color = block.Config.ParticleEffectColor,
+                    Position = block.transform.position
+                });
+            }
         }
     }
 }

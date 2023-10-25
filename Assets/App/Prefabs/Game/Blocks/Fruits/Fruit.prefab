@@ -347,7 +347,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _blockView: {fileID: 3111295626857305751}
-  _juiceParticles: {fileID: 9172851939602091670, guid: 060c973529f27814a92848d2ab9bf39c, type: 3}
+  _destroyParticles:
+  - {fileID: 612507790205250966, guid: 1ea594d895b73cf48b5b735495c07044, type: 3}
+  - {fileID: 9172851939602091670, guid: 060c973529f27814a92848d2ab9bf39c, type: 3}
 --- !u!114 &3111295626857305751
 MonoBehaviour:
   m_ObjectHideFlags: 0

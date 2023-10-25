@@ -44,6 +44,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             }
             
             var slicePoint = GetSlicePoint(componentRemote.InputData.Position);
+            slicePoint.x = Mathf.Clamp(slicePoint.x, float.MinValue, 0);
             _remote.SliceTo(slicePoint);
         }
 
@@ -56,6 +57,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             }
             
             var slicePoint = GetSlicePoint(inputData.Position);
+            slicePoint.x = Mathf.Clamp(slicePoint.x, 0, float.MaxValue);
             var cuttingVector = _local.SliceTo(slicePoint);
             
             if (cuttingVector.magnitude == 0) {

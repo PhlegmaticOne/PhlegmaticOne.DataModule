@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace App.Scripts.Game.Features.Blocks.Entities {
     public class Fruit : Block {
-        [SerializeField] private ParticleSystem _juiceParticles;
+        [SerializeField] private ParticleSystem[] _destroyParticles;
         
         protected override void AddComponentsToBlockEntity(Entity entity, ComponentBlockSpawnData blockSpawnData) {
             entity.AddComponent(new ComponentBlockCuttable());
             entity.AddComponent(new ComponentSpawnParticleOnCut {
-                Particles = _juiceParticles
+                Particles = _destroyParticles
             });
             entity.AddComponent(new ComponentGravity {
                 Acceleration = blockSpawnData.Acceleration,
