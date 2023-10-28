@@ -13,6 +13,10 @@ namespace App.Scripts.Game.Features.ScoreLabels.Views {
             _scoreText.text = score.ToString();
         }
 
+        public void SetColor(Color color) {
+            _scoreText.color = color;
+        }
+
         public void ShowAnimate(Vector2 from, Vector2 direction, float time) {
             _rectTransform.localPosition = from;
             _canvasGroup.Transparent();

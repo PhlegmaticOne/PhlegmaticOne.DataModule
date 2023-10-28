@@ -1,37 +1,40 @@
 ﻿using App.Scripts.Game.Features.Combo.Components;
 using App.Scripts.Game.Features.Combo.Services;
-using App.Scripts.Game.Features.Score.Components;
+using App.Scripts.Game.Features.Cutting.Components;
+using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 
 namespace App.Scripts.Game.Features.Combo.Systems {
-    public class SystemComboCheck : SystemBase {
+    public class SystemComboShowTextCheck : SystemBase {
         private readonly IComboCounter _comboCounter;
-        
+
         private IComponentsFilter _filter;
 
-        public SystemComboCheck(IComboCounter comboCounter) {
+        public SystemComboShowTextCheck(IComboCounter comboCounter) {
             _comboCounter = comboCounter;
         }
-        
+
         public override void OnAwake() {
             _filter = ComponentsFilter.Builder
-                .With<ComponentChangeScore>()
                 .With<ComponentComboOnCut>()
+                .With<ComponentBlockCut>()
+                .With<ComponentBlock>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
-            _comboCounter.OnUpdate(deltaTime);
-            
             foreach (var entity in _filter.Apply(World)) {
-                var componentScore = entity.GetComponent<ComponentChangeScore>();
-                
-                if (componentScore.IsRemote) {
+                var componentBlock = entity.GetComponent<ComponentBlock>().Block;
+
+                if (_comboCounter.ComboCount <= 1) {
                     continue;
                 }
                 
-                componentScore.ChangeDelta = _comboCounter.RecalculateScore(componentScore.ChangeDelta);
+                entity.AddComponent(new ComponentShowComboText {
+                    ComboValue = _comboCounter.ComboCount,
+                    PositionWorld = componentBlock.transform.position
+                });
             }
         }
     }

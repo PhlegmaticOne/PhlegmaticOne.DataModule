@@ -15,10 +15,13 @@ namespace App.Scripts.Game.Features.ScoreLabels.Factory {
         
         public void CreateLabel(ComponentScoreLabel componentScoreLabel) {
             var config = _config.ScoreLabelConfig;
+            var c = componentScoreLabel.Color;
+            var color = new Color(c.x, c.y, c.z);
             var scoreLabel = Object.Instantiate(config.Prefab, _config.SpawnTransform);
             var direction = componentScoreLabel.Direction.ToUnityVector() * config.DirectionForce;
             var screenPosition = _cameraProvider.WorldToScreen(componentScoreLabel.PositionWorld);
             scoreLabel.SetScore(componentScoreLabel.Score);
+            scoreLabel.SetColor(color);
             scoreLabel.ShowAnimate(screenPosition, direction, config.ShowTime);
         }
     }

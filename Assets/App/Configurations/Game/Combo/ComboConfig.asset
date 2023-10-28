@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ComboConfig
   m_EditorClassIdentifier: 
   _comboMaxTime: 0.5
+  _showTextTime: 1
+  _prefab: {fileID: 5433018024396297695, guid: f88297d9a4284434288d5343b6b7723e, type: 3}

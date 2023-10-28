@@ -7,6 +7,7 @@ using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
+using UnityEngine;
 
 namespace App.Scripts.Game.Features.ScoreLabels.Systems {
     public class SystemScoreLabelCheck : SystemBase {
@@ -24,11 +25,13 @@ namespace App.Scripts.Game.Features.ScoreLabels.Systems {
                 var changeScoreComponent = entity.GetComponent<ComponentChangeScore>();
                 var blockCut = entity.GetComponent<ComponentBlockCut>();
                 var block = entity.GetComponent<ComponentBlock>().Block;
+                Vector4 color = block.Config.ParticleEffectColor;
 
                 var local = new ComponentScoreLabel {
                     Score = changeScoreComponent.ChangeDelta,
                     Direction = blockCut.CuttingVector.ToUnityVector(),
-                    PositionWorld = block.transform.position
+                    PositionWorld = block.transform.position,
+                    Color = (Vector3)color
                 };
 
                 World.AppendEntity().WithComponent(local);

@@ -43,6 +43,8 @@ namespace App.Scripts.Game.Installers {
             
             Container.Bind<ISystem>().To<SystemChangeScoreCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemComboCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemComboShowTextCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemShowComboText>().AsSingle();
             Container.Bind<ISystem>().To<SystemChangeScore>().AsSingle();
 
             Container.Bind<ISystem>().To<SystemScoreLabelCheck>().AsSingle();
