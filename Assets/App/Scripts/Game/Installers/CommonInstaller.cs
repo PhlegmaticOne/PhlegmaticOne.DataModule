@@ -1,6 +1,8 @@
 ﻿using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.BlocksSplit.Factories;
 using App.Scripts.Game.Features.Common;
+using App.Scripts.Game.Features.Difficulty.Services;
+using App.Scripts.Game.Features.Packages.Services;
 using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
 using UnityEngine;
@@ -14,6 +16,12 @@ namespace App.Scripts.Game.Installers {
             BindCameraProvider();
             BindInputSystem();
             BindBlockService();
+            BindDifficulty();
+        }
+
+        private void BindDifficulty() {
+            Container.Bind<ISpawningDifficulty>().To<SpawningDifficultyDefault>().AsSingle();
+            Container.Bind<IPackageGenerator>().To<PackageGenerator>().AsSingle();
         }
 
         private void BindBlockService() {

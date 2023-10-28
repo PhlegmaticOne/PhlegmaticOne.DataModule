@@ -398,8 +398,10 @@ MonoBehaviour:
       _min: 2
       _max: 5
     _spawnBlockInPackageIntervals:
-      _min: 0
-      _max: 1
+      _min: 0.2
+      _max: 1.5
     _spawnPackageIntervals:
       _min: 1
-      _max: 2
+      _max: 3
+    _initialBlockGravity: 8
+    _maxDifficulty: 30

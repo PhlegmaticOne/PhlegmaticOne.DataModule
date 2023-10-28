@@ -1,68 +1,50 @@
 ﻿using System;
 using App.Scripts.Game.Features.Animations.Factories;
 using App.Scripts.Game.Features.Spawning.Components;
-using App.Scripts.Game.Features.Spawning.Configs.Blocks;
 using App.Scripts.Game.Features.Spawning.Configs.Spawners;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
-using App.Scripts.Game.Infrastructure.Random;
 using UnityEngine;
 
 namespace App.Scripts.Game.Features.Spawning.Systems {
-    public class SystemSpawnByTime : SystemBase {
+    public class SystemSpawnByBlockData : SystemBase {
         private readonly SpawnersConfiguration _spawnersConfiguration;
-        private readonly SpawnSystemConfiguration _spawnSystemConfiguration;
         private readonly IBlockAnimationTypeFactory _blockAnimationTypeFactory;
 
         private const float Gravity = 8;
         
         private IComponentsFilter _filter;
 
-        public SystemSpawnByTime(
+        public SystemSpawnByBlockData(
             SpawnersConfiguration spawnersConfiguration, 
-            SpawnSystemConfiguration spawnSystemConfiguration,
             IBlockAnimationTypeFactory blockAnimationTypeFactory) {
             _spawnersConfiguration = spawnersConfiguration;
-            _spawnSystemConfiguration = spawnSystemConfiguration;
             _blockAnimationTypeFactory = blockAnimationTypeFactory;
         }
         
         public override void OnAwake() {
-            World.CreateEntity()
-                .WithComponent(new ComponentTimer {
-                    CurrentTime = 0,
-                    Time = 5
-                })
-                .WithComponent(new ComponentBlockSpawner());
-
             _filter = ComponentsFilter.Builder
-                .With<ComponentBlockSpawner>()
-                .With<ComponentTimer>()
+                .With<ComponentSpawnBlock>()
                 .Build();
         }
 
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _filter.Apply(World)) {
-                var componentTimer = entity.GetComponent<ComponentTimer>();
-
-                if (!componentTimer.IsEnd) {
-                    continue;
-                }
-
+                var componentSpawnBlock = entity.GetComponent<ComponentSpawnBlock>();
                 var spawnerData = _spawnersConfiguration.GetRandomSpawnerData();
-                var fruit = _spawnSystemConfiguration.FruitSpawnData.GetRandomItemBasedOnProbabilities();
                 
                 World.AppendEntity()
                     .WithComponent(new ComponentBlockSpawnData {
                         Acceleration = Gravity * Vector3.down,
                         Position = spawnerData.GetSpawnPoint(),
                         Speed = spawnerData.GetInitialSpeed(),
-                        BlockType = fruit.Key,
+                        BlockType = componentSpawnBlock.BlockType,
                         BlockId = Guid.NewGuid(),
                         AnimationType = _blockAnimationTypeFactory.CreateBlockAnimationType()
                     });
-                componentTimer.CurrentTime = 0;
+
+                entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
             }
         }
     }

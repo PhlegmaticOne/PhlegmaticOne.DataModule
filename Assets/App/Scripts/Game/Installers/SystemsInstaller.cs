@@ -4,6 +4,7 @@ using App.Scripts.Game.Features.BlocksSplit.Systems;
 using App.Scripts.Game.Features.BoardState.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
 using App.Scripts.Game.Features.Network.Systems;
+using App.Scripts.Game.Features.Packages.Systems;
 using App.Scripts.Game.Features.Particles.Systems;
 using App.Scripts.Game.Features.Physics.Systems;
 using App.Scripts.Game.Features.RemoveBlocks.Systems;
@@ -21,7 +22,9 @@ namespace App.Scripts.Game.Installers {
             Container.Bind<ISystem>().To<SystemGravity>().AsSingle();
             Container.Bind<ISystem>().To<SystemDoAnimationScale>().AsSingle();
             Container.Bind<ISystem>().To<SystemDoAnimationRotation>().AsSingle();
-            Container.Bind<ISystem>().To<SystemSpawnByTime>().AsSingle();
+            Container.Bind<ISystem>().To<SystemPackageGeneration>().AsSingle();
+            Container.Bind<ISystem>().To<SystemPackageProcessor>().AsSingle();
+            Container.Bind<ISystem>().To<SystemSpawnByBlockData>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawning>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingInput>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingView>().AsSingle();
