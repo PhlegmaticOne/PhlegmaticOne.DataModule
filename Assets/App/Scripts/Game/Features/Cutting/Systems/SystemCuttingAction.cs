@@ -53,11 +53,6 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                     entity.AddComponent(new ComponentBlockCut {
                         CuttingVector = componentCuttingVector.CuttingVector
                     });
-
-                    World.AppendEntity()
-                        .WithComponent(new ComponentChangeScore {
-                            ChangeDelta = blockTransform.BlockConfig.ScoreForSlicing
-                        });
                 }
             }
         }

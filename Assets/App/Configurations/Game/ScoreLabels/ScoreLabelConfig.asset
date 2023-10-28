@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa14ccca2290422ea305b0dfdaee3195, type: 3}
-  m_Name: NetworkClientConfig
+  m_Script: {fileID: 11500000, guid: 46cc28fee2db4edd846927290a7b863c, type: 3}
+  m_Name: ScoreLabelConfig
   m_EditorClassIdentifier: 
-  _serverAddress: localhost
-  _serverPort: 8888
-  _maxMessageSize: 16384
-  _processLimit: 20
-  _testNotConnect: 0
+  _prefab: {fileID: 1359235736747251387, guid: 67d2bccba6202764090388445b08f220, type: 3}
+  _directionForce: 30
+  _showTime: 2

@@ -9,6 +9,7 @@ using App.Scripts.Game.Features.Particles.Systems;
 using App.Scripts.Game.Features.Physics.Systems;
 using App.Scripts.Game.Features.RemoveBlocks.Systems;
 using App.Scripts.Game.Features.Score.Systems;
+using App.Scripts.Game.Features.ScoreLabels.Systems;
 using App.Scripts.Game.Features.Spawning.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using Zenject;
@@ -39,7 +40,11 @@ namespace App.Scripts.Game.Installers {
             Container.Bind<ISystem>().To<SystemCheckSpawnParticles>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawnParticles>().AsSingle();
             
+            Container.Bind<ISystem>().To<SystemChangeScoreCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemChangeScore>().AsSingle();
+
+            Container.Bind<ISystem>().To<SystemScoreLabelCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemScoreLabelShow>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemCuttingCheckSplitBlocks>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingSplitBlock>().AsSingle();

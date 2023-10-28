@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Components.Base;
 using Newtonsoft.Json;
 
 namespace App.Scripts.Game.Infrastructure.Ecs.Entities {
+    public static class EntityExtensions {
+        public static Entity RemoveEndOfFrame(this Entity entity) {
+            entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
+            return entity;
+        }
+    }
+    
     [Serializable]
     public class Entity {
         [JsonProperty]

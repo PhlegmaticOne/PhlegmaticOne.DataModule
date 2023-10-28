@@ -3,7 +3,6 @@ using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Score.Components;
 using App.Scripts.Game.Features.Score.Services;
 using App.Scripts.Game.Features.Score.Views;
-using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 
@@ -41,7 +40,6 @@ namespace App.Scripts.Game.Features.Score.Systems {
                 ChangeDelta = delta,
                 CurrentScore = newScore
             });
-            entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
         }
 
         protected override void OnRemoteUpdate(Entity entity, ComponentChangeScore componentRemote, float deltaTime) {

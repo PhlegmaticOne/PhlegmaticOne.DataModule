@@ -39,8 +39,7 @@ namespace App.Scripts.Game.Features.Spawning.Factories {
         }
 
         private Entity CreateBlockEntity(Block block, ComponentBlockSpawnData spawnData) {
-            var entity = _world.AppendEntity()
-                .WithComponent(new ComponentBlock { Block = block });
+            var entity = _world.AppendEntity().WithComponent(new ComponentBlock { Block = block });
             return SetupEntityAnimations(entity, spawnData);
         }
 

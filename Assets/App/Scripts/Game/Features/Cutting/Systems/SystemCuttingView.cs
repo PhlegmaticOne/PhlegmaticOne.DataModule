@@ -42,8 +42,8 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             if (componentRemote.InputData.IsValid == false) {
                 return;
             }
-            
-            var slicePoint = GetSlicePoint(componentRemote.InputData.Position);
+
+            var slicePoint = _cameraProvider.ScreenToWorld(componentRemote.InputData.Position);
             slicePoint.x = Mathf.Clamp(slicePoint.x, float.MinValue, 0);
             _remote.SliceTo(slicePoint);
         }
@@ -56,7 +56,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                 return;
             }
             
-            var slicePoint = GetSlicePoint(inputData.Position);
+            var slicePoint = _cameraProvider.ScreenToWorld(inputData.Position);
             slicePoint.x = Mathf.Clamp(slicePoint.x, 0, float.MaxValue);
             var cuttingVector = _local.SliceTo(slicePoint);
             
@@ -72,7 +72,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
 
         private void ProcessCutEvents(BladeView blade, ComponentCuttingPoint componentCuttingPoint) {
             var inputData = componentCuttingPoint.InputData;
-            var slicePoint = GetSlicePoint(inputData.Position);
+            var slicePoint = _cameraProvider.ScreenToWorld(inputData.Position);
                 
             switch (inputData) {
                 case { InputState: InputState.Started }:

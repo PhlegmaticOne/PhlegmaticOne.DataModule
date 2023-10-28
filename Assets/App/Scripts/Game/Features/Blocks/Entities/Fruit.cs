@@ -2,6 +2,7 @@
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Particles.Components;
 using App.Scripts.Game.Features.Physics.Components;
+using App.Scripts.Game.Features.Score.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace App.Scripts.Game.Features.Blocks.Entities {
         
         protected override void AddComponentsToBlockEntity(Entity entity, ComponentBlockSpawnData blockSpawnData) {
             entity.AddComponent(new ComponentBlockCuttable());
+            entity.AddComponent(new ComponentChangeScoreOnCut {
+                Score = Config.ScoreForSlicing
+            });
             entity.AddComponent(new ComponentSpawnParticleOnCut {
                 Particles = _destroyParticles
             });
