@@ -1,4 +1,4 @@
-﻿using App.Scripts.Game.Features._Start;
+﻿using App.Scripts.Game.Features._Boot;
 using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.BlocksSplit.Factories;
 using App.Scripts.Game.Features.Common;
@@ -14,7 +14,7 @@ using Zenject;
 namespace App.Scripts.Game.Installers {
     public class CommonInstaller : MonoInstaller {
         [SerializeField] private Camera _camera;
-        [SerializeField] private Bootstrap _bootstrap;
+        [SerializeField] private GameBootstrap _gameBootstrap;
         
         public override void InstallBindings() {
             BindCameraProvider();
@@ -27,7 +27,7 @@ namespace App.Scripts.Game.Installers {
         }
 
         private void BindBootstrap() {
-            Container.BindInterfacesTo<Bootstrap>().FromInstance(_bootstrap).AsSingle();
+            Container.BindInterfacesTo<GameBootstrap>().FromInstance(_gameBootstrap).AsSingle();
         }
 
         private void BindNetworkSession() {

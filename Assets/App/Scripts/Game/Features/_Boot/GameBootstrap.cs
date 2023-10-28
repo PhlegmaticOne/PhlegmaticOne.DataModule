@@ -2,8 +2,8 @@
 using UnityEngine;
 using Zenject;
 
-namespace App.Scripts.Game.Features._Start {
-    public class Bootstrap : MonoBehaviour, IInitializable {
+namespace App.Scripts.Game.Features._Boot {
+    public class GameBootstrap : MonoBehaviour, IInitializable {
         private StateStartGame _stateStartGame;
 
         [Inject]

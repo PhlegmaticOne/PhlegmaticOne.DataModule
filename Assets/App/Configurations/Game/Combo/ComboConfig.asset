@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa14ccca2290422ea305b0dfdaee3195, type: 3}
-  m_Name: NetworkClientConfig
+  m_Script: {fileID: 11500000, guid: a8fc266d27154d4f9764712e5a1041dc, type: 3}
+  m_Name: ComboConfig
   m_EditorClassIdentifier: 
-  _serverAddress: localhost
-  _serverPort: 8888
-  _maxMessageSize: 16384
-  _processLimit: 20
-  _testNotConnect: 1
+  _comboMaxTime: 0.5

@@ -789,7 +789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 121454805}
-  _bootstrap: {fileID: 2110776380}
+  _gameBootstrap: {fileID: 2110776380}
 --- !u!1 &531517985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,6 +1361,7 @@ MonoBehaviour:
   - {fileID: 1589287274}
   - {fileID: 8244807}
   - {fileID: 1452094265}
+  - {fileID: 1966892181}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1947,6 +1948,7 @@ Transform:
   - {fileID: 1589287275}
   - {fileID: 8244806}
   - {fileID: 1452094266}
+  - {fileID: 1966892182}
   m_Father: {fileID: 849551672}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2874,6 +2876,50 @@ MonoBehaviour:
   _scoreText: {fileID: 1947950549}
   _maxScoreText: {fileID: 728399649}
   _updateScoreDuration: 1
+--- !u!1 &1966892180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966892182}
+  - component: {fileID: 1966892181}
+  m_Layer: 0
+  m_Name: Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1966892181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966892180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffda6a2a14044739ff222cc728bcd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1966892182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966892180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1249337078}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1968105440
 GameObject:
   m_ObjectHideFlags: 0
