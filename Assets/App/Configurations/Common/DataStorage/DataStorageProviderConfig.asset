@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _changeTrackerConfig: {fileID: 11400000, guid: 5af549aa23dddd64190f42e48682f11e, type: 2}
   _dataStorageConfigs:
+  - {fileID: 11400000, guid: 9ec216b628300e04abdca51bf5e3101c, type: 2}
   - {fileID: 11400000, guid: 08c467429c5ab5149abd9926804bda5e, type: 2}

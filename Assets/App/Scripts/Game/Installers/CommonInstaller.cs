@@ -1,22 +1,41 @@
-﻿using App.Scripts.Game.Features.Blocks.Services;
+﻿using App.Scripts.Game.Features._Start;
+using App.Scripts.Game.Features.Blocks.Services;
 using App.Scripts.Game.Features.BlocksSplit.Factories;
 using App.Scripts.Game.Features.Common;
 using App.Scripts.Game.Features.Difficulty.Services;
 using App.Scripts.Game.Features.Packages.Services;
 using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
+using App.Scripts.Game.Infrastructure.Session;
+using App.Scripts.Game.States;
 using UnityEngine;
 using Zenject;
 
 namespace App.Scripts.Game.Installers {
     public class CommonInstaller : MonoInstaller {
         [SerializeField] private Camera _camera;
+        [SerializeField] private Bootstrap _bootstrap;
         
         public override void InstallBindings() {
             BindCameraProvider();
             BindInputSystem();
             BindBlockService();
             BindDifficulty();
+            BindNetworkSession();
+            BindStates();
+            BindBootstrap();
+        }
+
+        private void BindBootstrap() {
+            Container.BindInterfacesTo<Bootstrap>().FromInstance(_bootstrap).AsSingle();
+        }
+
+        private void BindNetworkSession() {
+            Container.Bind<INetworkSession>().To<NetworkSession>().AsSingle();
+        }
+
+        private void BindStates() {
+            Container.Bind<StateStartGame>().AsSingle();
         }
 
         private void BindDifficulty() {

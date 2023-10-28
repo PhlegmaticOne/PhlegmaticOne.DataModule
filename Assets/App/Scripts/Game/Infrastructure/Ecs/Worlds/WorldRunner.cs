@@ -8,6 +8,7 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
         [SerializeField] private bool _isRunGame;
         
         private World _world;
+        private bool _isConstructed;
 
         [Inject]
         private void Construct(World world, IEnumerable<ISystem> systems) {
@@ -15,16 +16,17 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
             _world.Initialize(systems);
         }
 
-        private void Awake() {
+        public void Run() {
             if (!_isRunGame) {
                 return;
             }
             
             _world.Construct();
+            _isConstructed = true;
         }
-
+        
         private void Update() {
-            if (!_isRunGame) {
+            if (!IsRun()) {
                 return;
             }
             
@@ -32,7 +34,7 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
         }
 
         private void FixedUpdate() {
-            if (!_isRunGame) {
+            if (!IsRun()) {
                 return;
             }
             
@@ -40,11 +42,13 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
         }
 
         private void OnApplicationQuit() {
-            if (!_isRunGame) {
+            if (!IsRun()) {
                 return;
             }
             
             _world.Dispose();
         }
+
+        private bool IsRun() => _isRunGame && _isConstructed;
     }
 }
