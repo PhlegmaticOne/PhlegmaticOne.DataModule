@@ -36,7 +36,8 @@ namespace App.Scripts.Game.Features.ScoreLabels.Systems {
             return new ComponentScoreLabel {
                 Score = local.Score,
                 Direction = direction,
-                PositionWorld = position
+                PositionWorld = position,
+                Color = local.Color
             };
         }
     }

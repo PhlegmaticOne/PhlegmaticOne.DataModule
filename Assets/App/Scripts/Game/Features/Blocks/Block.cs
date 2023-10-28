@@ -15,11 +15,12 @@ namespace App.Scripts.Game.Features.Blocks {
         public BlockData BlockData { get; private set; }
         public IBlockConfig Config => BlockData.BlockConfig;
         public Guid Id => BlockData.Id;
-        public BlockType Type => BlockData.Type;
-
+        public bool IsRemote { get; private set; }
+        
         public void Initialize(Entity entity, BlockData blockData, ComponentBlockSpawnData blockSpawnData) {
             Entity = entity;
             BlockData = blockData;
+            IsRemote = blockSpawnData.IsRemote;
             _blockView.SetupBlockView(blockData.BlockConfig);
             AddComponentsToBlockEntity(Entity, blockSpawnData);
         }

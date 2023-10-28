@@ -6,6 +6,5 @@ namespace App.Scripts.Game.Features.Blocks.Configs {
         Block Prefab { get; }
         Color ParticleEffectColor { get; }
         float Radius { get; }
-        int ScoreForSlicing { get; }
     }
 }

@@ -205,10 +205,10 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Time: 0.2
+  m_SortingLayerID: -79081419
+  m_SortingLayer: 2
+  m_SortingOrder: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -238,8 +238,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9058824, g: 0.7725491, b: 0.21568629, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.9058824, g: 0.7725491, b: 0.21960786, a: 1}
+      key1: {r: 0.8301887, g: 0.6688949, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trailRenderer: {fileID: 1949571592828680826}
+  _effect: -50
 --- !u!1 &8112969903419499984
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +351,7 @@ MonoBehaviour:
   _destroyParticles:
   - {fileID: 612507790205250966, guid: 1ea594d895b73cf48b5b735495c07044, type: 3}
   - {fileID: 9172851939602091670, guid: 060c973529f27814a92848d2ab9bf39c, type: 3}
+  _scoreOnCut: 50
 --- !u!114 &3111295626857305751
 MonoBehaviour:
   m_ObjectHideFlags: 0

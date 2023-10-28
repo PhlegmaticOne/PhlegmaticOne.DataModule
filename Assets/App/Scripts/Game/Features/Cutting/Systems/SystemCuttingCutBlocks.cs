@@ -27,7 +27,6 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             
             entity.AddComponent(new ComponentRemoveBlockEndOfFrame());
             AddRemoteComponent(new ComponentBlockCut {
-                IsRemote = true,
                 BlockId = block.Id,
                 CuttingVector = componentBlockCut.CuttingVector
             });
