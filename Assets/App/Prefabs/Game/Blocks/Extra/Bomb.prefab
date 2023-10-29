@@ -71,9 +71,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -79081419
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
@@ -5012,6 +5012,8 @@ MonoBehaviour:
   _blockView: {fileID: 3111295626857305751}
   _particles:
   - {fileID: 3636309397056737813, guid: 6588ac6bf4cbfa6409d65936bbf03c5d, type: 3}
+  _force: 7.5
+  _radius: 6
 --- !u!114 &3111295626857305751
 MonoBehaviour:
   m_ObjectHideFlags: 0

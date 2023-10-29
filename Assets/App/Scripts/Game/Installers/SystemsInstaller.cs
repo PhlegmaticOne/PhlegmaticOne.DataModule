@@ -2,6 +2,7 @@
 using App.Scripts.Game.Features.Animations.Systems.Scale;
 using App.Scripts.Game.Features.BlocksSplit.Systems;
 using App.Scripts.Game.Features.BoardState.Systems;
+using App.Scripts.Game.Features.Bomb.Systems;
 using App.Scripts.Game.Features.Combo.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
 using App.Scripts.Game.Features.Network.Systems;
@@ -40,6 +41,9 @@ namespace App.Scripts.Game.Installers {
             
             Container.Bind<ISystem>().To<SystemCheckSpawnParticles>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawnParticles>().AsSingle();
+
+            Container.Bind<ISystem>().To<SystemThrowBlocksCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemThrowBlocks>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemChangeScoreCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemComboCheck>().AsSingle();
