@@ -61,7 +61,15 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
                 system.OnFixedUpdate(deltaTime);
             }
         }
-        
+
+        public void Clear() {
+            foreach (var entity in _entities) {
+                entity.CleanUp();
+            }
+            
+            _entities.Clear();
+        }
+
         public void Dispose() {
             foreach (var system in _systems) {
                 system.OnDispose();

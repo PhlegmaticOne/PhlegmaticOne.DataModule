@@ -13,9 +13,9 @@ namespace App.Scripts.Menu.Features.Progress.ViewModels {
             MaxScore = new ReactiveProperty<int>();
         }
 
-        public override Task InitializeAsync() {
+        public override async Task InitializeAsync() {
+            await _playerScoreService.InitializeAsync();
             UpdateScore();
-            return Task.CompletedTask;
         }
 
         public ReactiveProperty<int> MaxScore { get; }

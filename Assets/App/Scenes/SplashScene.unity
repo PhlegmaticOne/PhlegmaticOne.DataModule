@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e500bedd8f45999a984c5f838b9769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bootstrap: {fileID: 1737592416}
   _progressDeltaTime: 30
   _finalProgressDelay: 400
 --- !u!4 &133321757
@@ -268,7 +269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 2101526513}
   - {fileID: 133321756}
   _installerPrefabs: []
   _autoRun: 1
@@ -300,7 +300,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 133321757}
-  - {fileID: 2101526512}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -654,7 +653,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737592417}
-  - component: {fileID: 1737592418}
   - component: {fileID: 1737592416}
   - component: {fileID: 1737592419}
   m_Layer: 0
@@ -676,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2ebf6d3f794977b6dbe66a213a7f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _modelViewsBootstrap: {fileID: 1737592419}
 --- !u!4 &1737592417
 Transform:
   m_ObjectHideFlags: 0
@@ -691,77 +690,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1737592418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737592415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5abac709864177a9312dbe7ea32717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1737592419}
-    - {fileID: 1737592416}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _componentInitializers
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneInitializer,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _sceneStarters
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneStarter,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _sceneDisposers
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneDisposer,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!114 &1737592419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,51 +704,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _viewModelViewsOnScene:
   - {fileID: 4079495783458553096}
---- !u!1 &2101526511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2101526512}
-  - component: {fileID: 2101526513}
-  m_Layer: 0
-  m_Name: SceneProviderInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2101526512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101526511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 275287440}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2101526513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101526511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973cc2e807df48bfa096fc9a6b8ad627, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneBootstrap: {fileID: 1737592418}
 --- !u!1001 &4079495783458553093
 PrefabInstance:
   m_ObjectHideFlags: 0

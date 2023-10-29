@@ -10,13 +10,14 @@ namespace App.Scripts.Game.Features.Score.Services {
         }
         
         public int MaxScore => _playerScoreService.MaxScore;
+        public int CurrentScore => _sessionScore;
 
         public int AddScore(int score) {
             _sessionScore += score;
 
-            if (_sessionScore > _playerScoreService.MaxScore) {
-                _playerScoreService.ChangeMaxScore(_sessionScore);
-            }
+            // if (_sessionScore > _playerScoreService.MaxScore) {
+            //     _playerScoreService.ChangeMaxScore(_sessionScore);
+            // }
 
             return _sessionScore;
         }

@@ -13,6 +13,8 @@ namespace App.Scripts.Game.Infrastructure.Session {
         private TaskCompletionSource<bool> _completionSource;
         private CancellationTokenSource _cancellationTokenSource;
         private Client _client;
+
+        private int _clientsCount;
         
         public NetworkSession(NetworkClientConfig clientConfig, ILogger logger) {
             _config = clientConfig;
@@ -32,7 +34,7 @@ namespace App.Scripts.Game.Infrastructure.Session {
             _completionSource = new TaskCompletionSource<bool>();
             _cancellationTokenSource = new CancellationTokenSource();
             _client.Connect(_config.ServerAddress, _config.ServerPort);
-            On(_cancellationTokenSource.Token);
+            ListenConnections(_cancellationTokenSource.Token);
             return _config.TestNotConnect ? Task.CompletedTask : _completionSource.Task;
         }
 
@@ -49,10 +51,11 @@ namespace App.Scripts.Game.Infrastructure.Session {
             _client.OnDisconnected -= OnDisconnected;
             _client.OnData -= OnData;
             _client.Disconnect();
+            _clientsCount = 0;
         }
 
-        private void OnData(ArraySegment<byte> obj) {
-            DataReceived?.Invoke(obj);
+        private void OnData(ArraySegment<byte> message) {
+            DataReceived?.Invoke(message);
         }
 
         private void OnDisconnected() {
@@ -61,17 +64,21 @@ namespace App.Scripts.Game.Infrastructure.Session {
 
         private void OnConnected() {
             _logger.LogMessage("Connected");
-            _cancellationTokenSource.Cancel();
-            _completionSource.SetResult(true);
+            ++_clientsCount;
+
+            if (_clientsCount == _config.ClientsCount) {
+                _cancellationTokenSource.Cancel();
+                _completionSource.SetResult(true);
+            }
         }
 
-        private async Task On(CancellationToken cancellationToken) {
+        private async Task ListenConnections(CancellationToken cancellationToken) {
             while (_cancellationTokenSource.IsCancellationRequested == false) {
                 await Task.Delay(20, cancellationToken);
                 Tick();
             }
             
-            _logger.LogMessage("Exiting On");
+            _logger.LogMessage("Exiting ListenConnections");
         }
     }
 }

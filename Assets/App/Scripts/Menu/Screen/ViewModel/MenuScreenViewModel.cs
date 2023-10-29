@@ -1,5 +1,5 @@
-﻿using App.Scripts.Common.Dialogs.Manager;
-using App.Scripts.Menu.Features.Statistics.Dialog;
+﻿using System.Threading.Tasks;
+using App.Scripts.Common.Scenes.Base;
 using App.Scripts.Menu.Services.Exit;
 using PhlegmaticOne.ViewModels.Commands;
 using PhlegmaticOne.ViewModels.Contracts;
@@ -7,19 +7,19 @@ using PhlegmaticOne.ViewModels.Contracts;
 namespace App.Scripts.Menu.Screen.ViewModel {
     public class MenuScreenViewModel : BaseViewModel {
         private readonly IExitGameService _exitGameService;
-        private readonly IDialogsManager _dialogsManager;
+        private readonly ISceneProvider _sceneProvider;
 
-        public MenuScreenViewModel(IExitGameService exitGameService, IDialogsManager dialogsManager) {
+        public MenuScreenViewModel(IExitGameService exitGameService, ISceneProvider sceneProvider) {
             _exitGameService = exitGameService;
-            _dialogsManager = dialogsManager;
+            _sceneProvider = sceneProvider;
             ExitCommand = RelayCommandFactory.CreateEmptyCommand(ExitGame);
-            PlayCommand = RelayCommandFactory.CreateEmptyCommand(ShowStatistics);
+            PlayCommand = RelayCommandFactory.CreateEmptyAsyncCommand(ShowStatistics);
         }
         
         public IRelayCommand ExitCommand { get; }
         public IRelayCommand PlayCommand { get; }
 
-        private void ShowStatistics() => _dialogsManager.ShowDialog<StatisticsDialog>();
+        private Task ShowStatistics() => _sceneProvider.LoadSceneAsync(SceneType.Game);
         private void ExitGame() => _exitGameService.Exit();
     }
 }

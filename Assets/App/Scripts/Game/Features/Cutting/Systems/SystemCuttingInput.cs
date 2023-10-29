@@ -10,7 +10,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
         private readonly IInputSystem _inputSystem;
 
         public SystemCuttingInput(IInputSystemFactory inputSystem, INetworkService networkService) : base(networkService) {
-            _inputSystem = inputSystem.CreateInput();
+            _inputSystem = inputSystem.GetInput();
         }
 
         public override void OnAwake() {

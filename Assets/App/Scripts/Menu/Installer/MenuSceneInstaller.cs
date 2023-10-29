@@ -1,17 +1,26 @@
-﻿using App.Scripts.Menu.Features.Progress.ViewModels;
+﻿using App.Scripts.Menu.Bootstrap;
+using App.Scripts.Menu.Features.Progress.ViewModels;
 using App.Scripts.Menu.Features.Statistics.ViewModels;
 using App.Scripts.Menu.Screen;
 using App.Scripts.Menu.Screen.ViewModel;
 using App.Scripts.Menu.Services.Exit;
+using UnityEngine;
 using Zenject;
 
 namespace App.Scripts.Menu.Installer {
     public class MenuSceneInstaller : MonoInstaller {
+        [SerializeField] private MenuSceneBootstrap _bootstrap;
+        
         public override void InstallBindings() {
             BindPlayerViewModel();
             BindStatisticsViewModel();
             BindMenuScreen();
             BindExitService();
+            BindBootstrap();
+        }
+
+        private void BindBootstrap() {
+            Container.BindInterfacesTo<MenuSceneBootstrap>().FromInstance(_bootstrap).AsSingle();
         }
 
         private void BindExitService() {

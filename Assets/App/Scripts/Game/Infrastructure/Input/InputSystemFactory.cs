@@ -4,7 +4,7 @@ namespace App.Scripts.Game.Infrastructure.Input {
     public class InputSystemFactory : IInputSystemFactory {
         private IInputSystem _inputSystem;
 
-        public IInputSystem CreateInput()
+        public IInputSystem GetInput()
         {
             if (_inputSystem == null)
             {

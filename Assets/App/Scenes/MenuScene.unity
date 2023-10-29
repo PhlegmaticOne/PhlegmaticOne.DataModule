@@ -171,50 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogsPool: {fileID: 1856956420}
   _uiElementsPool: {fileID: 1381936531}
---- !u!1 &347852387
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 347852389}
-  - component: {fileID: 347852388}
-  m_Layer: 0
-  m_Name: AppEventsHandlerInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &347852388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347852387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bd9c456460421f99f315f90f927eb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &347852389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347852387}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1962626191}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &431609169
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,51 +300,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &783331827
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 783331829}
-  - component: {fileID: 783331828}
-  m_Layer: 0
-  m_Name: SceneProviderInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &783331828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783331827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973cc2e807df48bfa096fc9a6b8ad627, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneBootstrap: {fileID: 1712565814}
---- !u!4 &783331829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783331827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1962626191}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &889582848
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89df3bcf94574cfca81546c2fe7b8e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bootstrap: {fileID: 1712565812}
 --- !u!4 &924368247
 Transform:
   m_ObjectHideFlags: 0
@@ -762,7 +674,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1712565813}
-  - component: {fileID: 1712565814}
   - component: {fileID: 1712565812}
   - component: {fileID: 1712565815}
   m_Layer: 0
@@ -784,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4aaa505bf6946cc876eac0b3cf5a3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _modelViewsBootstrap: {fileID: 1712565815}
   _menuScreenView: {fileID: 6291282476300003479}
 --- !u!4 &1712565813
 Transform:
@@ -800,77 +712,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1712565814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712565811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5abac709864177a9312dbe7ea32717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1712565815}
-    - {fileID: 1712565812}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _componentInitializers
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneInitializer,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _sceneStarters
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneStarter,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _sceneDisposers
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[App.Scripts.Common.Boot.Contracts.ISceneDisposer,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!114 &1712565815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,8 +819,6 @@ MonoBehaviour:
   - {fileID: 889582849}
   - {fileID: 431609171}
   - {fileID: 303023556}
-  - {fileID: 783331828}
-  - {fileID: 347852388}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1013,8 +852,6 @@ Transform:
   - {fileID: 889582851}
   - {fileID: 431609170}
   - {fileID: 303023555}
-  - {fileID: 783331829}
-  - {fileID: 347852389}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

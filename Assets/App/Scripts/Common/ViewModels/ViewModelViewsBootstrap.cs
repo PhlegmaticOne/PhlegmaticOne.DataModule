@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using App.Scripts.Common.Boot.Contracts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace App.Scripts.Common.ViewModels {
-    public class ViewModelViewsBootstrap : MonoBehaviour, ISceneInitializer, ISceneDisposer {
+    public class ViewModelViewsBootstrap : MonoBehaviour {
         
         [SerializeField] private List<ViewModelView> _viewModelViewsOnScene;
         public async Task InitializeAsync() {

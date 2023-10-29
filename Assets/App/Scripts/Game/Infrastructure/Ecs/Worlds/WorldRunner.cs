@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using UnityEngine;
 using Zenject;
@@ -24,6 +25,16 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
             _world.Construct();
             _isConstructed = true;
         }
+
+        public void Dispose() {
+            if (!IsRun()) {
+                return;
+            }
+            
+            _world.Dispose();
+            _isConstructed = false;
+            StartCoroutine(ClearWorld());
+        }
         
         private void Update() {
             if (!IsRun()) {
@@ -41,12 +52,9 @@ namespace App.Scripts.Game.Infrastructure.Ecs.Worlds {
             _world.FixedUpdate(Time.fixedDeltaTime);
         }
 
-        private void OnApplicationQuit() {
-            if (!IsRun()) {
-                return;
-            }
-            
-            _world.Dispose();
+        private IEnumerator ClearWorld() {
+            yield return new WaitForEndOfFrame();
+            _world.Clear();
         }
 
         private bool IsRun() => _isRunGame && _isConstructed;

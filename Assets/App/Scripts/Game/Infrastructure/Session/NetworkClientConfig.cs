@@ -7,6 +7,7 @@ namespace App.Scripts.Game.Infrastructure.Session {
         [SerializeField] private int _serverPort;
         [SerializeField] private int _maxMessageSize;
         [SerializeField] private int _processLimit;
+        [SerializeField] private int _clientsCount;
         [SerializeField] private bool _testNotConnect;
 
         public string ServerAddress => _serverAddress;
@@ -14,5 +15,6 @@ namespace App.Scripts.Game.Infrastructure.Session {
         public int MaxMessageSize => _maxMessageSize;
         public int ProcessLimit => _processLimit;
         public bool TestNotConnect => _testNotConnect;
+        public int ClientsCount => _clientsCount;
     }
 }

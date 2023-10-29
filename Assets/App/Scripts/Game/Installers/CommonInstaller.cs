@@ -36,6 +36,7 @@ namespace App.Scripts.Game.Installers {
 
         private void BindStates() {
             Container.Bind<StateStartGame>().AsSingle();
+            Container.Bind<StateWin>().AsSingle();
         }
 
         private void BindDifficulty() {

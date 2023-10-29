@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,5 +10,12 @@ namespace App.Scripts.Game.Features.Blocks.Services {
         public void AddBlock(Block block) => _blockViews.Add(block);
         public void RemoveBlock(Block block) => _blockViews.Remove(block);
         public Block FindById(Guid id) => _blockViews.FirstOrDefault(x => x.BlockData.Id == id);
+        public IEnumerator<Block> GetEnumerator() {
+            return _blockViews.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return ((IEnumerable)_blockViews).GetEnumerator();
+        }
     }
 }
