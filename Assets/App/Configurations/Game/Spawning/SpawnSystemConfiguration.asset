@@ -223,10 +223,10 @@ MonoBehaviour:
         Assembly-CSharp
     - Name: _spawnInPackageProbability
       Entry: 4
-      Data: 1
+      Data: 0
     - Name: _spawnCountInPackagePercentage
       Entry: 4
-      Data: 0.5
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -311,10 +311,10 @@ MonoBehaviour:
         Assembly-CSharp
     - Name: _spawnInPackageProbability
       Entry: 4
-      Data: 0
+      Data: 1
     - Name: _spawnCountInPackagePercentage
       Entry: 4
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -395,8 +395,8 @@ MonoBehaviour:
       Data: 
   _packageSpawnData:
     _blocksInPackage:
-      _min: 2
-      _max: 5
+      _min: 1
+      _max: 1
     _spawnBlockInPackageIntervals:
       _min: 0.2
       _max: 1.5

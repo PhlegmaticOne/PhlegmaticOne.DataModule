@@ -26,7 +26,8 @@ namespace App.Scripts.Game.Features.Packages.Services {
             while (result.Count <  blocksInPackage) {
                 result.Add(new PackageEntry {
                     BlockType = GetRandomFruit(),
-                    TimeToNextBlock = GetRandomTimeToNextBlock(difficultyData)
+                    TimeToNextBlock = GetRandomTimeToNextBlock(difficultyData),
+                    Gravity = difficultyData.BlocksGravity
                 });
             }
             
@@ -68,7 +69,8 @@ namespace App.Scripts.Game.Features.Packages.Services {
                     blocksPackage.Add(new PackageEntry
                     {
                         BlockType = blockInfo,
-                        TimeToNextBlock = GetRandomTimeToNextBlock(difficultyInfo)
+                        TimeToNextBlock = GetRandomTimeToNextBlock(difficultyInfo),
+                        Gravity = difficultyInfo.BlocksGravity
                     });
                     randomBlocksCount--;
                 }

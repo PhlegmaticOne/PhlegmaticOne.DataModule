@@ -83,12 +83,5 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                     break;
             }
         }
-
-        private Vector3 GetSlicePoint(in Vector3 inputPosition) {
-            var camera = _cameraProvider.Camera;
-            var position = camera.ScreenToWorldPoint(inputPosition);
-            position.z = camera.nearClipPlane;
-            return position;
-        }
     }
 }

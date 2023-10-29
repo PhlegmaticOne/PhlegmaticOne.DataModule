@@ -1,11 +1,20 @@
 ﻿using App.Scripts.Game.Features.Packages.Components;
+using App.Scripts.Game.Features.Packages.Models;
 using App.Scripts.Game.Features.Spawning.Components;
+using App.Scripts.Game.Features.Spawning.Configs.Spawners;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
+using UnityEngine;
 
 namespace App.Scripts.Game.Features.Packages.Systems {
     public class SystemPackageProcessor : SystemBase {
+        private readonly SpawnersConfiguration _spawnersConfiguration;
+        
         private IComponentsFilter _filter;
+
+        public SystemPackageProcessor(SpawnersConfiguration spawnersConfiguration) {
+            _spawnersConfiguration = spawnersConfiguration;
+        }
 
         public override void OnAwake() {
             _filter = ComponentsFilter.Builder
@@ -15,9 +24,7 @@ namespace App.Scripts.Game.Features.Packages.Systems {
 
             World.CreateEntity()
                 .WithComponent(new ComponentUpdatePackage())
-                .WithComponent(new ComponentPackagesSpawned {
-                    PackagesSpawned = 0
-                })
+                .WithComponent(new ComponentPackagesSpawned())
                 .WithComponent(new ComponentPackage());
         }
 
@@ -34,10 +41,7 @@ namespace App.Scripts.Game.Features.Packages.Systems {
                     packageEntry.CurrentTime += deltaTime;
 
                     if (packageEntry.CurrentTime >= packageEntry.TimeToNextBlock) {
-                        World.AppendEntity()
-                            .WithComponent(new ComponentSpawnBlock {
-                                BlockType = packageEntry.BlockType
-                            });
+                        CreateNewBlockSpawnComponent(packageEntry);
                         componentPackage.CurrentItemIndex++;
                     }
 
@@ -55,6 +59,18 @@ namespace App.Scripts.Game.Features.Packages.Systems {
                     }
                 }
             }
+        }
+
+        private void CreateNewBlockSpawnComponent(PackageEntry packageEntry) {
+            var spawnerData = _spawnersConfiguration.GetRandomSpawnerData();
+            
+            World.AppendEntity()
+                .WithComponent(new ComponentSpawnBlock {
+                    BlockType = packageEntry.BlockType,
+                    Acceleration = packageEntry.Gravity * Vector3.down,
+                    Position = spawnerData.GetSpawnPoint(),
+                    Speed = spawnerData.GetInitialSpeed(),
+                });
         }
     }
 }

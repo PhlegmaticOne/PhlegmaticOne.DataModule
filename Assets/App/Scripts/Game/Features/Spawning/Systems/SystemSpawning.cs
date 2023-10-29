@@ -26,7 +26,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
         protected override void OnLocalUpdate(Entity entity, float deltaTime) {
             var componentBlockRemote = entity.GetComponent<ComponentBlockSpawnData>();
             SpawnBlock(componentBlockRemote);
-            entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
+            entity.RemoveEndOfFrame();
             AddRemoteComponent(ToRemote(componentBlockRemote));
         }
 

@@ -5,6 +5,7 @@ using App.Scripts.Game.Features.BoardState.Systems;
 using App.Scripts.Game.Features.Bomb.Systems;
 using App.Scripts.Game.Features.Combo.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
+using App.Scripts.Game.Features.FruitBasket.Systems;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Packages.Systems;
 using App.Scripts.Game.Features.Particles.Systems;
@@ -34,6 +35,7 @@ namespace App.Scripts.Game.Installers {
             Container.Bind<ISystem>().To<SystemSpawnByBlockData>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawning>().AsSingle();
             
+            Container.Bind<ISystem>().To<SystemTemporaryUncuttableUpdate>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingInput>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingView>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingAction>().AsSingle();
@@ -44,6 +46,9 @@ namespace App.Scripts.Game.Installers {
 
             Container.Bind<ISystem>().To<SystemThrowBlocksCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemThrowBlocks>().AsSingle();
+
+            Container.Bind<ISystem>().To<SystemSpawnFruitBasketCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemSpawnFruitBasket>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemChangeScoreCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemComboCheck>().AsSingle();

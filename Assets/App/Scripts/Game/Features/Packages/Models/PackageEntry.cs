@@ -5,5 +5,6 @@ namespace App.Scripts.Game.Features.Packages.Models {
         public BlockType BlockType;
         public float TimeToNextBlock;
         public float CurrentTime;
+        public float Gravity;
     }
 }

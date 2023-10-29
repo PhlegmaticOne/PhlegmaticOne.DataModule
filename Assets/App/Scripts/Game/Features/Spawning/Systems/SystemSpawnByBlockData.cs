@@ -1,25 +1,18 @@
 ﻿using System;
 using App.Scripts.Game.Features.Animations.Factories;
+using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Spawning.Components;
-using App.Scripts.Game.Features.Spawning.Configs.Spawners;
-using App.Scripts.Game.Infrastructure.Ecs.Components;
+using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
-using UnityEngine;
 
 namespace App.Scripts.Game.Features.Spawning.Systems {
     public class SystemSpawnByBlockData : SystemBase {
-        private readonly SpawnersConfiguration _spawnersConfiguration;
         private readonly IBlockAnimationTypeFactory _blockAnimationTypeFactory;
 
-        private const float Gravity = 8;
-        
         private IComponentsFilter _filter;
 
-        public SystemSpawnByBlockData(
-            SpawnersConfiguration spawnersConfiguration, 
-            IBlockAnimationTypeFactory blockAnimationTypeFactory) {
-            _spawnersConfiguration = spawnersConfiguration;
+        public SystemSpawnByBlockData(IBlockAnimationTypeFactory blockAnimationTypeFactory) {
             _blockAnimationTypeFactory = blockAnimationTypeFactory;
         }
         
@@ -32,19 +25,24 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
         public override void OnUpdate(float deltaTime) {
             foreach (var entity in _filter.Apply(World)) {
                 var componentSpawnBlock = entity.GetComponent<ComponentSpawnBlock>();
-                var spawnerData = _spawnersConfiguration.GetRandomSpawnerData();
+                var uncuttableTime = -1f;
                 
-                World.AppendEntity()
+                if (entity.TryGetComponent<ComponentTemporaryUncuttable>(out var componentTemporaryUncuttable)) {
+                    uncuttableTime = componentTemporaryUncuttable.Time;
+                }
+                
+                var newEntity = World.AppendEntity()
                     .WithComponent(new ComponentBlockSpawnData {
-                        Acceleration = Gravity * Vector3.down,
-                        Position = spawnerData.GetSpawnPoint(),
-                        Speed = spawnerData.GetInitialSpeed(),
+                        Acceleration = componentSpawnBlock.Acceleration,
+                        Position = componentSpawnBlock.Position,
+                        Speed = componentSpawnBlock.Speed,
                         BlockType = componentSpawnBlock.BlockType,
                         BlockId = Guid.NewGuid(),
+                        UncuttableTime = uncuttableTime,
                         AnimationType = _blockAnimationTypeFactory.CreateBlockAnimationType()
                     });
-
-                entity.AddComponent(new ComponentRemoveEntityEndOfFrame());
+                
+                entity.RemoveEndOfFrame();
             }
         }
     }

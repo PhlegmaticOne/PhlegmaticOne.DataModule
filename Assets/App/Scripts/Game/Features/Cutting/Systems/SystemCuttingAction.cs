@@ -25,6 +25,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             _blocksFilter = ComponentsFilter.Builder
                 .With<ComponentBlock>()
                 .With<ComponentBlockCuttable>()
+                .Without<ComponentTemporaryUncuttable>()
                 .Build();
         }
 

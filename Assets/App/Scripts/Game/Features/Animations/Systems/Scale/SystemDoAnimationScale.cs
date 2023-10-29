@@ -33,7 +33,7 @@ namespace App.Scripts.Game.Features.Animations.Systems.Scale {
                 var block = entity.GetComponent<ComponentBlock>().Block;
                 var policy = _resolveScalePolicies[scaleComponent.ScaleAnimationBehavior];
                 var scale = GetScale(policy, block, scaleComponent);
-                block.transform.localScale = Vector3.one * scale;
+                block.transform.localScale = block.OriginalScale * scale;
             }
         }
 

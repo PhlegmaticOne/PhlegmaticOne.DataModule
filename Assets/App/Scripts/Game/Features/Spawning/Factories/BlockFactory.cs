@@ -1,13 +1,16 @@
-﻿using App.Scripts.Game.Features.Animations.Factories;
+﻿using System;
+using App.Scripts.Game.Features.Animations.Factories;
 using App.Scripts.Game.Features.Blocks;
 using App.Scripts.Game.Features.Blocks.Configs;
 using App.Scripts.Game.Features.Blocks.Models;
+using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs.Spawners;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Worlds;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace App.Scripts.Game.Features.Spawning.Factories {
     public class BlockFactory : IBlockFactory {
@@ -40,6 +43,13 @@ namespace App.Scripts.Game.Features.Spawning.Factories {
 
         private Entity CreateBlockEntity(Block block, ComponentBlockSpawnData spawnData) {
             var entity = _world.AppendEntity().WithComponent(new ComponentBlock { Block = block });
+
+            if (Math.Abs(spawnData.UncuttableTime + 1f) > 0.01f) {
+                entity.AddComponent(new ComponentTemporaryUncuttable {
+                    Time = spawnData.UncuttableTime
+                });
+            }
+            
             return SetupEntityAnimations(entity, spawnData);
         }
 
