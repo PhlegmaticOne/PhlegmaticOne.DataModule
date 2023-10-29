@@ -31,7 +31,7 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
                     uncuttableTime = componentTemporaryUncuttable.Time;
                 }
                 
-                var newEntity = World.AppendEntity()
+                World.AppendEntity()
                     .WithComponent(new ComponentBlockSpawnData {
                         Acceleration = componentSpawnBlock.Acceleration,
                         Position = componentSpawnBlock.Position,

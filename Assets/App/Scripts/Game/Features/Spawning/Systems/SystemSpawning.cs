@@ -4,6 +4,7 @@ using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Factories;
+using App.Scripts.Game.Features.Spawning.Services;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Serialization;
@@ -13,21 +14,25 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
         private readonly IBlockFactory _blockFactory;
         private readonly BlockConfigsProvider _blockConfigsProvider;
         private readonly IBlockContainer _blockContainer;
+        private readonly ISpawnerSharedData _spawnerSharedData;
 
         public SystemSpawning(INetworkService networkService, 
             IBlockFactory blockFactory,
             BlockConfigsProvider blockConfigsProvider,
-            IBlockContainer blockContainer) : base(networkService) {
+            IBlockContainer blockContainer,
+            ISpawnerSharedData spawnerSharedData) : base(networkService) {
             _blockFactory = blockFactory;
             _blockConfigsProvider = blockConfigsProvider;
             _blockContainer = blockContainer;
+            _spawnerSharedData = spawnerSharedData;
         }
 
         protected override void OnLocalUpdate(Entity entity, float deltaTime) {
-            var componentBlockRemote = entity.GetComponent<ComponentBlockSpawnData>();
-            SpawnBlock(componentBlockRemote);
+            var componentBlockSpawnData = entity.GetComponent<ComponentBlockSpawnData>();
+            componentBlockSpawnData.DeltaTimeDivider = _spawnerSharedData.Data.DeltaTimeDivider;
+            SpawnBlock(componentBlockSpawnData);
             entity.RemoveEndOfFrame();
-            AddRemoteComponent(ToRemote(componentBlockRemote));
+            AddRemoteComponent(ToRemote(componentBlockSpawnData));
         }
 
         protected override void OnRemoteUpdate(Entity entity, ComponentBlockSpawnData componentBlockRemote, float deltaTime) {
@@ -46,11 +51,12 @@ namespace App.Scripts.Game.Features.Spawning.Systems {
             
             return new ComponentBlockSpawnData {
                 Acceleration = blockSpawnData.Acceleration,
-                Position = new Vector3Tiny(-position.x, position.y, position.z),
-                Speed = new Vector3Tiny(-speed.x, speed.y, speed.z),
+                Position = position.InvertX(),
+                Speed = speed.InvertX(),
                 BlockType = blockSpawnData.BlockType,
                 BlockId = blockSpawnData.BlockId,
-                AnimationType = blockSpawnData.AnimationType
+                AnimationType = blockSpawnData.AnimationType,
+                DeltaTimeDivider = blockSpawnData.DeltaTimeDivider
             };
         }
     }

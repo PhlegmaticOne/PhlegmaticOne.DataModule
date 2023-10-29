@@ -20,7 +20,7 @@ namespace App.Scripts.Game.Features.Physics.Systems {
                 var gravityComponent = entity.GetComponent<ComponentGravity>();
                 var speed = gravityComponent.Speed;
                 var transform = transformComponent.Block.transform;
-                transform.position += speed * deltaTime;
+                transform.position += speed * (deltaTime / gravityComponent.DeltaTimeDivider);
             }
         }
 
@@ -28,7 +28,7 @@ namespace App.Scripts.Game.Features.Physics.Systems {
             foreach (var entity in _filter.Apply(World)) {
                 var gravityComponent = entity.GetComponent<ComponentGravity>();
                 var acceleration = gravityComponent.Acceleration;
-                gravityComponent.Speed += acceleration * deltaTime;
+                gravityComponent.Speed += acceleration * (deltaTime / gravityComponent.DeltaTimeDivider);
             }
         }
     }

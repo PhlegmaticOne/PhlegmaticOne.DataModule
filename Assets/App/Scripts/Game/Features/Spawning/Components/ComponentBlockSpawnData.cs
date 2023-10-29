@@ -12,6 +12,7 @@ namespace App.Scripts.Game.Features.Spawning.Components {
         public Vector3Tiny Position;
         public Vector3Tiny Acceleration;
         public float UncuttableTime;
+        public float DeltaTimeDivider;
         public BlockAnimationType AnimationType;
     }
 }

@@ -6,5 +6,6 @@ namespace App.Scripts.Game.Features.Physics.Components {
         public Vector3 Speed;
         public Vector3 StartSpeed;
         public Vector3 Acceleration;
+        public float DeltaTimeDivider = 1;
     }
 }

@@ -6,6 +6,7 @@ using App.Scripts.Game.Features.Blocks.Models;
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Spawning.Components;
 using App.Scripts.Game.Features.Spawning.Configs.Spawners;
+using App.Scripts.Game.Features.Spawning.Services;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Worlds;
@@ -16,14 +17,17 @@ namespace App.Scripts.Game.Features.Spawning.Factories {
     public class BlockFactory : IBlockFactory {
         private readonly SpawnersConfiguration _spawnersConfiguration;
         private readonly IBlockAnimationFactory _blockAnimationFactory;
+        private readonly ISpawnerSharedData _spawnerSharedData;
         private readonly World _world;
 
         public BlockFactory(
             SpawnersConfiguration spawnersConfiguration, 
             IBlockAnimationFactory blockAnimationFactory,
+            ISpawnerSharedData spawnerSharedData,
             World world) {
             _spawnersConfiguration = spawnersConfiguration;
             _blockAnimationFactory = blockAnimationFactory;
+            _spawnerSharedData = spawnerSharedData;
             _world = world;
         }
         

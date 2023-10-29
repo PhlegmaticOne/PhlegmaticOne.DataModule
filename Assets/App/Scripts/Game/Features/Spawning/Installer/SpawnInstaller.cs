@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Game.Features.Spawning.Configs.Spawners;
+using App.Scripts.Game.Features.Spawning.Services;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,8 @@ namespace App.Scripts.Game.Features.Spawning.Installer {
             Container.Bind<SpawnersConfiguration>()
                 .FromInstance(_spawnersConfiguration)
                 .AsSingle();
+
+            Container.Bind<ISpawnerSharedData>().To<SpawnerSharedData>().AsSingle();
         }
     }
 }

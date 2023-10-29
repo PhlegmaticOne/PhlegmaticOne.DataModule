@@ -47,10 +47,15 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
             var cuttingPoint = componentCuttingVector.CuttingPoint;
             
             foreach (var entity in _blocksFilter.Apply(World)) {
-                var blockTransform = entity.GetComponent<ComponentBlock>();
-                var distance = (blockTransform.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
+                var componentBlock = entity.GetComponent<ComponentBlock>();
                 
-                if (distance <= blockTransform.BlockConfig.Radius) {
+                if (componentBlock.Block.IsRemote) {
+                    continue;
+                }
+                
+                var distance = (componentBlock.Block.transform.position - cuttingPoint).WithZ(0).magnitude;
+                
+                if (distance <= componentBlock.BlockConfig.Radius) {
                     entity.AddComponent(new ComponentBlockCut {
                         CuttingVector = componentCuttingVector.CuttingVector
                     });

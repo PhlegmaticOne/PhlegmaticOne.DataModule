@@ -5,6 +5,7 @@ using App.Scripts.Game.Features.BoardState.Systems;
 using App.Scripts.Game.Features.Bomb.Systems;
 using App.Scripts.Game.Features.Combo.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
+using App.Scripts.Game.Features.Freezing.Systems;
 using App.Scripts.Game.Features.FruitBasket.Systems;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Packages.Systems;
@@ -49,6 +50,10 @@ namespace App.Scripts.Game.Installers {
 
             Container.Bind<ISystem>().To<SystemSpawnFruitBasketCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemSpawnFruitBasket>().AsSingle();
+            
+            Container.Bind<ISystem>().To<SystemFreezeCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemFreezeRemoteCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemFreeze>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemChangeScoreCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemComboCheck>().AsSingle();

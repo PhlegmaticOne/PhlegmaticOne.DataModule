@@ -50,7 +50,8 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
                 Position = (Vector3)newPosition,
                 BlockType = original.BlockData.Type,
                 Acceleration = componentGravity.Acceleration,
-                AnimationType = BlockAnimationType.Rotation
+                AnimationType = BlockAnimationType.Rotation,
+                DeltaTimeDivider = componentGravity.DeltaTimeDivider
             };
         }
 

@@ -25,7 +25,8 @@ namespace App.Scripts.Game.Features.Blocks.Entities {
             entity.AddComponent(new ComponentGravity {
                 Acceleration = blockSpawnData.Acceleration,
                 Speed = blockSpawnData.Speed,
-                StartSpeed = blockSpawnData.Speed
+                StartSpeed = blockSpawnData.Speed,
+                DeltaTimeDivider = blockSpawnData.DeltaTimeDivider
             });
             entity.AddComponent(new ComponentSplitBlockOnCut {
                 Sprite = BlockData.BlockConfig.Sprite

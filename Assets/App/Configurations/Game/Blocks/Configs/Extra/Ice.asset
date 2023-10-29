@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a2150b1aa74b3dbcaf9cfe8115aa74, type: 3}
   m_Name: Ice
   m_EditorClassIdentifier: 
-  _destroyOnCut: 1
-  _isCuttable: 1
   _sprite: {fileID: 21300000, guid: 66b37c652685b464e86d622732a8beaa, type: 3}
+  _prefab: {fileID: 5793113802730333831, guid: 559555c2818a07a4ab08e653f303ad34, type: 3}
   _particleEffectColor: {r: 1, g: 1, b: 1, a: 1}
   _radius: 1.1
-  _scoreForSlicing: 0
-  _comboBehavior: 0
-  _fallenBehaviour: 0
-  _magnetBehaviour: 1
