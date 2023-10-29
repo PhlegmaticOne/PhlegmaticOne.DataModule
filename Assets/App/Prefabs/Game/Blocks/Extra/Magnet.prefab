@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5675329852629813706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,7 +83,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.30333328
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -104,8 +104,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.2392157, g: 0.6313726, b: 0.8000001, a: 1}
-      key1: {r: 0.7411765, g: 0.86274517, b: 0.909804, a: 1}
+      key0: {r: 0.9333334, g: 0.21960786, b: 0.21960786, a: 1}
+      key1: {r: 0.04705883, g: 0.47450984, b: 0.854902, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -149,11 +149,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6820620187468085041}
-  - component: {fileID: 5793113802730333831}
+  - component: {fileID: 4367022298333265495}
   - component: {fileID: 3111295626857305751}
   - component: {fileID: 8623482291342484930}
   m_Layer: 9
-  m_Name: Freeze
+  m_Name: Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5793113802730333831
+--- !u!114 &4367022298333265495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8112969903419499984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01bae0ec3fcf49bf999983f639ae219a, type: 3}
+  m_Script: {fileID: 11500000, guid: 87878b3a468941488470253632631ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -197,10 +197,14 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _blockView: {fileID: 3111295626857305751}
-  _force: 4
-  _time: 5
   _particleSystems:
-  - {fileID: 722976512074995390, guid: 0eb13b6f6a8d5d244b2f7504bd110c39, type: 3}
+  - {fileID: 8147319459367643175, guid: e4e0e59b23d76eb428122895c51a5894, type: 3}
+  _componentMagnetOnCut:
+    Radius: 3.5
+    Time: 4
+    Force: 7
+    MagnetizedCenterRadius: 0.1
+    ThrowPower: 3
 --- !u!114 &3111295626857305751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: -1798184317
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ea970b58b347fe46b0af73806d33dda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06df96b5245102b4badd47e6873b4f0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

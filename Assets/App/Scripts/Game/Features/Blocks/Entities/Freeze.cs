@@ -1,6 +1,7 @@
 ﻿using App.Scripts.Game.Features.BlocksSplit.Components;
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Freezing.Components;
+using App.Scripts.Game.Features.Magnet.Components;
 using App.Scripts.Game.Features.Particles.Components;
 using App.Scripts.Game.Features.Physics.Components;
 using App.Scripts.Game.Features.Spawning.Components;
@@ -15,6 +16,7 @@ namespace App.Scripts.Game.Features.Blocks.Entities {
         
         protected override void AddComponentsToBlockEntity(Entity entity, ComponentBlockSpawnData blockSpawnData) {
             entity.AddComponent(new ComponentBlockCuttable());
+            entity.AddComponent(new ComponentMagnetized());
             entity.AddComponent(new ComponentGravity {
                 Acceleration = blockSpawnData.Acceleration,
                 Speed = blockSpawnData.Speed,

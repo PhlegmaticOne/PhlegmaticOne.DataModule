@@ -51,7 +51,8 @@ namespace App.Scripts.Game.Features.BlocksSplit.Factories {
                 BlockType = original.BlockData.Type,
                 Acceleration = componentGravity.Acceleration,
                 AnimationType = BlockAnimationType.Rotation,
-                DeltaTimeDivider = componentGravity.DeltaTimeDivider
+                DeltaTimeDivider = componentGravity.DeltaTimeDivider,
+                IsRemote = original.IsRemote
             };
         }
 
