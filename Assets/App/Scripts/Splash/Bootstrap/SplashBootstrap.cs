@@ -28,6 +28,8 @@ namespace App.Scripts.Splash.Bootstrap {
 
         public async Task InitializeAsync() {
             Application.targetFrameRate = 60;
+            Debug.developerConsoleVisible = true;
+            Debug.LogError("Enable console...");
             await _modelViewsBootstrap.InitializeAsync();
             await AppInitializedAndScreenLoaded();
             await _sceneProvider.LoadSceneAsync(SceneType.Menu);

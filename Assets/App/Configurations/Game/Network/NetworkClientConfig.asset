@@ -16,5 +16,5 @@ MonoBehaviour:
   _serverPort: 8888
   _maxMessageSize: 16384
   _processLimit: 20
-  _clientsCount: 1
-  _testNotConnect: 1
+  _clientsCount: 2
+  _testNotConnect: 0

@@ -1,6 +1,5 @@
 ﻿using App.Scripts.Common.Scenes.Base;
 using App.Scripts.Game.Features.Win.Components;
-using App.Scripts.Game.Infrastructure.Ecs.Worlds;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

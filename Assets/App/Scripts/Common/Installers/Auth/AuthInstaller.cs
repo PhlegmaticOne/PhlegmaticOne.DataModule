@@ -8,7 +8,7 @@ namespace App.Scripts.Common.Installers.Auth {
         [SerializeField] private ApplicationAuthType _authType;
         
         public override void InstallBindings() {
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR || UNITY_STANDALONE_WIN
                 BindFakeAuth();
             #else
                 BindAuth();
