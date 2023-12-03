@@ -4,6 +4,7 @@ using App.Scripts.Common.Scenes.Base;
 using App.Scripts.Menu.Features.Statistics.Dialog;
 using App.Scripts.Menu.Services.Exit;
 using Assets.App.Scripts.Menu.Features.Leaderboard.Dialog;
+using Assets.App.Scripts.Menu.Features.Settings.Dialog;
 using Cysharp.Threading.Tasks;
 using PhlegmaticOne.ViewModels.Commands;
 using PhlegmaticOne.ViewModels.Contracts;
@@ -50,7 +51,7 @@ namespace App.Scripts.Menu.Screen.ViewModel
 
         private Task ShowSettingsDialog()
         {
-            return _dialogsManager.ShowDialog<LeaderboardDialog>().AsTask();
+            return _dialogsManager.ShowDialog<SettingsDialog>().AsTask();
         }
     }
 }

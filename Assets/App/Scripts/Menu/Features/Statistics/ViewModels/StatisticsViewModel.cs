@@ -16,10 +16,10 @@ namespace App.Scripts.Menu.Features.Statistics.ViewModels
         
         public ReactiveCollection<StatisticsBlockInfo> Statistics { get; }
 
-        public override Task InitializeAsync() {
+        public override async Task InitializeAsync() {
+            await _statisticsService.InitializeAsync();
             var statistics = _statisticsService.LoadStatistics();
             Statistics.Initialize(statistics.Statistics);
-            return Task.CompletedTask;
         }
     }
 }

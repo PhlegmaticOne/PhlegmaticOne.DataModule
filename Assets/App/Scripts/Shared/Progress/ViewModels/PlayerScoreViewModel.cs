@@ -6,9 +6,9 @@ using PhlegmaticOne.ViewModels.Properties;
 
 namespace App.Scripts.Menu.Features.Progress.ViewModels {
     public class PlayerScoreViewModel : BaseViewModel {
-        private readonly IPlayerScoreService _playerScoreService;
+        private readonly IPlayerService _playerScoreService;
 
-        public PlayerScoreViewModel(IPlayerScoreService playerScoreService) {
+        public PlayerScoreViewModel(IPlayerService playerScoreService) {
             _playerScoreService = playerScoreService;
             MaxScore = new ReactiveProperty<int>();
         }

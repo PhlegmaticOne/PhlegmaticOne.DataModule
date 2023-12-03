@@ -1,5 +1,4 @@
-﻿using App.Scripts.Game.Features.Sound.Components;
-using App.Scripts.Shared.Sounds.Configs;
+﻿using App.Scripts.Shared.Sounds.Configs;
 using UnityEngine;
 
 namespace App.Scripts.Shared.Sounds.Services
@@ -13,12 +12,21 @@ namespace App.Scripts.Shared.Sounds.Services
         {
             _audioSource = audioSource;
             _soundSystemConfig = soundSystemConfig;
+            IsMuted = false;
         }
-        
+
+        public bool IsMuted { get; private set; }
+
         public void PlaySound(SoundType soundType)
         {
             var audioClip = _soundSystemConfig.GetAudioClip(soundType);
             _audioSource.PlayOneShot(audioClip);
+        }
+
+        public void SetSoundMuted(bool mute)
+        {
+            IsMuted = mute;
+            _audioSource.mute = mute;
         }
     }
 }

@@ -6,11 +6,11 @@ using App.Scripts.Shared.Progress.Services;
 namespace App.Scripts.Game.States {
     public class StateStartGame {
         private readonly INetworkSession _networkSession;
-        private readonly IPlayerScoreService _playerScoreService;
+        private readonly IPlayerService _playerScoreService;
         private readonly WorldRunner _worldRunner;
 
         public StateStartGame(INetworkSession networkSession, 
-            IPlayerScoreService playerScoreService, 
+            IPlayerService playerScoreService, 
             WorldRunner worldRunner) {
             _networkSession = networkSession;
             _playerScoreService = playerScoreService;

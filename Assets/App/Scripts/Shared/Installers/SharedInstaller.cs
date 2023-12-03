@@ -13,7 +13,7 @@ namespace App.Scripts.Shared.Installers {
         }
 
         private void BindPlayerScoreService() {
-            Container.Bind<IPlayerScoreService>().To<PlayerScoreService>().AsSingle();
+            Container.Bind<IPlayerService>().To<PlayerService>().AsSingle();
             Container.Bind<IStatisticsService>().To<StatisticsService>().AsSingle();
         }
         

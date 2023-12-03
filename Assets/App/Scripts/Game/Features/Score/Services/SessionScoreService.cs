@@ -2,10 +2,10 @@
 
 namespace App.Scripts.Game.Features.Score.Services {
     public class SessionScoreService : ISessionScoreService {
-        private readonly IPlayerScoreService _playerScoreService;
+        private readonly IPlayerService _playerScoreService;
         private int _sessionScore;
         
-        public SessionScoreService(IPlayerScoreService playerScoreService) {
+        public SessionScoreService(IPlayerService playerScoreService) {
             _playerScoreService = playerScoreService;
         }
         

@@ -5,6 +5,7 @@ using App.Scripts.Menu.Features.Statistics.ViewModels;
 using App.Scripts.Menu.Screen;
 using App.Scripts.Menu.Screen.ViewModel;
 using App.Scripts.Menu.Services.Exit;
+using Assets.App.Scripts.Menu.Features.Settings.ViewModel;
 using Assets.App.Scripts.Menu.Features.Statistics.Services;
 using UnityEngine;
 using Zenject;
@@ -20,6 +21,12 @@ namespace App.Scripts.Menu.Installer {
             BindExitService();
             BindBootstrap();
             BindLeaderboard();
+            BindSettings();
+        }
+
+        private void BindSettings()
+        {
+            Container.Bind<SettingsDialogViewModel>().AsSingle();
         }
 
         private void BindLeaderboard()

@@ -4,12 +4,13 @@ using PhlegmaticOne.DataStorage.Storage;
 using PhlegmaticOne.DataStorage.Storage.Base;
 
 namespace App.Scripts.Shared.Progress.Services {
-    public class PlayerScoreService : IPlayerScoreService {
+    public class PlayerService : IPlayerService
+    {
         private readonly IDataStorage _dataStorage;
 
         private IValueSource<PlayerState> _playerProgress;
  
-        public PlayerScoreService(IDataStorage dataStorage) {
+        public PlayerService(IDataStorage dataStorage) {
             _dataStorage = dataStorage;
         }
 
@@ -25,9 +26,16 @@ namespace App.Scripts.Shared.Progress.Services {
         }
 
         public int MaxScore => _playerProgress.AsNoTrackable().MaxScore;
-        
+
+        public string UserName => _playerProgress.AsNoTrackable().Name;
+
         public void ChangeMaxScore(int maxScore) {
             _playerProgress.AsTrackable().ChangeMaxScore(maxScore);
+        }
+
+        public void ChangeName(string name)
+        {
+            _playerProgress.AsTrackable().ChangeName(name);
         }
     }
 }

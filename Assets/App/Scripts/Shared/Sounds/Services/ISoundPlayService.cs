@@ -1,9 +1,9 @@
-﻿using App.Scripts.Game.Features.Sound.Components;
-
-namespace App.Scripts.Shared.Sounds.Services
+﻿namespace App.Scripts.Shared.Sounds.Services
 {
     public interface ISoundPlayService
     {
+        bool IsMuted { get; }
         void PlaySound(SoundType soundType);
+        void SetSoundMuted(bool mute);
     }
 }
