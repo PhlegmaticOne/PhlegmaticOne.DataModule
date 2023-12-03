@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Leaderboard.Header
     m_Metadata:
       m_Items: []
+  - m_Id: 43583521822134272
+    m_Key: Settings.Header
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

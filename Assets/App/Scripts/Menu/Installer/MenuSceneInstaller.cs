@@ -1,9 +1,11 @@
 ﻿using App.Scripts.Menu.Bootstrap;
 using App.Scripts.Menu.Features.Progress.ViewModels;
+using App.Scripts.Menu.Features.Statistics.Services;
 using App.Scripts.Menu.Features.Statistics.ViewModels;
 using App.Scripts.Menu.Screen;
 using App.Scripts.Menu.Screen.ViewModel;
 using App.Scripts.Menu.Services.Exit;
+using Assets.App.Scripts.Menu.Features.Statistics.Services;
 using UnityEngine;
 using Zenject;
 

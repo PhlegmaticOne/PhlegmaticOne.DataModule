@@ -9,12 +9,8 @@
         Granad = 6,
         Watermelon = 7,
         Bomb = 8,
-        Heart = 9,
-        Magnet = 10,
-        Ice = 11,
-        FruitsBag = 12,
-        Brick = 13,
-        Samurai = 14,
-        Mimic = 15
+        Magnet = 9,
+        Ice = 10,
+        FruitsBag = 11,
     }
 }

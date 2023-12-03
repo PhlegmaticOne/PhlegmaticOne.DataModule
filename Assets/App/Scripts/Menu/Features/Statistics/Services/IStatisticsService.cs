@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using App.Scripts.Menu.Features.Statistics.Models;
 
-namespace App.Scripts.Menu.Features.Statistics.Services {
+namespace App.Scripts.Menu.Features.Statistics.Services
+{
     public interface IStatisticsService {
-        event Action<StatisticsBlockInfo> Changed; 
+        Task InitializeAsync();
         void AddSlice(StatisticsBlockType blockType);
-        Task<StatisticsModel> LoadStatistics();
+        StatisticsModel LoadStatistics();
     }
 }

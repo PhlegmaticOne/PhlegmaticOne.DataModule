@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MenuConfigsInstaller
   m_EditorClassIdentifier: 
   _configs:
+  - {fileID: 11400000, guid: cf60a829bc2213644a84074c5a0291c0, type: 2}
   - {fileID: 11400000, guid: c7cd2eebe9ba4e542ae8f3788a3d6858, type: 2}
   - {fileID: 11400000, guid: f47d060298a45044db103c95b63e6280, type: 2}
   _folder: {fileID: 102900000, guid: 4061738fd16ad764dbdb56577960f864, type: 3}

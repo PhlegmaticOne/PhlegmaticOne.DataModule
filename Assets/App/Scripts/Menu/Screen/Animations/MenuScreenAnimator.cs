@@ -12,6 +12,7 @@ namespace App.Scripts.Menu.Screen.Animations {
         [SerializeField] private RectTransform _fruitNinja;
         [SerializeField] private MenuPlayerScoreView _menuPlayerScoreView;
         [SerializeField] private CanvasGroup _buttonsPanel;
+        [SerializeField] private CanvasGroup _userButtonsPanel;
         
         private MenuScreenAnimatorConfig _config;
 
@@ -36,8 +37,10 @@ namespace App.Scripts.Menu.Screen.Animations {
                 _lights.UniAnchoredPos(_lightsPosition, _config.Lights));
             await _fruitNinja.UniShowScale(_config.FruitNinja);
             await _menuPlayerScoreView.transform.UniShowScale(_config.PlayerScore);
-            await _menuPlayerScoreView.AnimateScoreFromZero(_config.PlayerScoreText);
             await _buttonsPanel.UniOpaque(_config.Buttons);
+            await _userButtonsPanel.UniOpaque(_config.Buttons);
+
+            await _menuPlayerScoreView.AnimateScoreFromZero(_config.PlayerScoreText);
         }
 
         private void ToStartState() {
@@ -58,6 +61,7 @@ namespace App.Scripts.Menu.Screen.Animations {
             _fruitNinja.localScale = Vector3.zero;
             _menuPlayerScoreView.transform.localScale = Vector3.zero;
             _buttonsPanel.alpha = 0;
+            _userButtonsPanel.alpha = 0;
         }
     }
 }

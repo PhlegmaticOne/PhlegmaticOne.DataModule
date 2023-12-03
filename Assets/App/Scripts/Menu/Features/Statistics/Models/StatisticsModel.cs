@@ -4,11 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using App.Scripts.Common.Utils;
 using Newtonsoft.Json;
+using PhlegmaticOne.DataStorage.Contracts;
 
 namespace App.Scripts.Menu.Features.Statistics.Models {
     [Serializable]
     [DataContract]
-    public class StatisticsModel {
+    public class StatisticsModel : IModel {
         [DataMember]
         private List<StatisticsBlockInfo> _statistics;
 

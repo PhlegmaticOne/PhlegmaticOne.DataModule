@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Leaderboard
     m_Metadata:
       m_Items: []
+  - m_Id: 43583521822134272
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

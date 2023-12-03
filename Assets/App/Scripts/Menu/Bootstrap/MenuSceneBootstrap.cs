@@ -22,7 +22,6 @@ namespace App.Scripts.Menu.Bootstrap {
         public async void Initialize()
         {
             await InitializeAsync();
-            //await _modelViewsBootstrap.InitializeAsync();
         }
 
         public void Dispose() {
@@ -31,8 +30,8 @@ namespace App.Scripts.Menu.Bootstrap {
         }
 
         public async Task InitializeAsync() {
-            await _inputLocker.ExecuteInLocked(() => _menuScreenView.ShowAnimate());
             await _modelViewsBootstrap.InitializeAsync();
+            await _inputLocker.ExecuteInLocked(() => _menuScreenView.ShowAnimate());
         }
     }
 }
