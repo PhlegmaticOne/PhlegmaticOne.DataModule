@@ -5,6 +5,7 @@ using App.Scripts.Menu.Features.Statistics.ViewModels;
 using App.Scripts.Menu.Screen;
 using App.Scripts.Menu.Screen.ViewModel;
 using App.Scripts.Menu.Services.Exit;
+using Assets.App.Scripts.Menu.Features.Connect.ViewModel;
 using Assets.App.Scripts.Menu.Features.Settings.ViewModel;
 using Assets.App.Scripts.Menu.Features.Statistics.Services;
 using UnityEngine;
@@ -22,6 +23,12 @@ namespace App.Scripts.Menu.Installer {
             BindBootstrap();
             BindLeaderboard();
             BindSettings();
+            BindConnect();
+        }
+
+        private void BindConnect()
+        {
+            Container.Bind<ConnectDialogViewModel>().AsSingle();
         }
 
         private void BindSettings()

@@ -3,6 +3,7 @@ using App.Scripts.Common.Dialogs.Manager;
 using App.Scripts.Common.Scenes.Base;
 using App.Scripts.Menu.Features.Statistics.Dialog;
 using App.Scripts.Menu.Services.Exit;
+using Assets.App.Scripts.Menu.Features.Connect.Dialog;
 using Assets.App.Scripts.Menu.Features.Leaderboard.Dialog;
 using Assets.App.Scripts.Menu.Features.Settings.Dialog;
 using Cysharp.Threading.Tasks;
@@ -13,16 +14,13 @@ namespace App.Scripts.Menu.Screen.ViewModel
 {
     public class MenuScreenViewModel : BaseViewModel {
         private readonly IExitGameService _exitGameService;
-        private readonly ISceneProvider _sceneProvider;
         private readonly IDialogsManager _dialogsManager;
 
         public MenuScreenViewModel(
             IExitGameService exitGameService, 
-            ISceneProvider sceneProvider,
             IDialogsManager dialogsManager) 
         {
             _exitGameService = exitGameService;
-            _sceneProvider = sceneProvider;
             _dialogsManager=dialogsManager;
             ExitCommand = RelayCommandFactory.CreateEmptyCommand(ExitGame);
             PlayCommand = RelayCommandFactory.CreateEmptyAsyncCommand(StartGame);
@@ -37,8 +35,13 @@ namespace App.Scripts.Menu.Screen.ViewModel
         public IRelayCommand ShowLeaderboardCommand { get; }
         public IRelayCommand ShowSettingsCommand { get; }
 
-        private Task StartGame() => _sceneProvider.LoadSceneAsync(SceneType.Game);
         private void ExitGame() => _exitGameService.Exit();
+
+        private Task StartGame()
+        {
+            return _dialogsManager.ShowDialog<ConnectDialog>().AsTask();
+        }
+
         private Task ShowStatisticsDialog()
         {
             return _dialogsManager.ShowDialog<StatisticsDialog>().AsTask();

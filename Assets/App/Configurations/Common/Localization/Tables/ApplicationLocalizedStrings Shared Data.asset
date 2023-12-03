@@ -79,6 +79,22 @@ MonoBehaviour:
     m_Key: Common.Submit
     m_Metadata:
       m_Items: []
+  - m_Id: 43655449052237824
+    m_Key: Connect.Header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43655541163347968
+    m_Key: Connection.Address
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43655609220124672
+    m_Key: Connection.Port
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43655660881367040
+    m_Key: Connection.TestNonConnect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

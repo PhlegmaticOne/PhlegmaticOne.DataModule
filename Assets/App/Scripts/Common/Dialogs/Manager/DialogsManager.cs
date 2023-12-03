@@ -8,7 +8,9 @@ namespace App.Scripts.Common.Dialogs.Manager {
         private readonly DialogsPool _dialogsPool;
         private readonly DialogsManagerSettings _settings;
         private readonly List<BaseDialogController> _activeDialogs;
-        
+
+        public IReadOnlyList<BaseDialogController> ActiveDialogs => _activeDialogs;
+
         public DialogsManager(DialogsPool dialogsPool, DialogsManagerSettings settings) {
             _dialogsPool = dialogsPool;
             _settings = settings;

@@ -1071,6 +1071,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _prefabs:
+  - {fileID: 1070645686426662115, guid: 34232fe39ed1ab74fadcf9ccc8a6afa0, type: 3}
   - {fileID: 1070645686426662115, guid: 6f229c31e6a43614093f99a61f0f71e9, type: 3}
   - {fileID: 1070645686426662115, guid: 29e8bc985afbee147b0a5333fc153aa5, type: 3}
   - {fileID: 1070645686426662115, guid: bc86fb30866fcbe45b206eab6aba639f, type: 3}

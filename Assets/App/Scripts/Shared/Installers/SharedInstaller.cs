@@ -3,6 +3,7 @@ using App.Scripts.Common.Scenes.Base;
 using App.Scripts.Menu.Features.Statistics.Services;
 using App.Scripts.Shared.Progress.Services;
 using Assets.App.Scripts.Menu.Features.Statistics.Services;
+using Assets.App.Scripts.Shared.Network;
 using Zenject;
 
 namespace App.Scripts.Shared.Installers {
@@ -10,6 +11,12 @@ namespace App.Scripts.Shared.Installers {
         public override void InstallBindings() {
             BindSceneProvider();
             BindPlayerScoreService();
+            BindNetworkDataProvider();
+        }
+
+        private void BindNetworkDataProvider()
+        {
+            Container.Bind<INetworkDataProvider>().To<NetworkDataProvider>().AsSingle();
         }
 
         private void BindPlayerScoreService() {

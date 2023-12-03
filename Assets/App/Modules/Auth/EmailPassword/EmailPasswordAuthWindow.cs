@@ -15,6 +15,12 @@ namespace PhlegmaticOne.Auth.Assets.App.Modules.Auth.EmailPassword
 
         private TaskCompletionSource<AuthData> _result;
 
+        public void SetRawData(string email, string password)
+        {
+            _emailText.text = email;
+            _passwordText.text = password;
+        }
+
         public Task<AuthData> GetAuthDataAsync()
         {
             gameObject.SetActive(true);

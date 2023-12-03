@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Assets.App.Scripts.Shared.Network;
 using Newtonsoft.Json;
 using Telepathy;
 using UnityEngine;
@@ -10,15 +11,18 @@ using ILogger = PhlegmaticOne.Logger.Base.ILogger;
 namespace App.Scripts.Game.Infrastructure.Session {
     public class NetworkSession : INetworkSession {
         private static readonly byte[] SyncStart = Encoding.UTF8.GetBytes("[SYNC]");
+
         private readonly NetworkClientConfig _config;
+        private readonly INetworkDataProvider _networkDataProvider;
         private readonly ILogger _logger;
 
         private TaskCompletionSource<bool> _completionSource;
         private CancellationTokenSource _cancellationTokenSource;
         private Client _client;
 
-        public NetworkSession(NetworkClientConfig clientConfig, ILogger logger) {
+        public NetworkSession(NetworkClientConfig clientConfig, INetworkDataProvider networkDataProvider, ILogger logger) {
             _config = clientConfig;
+            _networkDataProvider=networkDataProvider;
             _logger = logger;
         }
         
@@ -27,6 +31,7 @@ namespace App.Scripts.Game.Infrastructure.Session {
         public event Action<ArraySegment<byte>> DataReceived;
         
         public Task StartAsync() {
+            var data = _networkDataProvider.NetworkData;
             Application.runInBackground = true;
             _client = new Client(_config.MaxMessageSize);
             _client.OnConnected += OnConnected;
@@ -34,9 +39,9 @@ namespace App.Scripts.Game.Infrastructure.Session {
             _client.OnData += OnData;
             _completionSource = new TaskCompletionSource<bool>();
             _cancellationTokenSource = new CancellationTokenSource();
-            _client.Connect(_config.ServerAddress, _config.ServerPort);
+            _client.Connect(data.Address, data.Port);
             ListenConnections(_cancellationTokenSource.Token);
-            return _config.TestNotConnect ? Task.CompletedTask : _completionSource.Task;
+            return data.TestNotConnect ? Task.CompletedTask : _completionSource.Task;
         }
 
         public void Tick() {
