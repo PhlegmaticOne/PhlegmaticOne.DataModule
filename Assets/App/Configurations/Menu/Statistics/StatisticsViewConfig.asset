@@ -45,4 +45,4 @@ MonoBehaviour:
   - BlockType: 10
     Sprite: {fileID: 21300000, guid: 66b37c652685b464e86d622732a8beaa, type: 3}
   - BlockType: 11
-    Sprite: {fileID: 21300000, guid: b3e6227a938b01a4793a4e7160bbc94b, type: 3}
+    Sprite: {fileID: 21300000, guid: 5b00f6f32c374da43b65610f4d369d30, type: 3}

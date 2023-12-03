@@ -51,11 +51,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 43596484037627904
-    m_Localized: 'Your name:'
+    m_Localized: Your name
     m_Metadata:
       m_Items: []
   - m_Id: 43596665944592384
-    m_Localized: 'Sound muted:'
+    m_Localized: Sound muted
     m_Metadata:
       m_Items: []
   references:

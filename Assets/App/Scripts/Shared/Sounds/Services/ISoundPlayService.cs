@@ -5,5 +5,6 @@
         bool IsMuted { get; }
         void PlaySound(SoundType soundType);
         void SetSoundMuted(bool mute);
+        void UpdateSounds();
     }
 }

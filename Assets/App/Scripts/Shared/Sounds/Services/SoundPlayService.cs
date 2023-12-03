@@ -26,7 +26,17 @@ namespace App.Scripts.Shared.Sounds.Services
         public void SetSoundMuted(bool mute)
         {
             IsMuted = mute;
-            _audioSource.mute = mute;
+            UpdateSounds();
+        }
+
+        public void UpdateSounds()
+        {
+            var sounds = Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+            foreach (var sound in sounds)
+            {
+                sound.mute = IsMuted;
+            }
         }
     }
 }

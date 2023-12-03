@@ -4,16 +4,20 @@ using App.Scripts.Game.Features.Cutting.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
+using App.Scripts.Menu.Features.Statistics.Services;
+using Assets.App.Scripts.Game.Features.Blocks.Models;
 
 namespace App.Scripts.Game.Features.Cutting.Systems {
     public class SystemCuttingAction : SystemBase {
         private readonly CuttingConfig _config;
-        
+        private readonly IStatisticsService _statisticsService;
+
         private IComponentsFilter _filter;
         private IComponentsFilter _blocksFilter;
 
-        public SystemCuttingAction(CuttingConfig config) {
+        public SystemCuttingAction(CuttingConfig config, IStatisticsService statisticsService) {
             _config = config;
+            _statisticsService=statisticsService;
         }
         
         public override void OnAwake() {
@@ -58,8 +62,17 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
                     entity.AddComponent(new ComponentBlockCut {
                         CuttingVector = componentCuttingVector.CuttingVector
                     });
+
+                    AddCuttedBlockToStatistics(componentBlock);
                 }
             }
+        }
+
+        private void AddCuttedBlockToStatistics(ComponentBlock componentBlock)
+        {
+            var blockType = componentBlock.BlockData.Type;
+            var statisticsBlockType = BlockTypesMapper.MapFromBlockType(blockType);
+            _statisticsService.AddSlice(statisticsBlockType);
         }
     }
 }
