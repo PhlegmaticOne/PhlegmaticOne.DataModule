@@ -35,11 +35,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9049906754981888
-    m_Localized: Poke-thing
+    m_Localized: Statistics
     m_Metadata:
       m_Items: []
   - m_Id: 9050508742463488
     m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43579776925224960
+    m_Localized: Leaderboard
     m_Metadata:
       m_Items: []
   references:

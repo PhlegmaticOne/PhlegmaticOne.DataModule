@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Firebase.Analytics;
 using Firebase.Auth;
-using GoogleSignIn;
-using PhlegmaticOne.Auth.Google;
 using PhlegmaticOne.Auth.Google.Log;
 using PhlegmaticOne.Logger.Base;
 
-namespace PhlegmaticOne.Auth.App.Modules.Auth.Editor {
+namespace PhlegmaticOne.Auth.App.Modules.Auth.Editor
+{
     public class EditorAuthProvider : IAuthProvider {
         private const string UserIdPropertyName = "User_Id";
         private const string TestUserEmail = "editor@gmail.com";

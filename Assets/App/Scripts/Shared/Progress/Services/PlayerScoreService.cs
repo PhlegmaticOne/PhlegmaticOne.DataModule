@@ -7,17 +7,20 @@ namespace App.Scripts.Shared.Progress.Services {
     public class PlayerScoreService : IPlayerScoreService {
         private readonly IDataStorage _dataStorage;
 
-        private IValueSource<PlayerProgress> _playerProgress;
+        private IValueSource<PlayerState> _playerProgress;
  
         public PlayerScoreService(IDataStorage dataStorage) {
             _dataStorage = dataStorage;
         }
 
         public async Task InitializeAsync() {
-            _playerProgress = await _dataStorage.ReadAsync<PlayerProgress>();
+            _playerProgress = await _dataStorage.ReadAsync<PlayerState>();
 
             if (_playerProgress.NoValue()) {
-                _playerProgress.SetRaw(PlayerProgress.Zero);
+                var userName = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.Email;
+                var initialPlayer = PlayerState.Zero;
+                initialPlayer.ChangeName(userName);
+                _playerProgress.SetRaw(initialPlayer);
             }
         }
 

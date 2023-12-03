@@ -15,7 +15,7 @@ namespace App.Scripts.Common.FirebaseStorage.KeyResolvers
         public string ResolveKey<T>() {
             var key = _keyResolver.ResolveKey<T>();
             var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-            return string.Concat("/", userId, "/", key);
+            return string.Concat("/users/", userId, "/", key);
         }
     }
 }

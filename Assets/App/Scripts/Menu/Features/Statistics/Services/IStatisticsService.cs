@@ -7,6 +7,5 @@ namespace App.Scripts.Menu.Features.Statistics.Services {
         event Action<StatisticsBlockInfo> Changed; 
         void AddSlice(StatisticsBlockType blockType);
         Task<StatisticsModel> LoadStatistics();
-        Task SaveAsync();
     }
 }

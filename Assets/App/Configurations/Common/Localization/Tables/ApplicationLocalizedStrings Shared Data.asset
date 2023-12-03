@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: Common.Save
     m_Metadata:
       m_Items: []
+  - m_Id: 43579776925224960
+    m_Key: Leaderboard.Header
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

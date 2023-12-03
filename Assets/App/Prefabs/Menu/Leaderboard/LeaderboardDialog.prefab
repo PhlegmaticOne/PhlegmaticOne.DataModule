@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1699204298494139060}
   - component: {fileID: 1699204298494139063}
   - component: {fileID: 1699204298494139058}
-  - component: {fileID: 1699204298494139059}
+  - component: {fileID: 4150853716694932108}
   m_Layer: 5
   m_Name: StatisticsListView
   m_TagString: Untagged
@@ -39,8 +39,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -210}
-  m_SizeDelta: {x: 0, y: 420}
+  m_AnchoredPosition: {x: 0, y: -209}
+  m_SizeDelta: {x: 0, y: 418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1699204298494139061
 CanvasRenderer:
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &1699204298494139059
+--- !u!114 &4150853716694932108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1699204298494139065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc59bf6bac2403fb4a34e46900151da, type: 3}
+  m_Script: {fileID: 11500000, guid: f585332328f9a654aaa26981bbd9050b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _contentTransform: {fileID: 1699204298961580815}
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430"
+  m_text: "\u0421\u043F\u0438\u0441\u043E\u043A \u043B\u0438\u0434\u0435\u0440\u043E\u0432"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 553ed014deb4ebb488c7419c5036903b, type: 2}
   m_sharedMaterial: {fileID: 3248121947192475318, guid: 553ed014deb4ebb488c7419c5036903b, type: 2}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.25
+  m_fontSize: 28.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -381,7 +381,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:edba77a1f1027d542b582e03def759f6
     m_TableEntryReference:
-      m_KeyId: 9049906754981888
+      m_KeyId: 43579776925224960
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -648,11 +648,11 @@ GameObject:
   - component: {fileID: 1699204300564956885}
   - component: {fileID: 1699204300564956884}
   - component: {fileID: 1699204300564956882}
-  - component: {fileID: 1699204300564956883}
-  - component: {fileID: 7988392600672430839}
   - component: {fileID: 1070645686426662115}
+  - component: {fileID: 2486110058814137769}
+  - component: {fileID: 2937303386912952073}
   m_Layer: 5
-  m_Name: StatisticsDialog
+  m_Name: LeaderboardDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ MonoBehaviour:
   _backgroundImage: {fileID: 1699204300564956884}
   _isPlayMoveAnimation: 1
   _contentRectTransform: {fileID: 1699204298570739744}
---- !u!114 &1699204300564956883
+--- !u!114 &1070645686426662115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -742,7 +742,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1699204300564956886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b989a7232164ca8a75f405b0754b83c, type: 3}
+  m_Script: {fileID: 11500000, guid: ea1a9e39a5da4753a7ba1caccd827bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2486110058814137769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699204300564956886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c78a525c438c74395014f627c3e09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -757,8 +769,8 @@ MonoBehaviour:
   _closeButtons:
   - {fileID: 6769276810320710894}
   _dialogAnimator: {fileID: 1699204300564956882}
-  _statisticsView: {fileID: 7988392600672430839}
---- !u!114 &7988392600672430839
+  _leaderboardView: {fileID: 2937303386912952073}
+--- !u!114 &2937303386912952073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,22 +779,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1699204300564956886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf1d44cc353473383b629fd0a391870, type: 3}
+  m_Script: {fileID: 11500000, guid: af2f36d45c1cc284bb1c8cc4ecc4c3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statisticsList: {fileID: 1699204298494139059}
---- !u!114 &1070645686426662115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699204300564956886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1a9e39a5da4753a7ba1caccd827bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _leaderboardList: {fileID: 4150853716694932108}
 --- !u!1 &6260144784098995489
 GameObject:
   m_ObjectHideFlags: 0

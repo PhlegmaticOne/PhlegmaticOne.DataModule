@@ -12,13 +12,10 @@ namespace App.Scripts.Menu.Features.Statistics.ViewModels {
         public StatisticsViewModel(IStatisticsService statisticsService) {
             _statisticsService = statisticsService;
             Statistics = new ReactiveCollection<StatisticsBlockInfo>();
-            SaveCommand = RelayCommandFactory.CreateEmptyAsyncCommand(SaveStatistics);
             AddSliceCommand = RelayCommandFactory.CreateCommand<StatisticsBlockInfo>(AddSlice);
         }
         
         public ReactiveCollection<StatisticsBlockInfo> Statistics { get; }
-
-        public IRelayCommand SaveCommand { get; }
 
         public IRelayCommand AddSliceCommand { get; }
 
@@ -40,7 +37,5 @@ namespace App.Scripts.Menu.Features.Statistics.ViewModels {
             var blockType = blockInfo.BlockType;
             _statisticsService.AddSlice(blockType);
         }
-        
-        private Task SaveStatistics() => _statisticsService.SaveAsync();
     }
 }

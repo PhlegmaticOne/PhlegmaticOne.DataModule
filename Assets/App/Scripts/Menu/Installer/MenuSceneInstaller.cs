@@ -17,6 +17,13 @@ namespace App.Scripts.Menu.Installer {
             BindMenuScreen();
             BindExitService();
             BindBootstrap();
+            BindLeaderboard();
+        }
+
+        private void BindLeaderboard()
+        {
+            Container.Bind<LeaderboardViewModel>().AsSingle();
+            Container.Bind<ILeaderboadSelectService>().To<LeaderboardSelectService>().AsSingle();
         }
 
         private void BindBootstrap() {

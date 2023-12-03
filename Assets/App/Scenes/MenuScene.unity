@@ -755,6 +755,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _prefabs:
+  - {fileID: 3320006838147682371, guid: a1841fec2c087574898a877e303a8856, type: 3}
   - {fileID: 3320006838147682371, guid: 61a59dfdb2113634ab79dbe7762c6a51, type: 3}
   _prefabsFolder: {fileID: 102900000, guid: 5ef1888aded844942be091fdf4c209fd, type: 3}
 --- !u!1 &1430586605
@@ -1070,6 +1071,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _prefabs:
+  - {fileID: 1070645686426662115, guid: 6f229c31e6a43614093f99a61f0f71e9, type: 3}
   - {fileID: 1070645686426662115, guid: bc86fb30866fcbe45b206eab6aba639f, type: 3}
   _prefabsFolder: {fileID: 102900000, guid: 5ef1888aded844942be091fdf4c209fd, type: 3}
 --- !u!1 &1962626189
@@ -1291,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6291282475783868201, guid: 0f43893cc175a4349ac69dcb27559bc8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 219
       objectReference: {fileID: 0}
     - target: {fileID: 6291282475886810771, guid: 0f43893cc175a4349ac69dcb27559bc8, type: 3}
       propertyPath: m_Camera
