@@ -1,4 +1,4 @@
-﻿using PhlegmaticOne.Auth.Fake;
+﻿using PhlegmaticOne.Auth.App.Modules.Auth.Editor;
 using PhlegmaticOne.Auth.Google;
 using UnityEngine;
 using Zenject;
@@ -16,7 +16,7 @@ namespace App.Scripts.Common.Installers.Auth {
         }
 
         private void BindFakeAuth() {
-            Container.BindInterfacesTo<FakeAuthProvider>().AsSingle();
+            Container.BindInterfacesTo<EditorAuthProvider>().AsSingle();
         }
 
         private void BindAuth() {

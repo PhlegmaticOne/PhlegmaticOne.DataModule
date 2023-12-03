@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1024140134361040423}
   - component: {fileID: 1024140134361040420}
   - component: {fileID: 819832953870894306}
+  - component: {fileID: 3945809727865422384}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -30,6 +31,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1024140134888592824}
   m_Father: {fileID: 0}
@@ -135,6 +137,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1024140134361040420}
+--- !u!114 &3945809727865422384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024140134361040418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830a82597cf94c91acdb003fc8104155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundType: 1
 --- !u!1 &1024140134888592825
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +180,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024140134361040421}
   m_RootOrder: 0
@@ -297,7 +313,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   references:
-    version: 1
+    version: 2
+    RefIds: []
 --- !u!114 &5095229558141269780
 MonoBehaviour:
   m_ObjectHideFlags: 0

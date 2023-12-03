@@ -15,6 +15,7 @@ using App.Scripts.Game.Features.Physics.Systems;
 using App.Scripts.Game.Features.RemoveBlocks.Systems;
 using App.Scripts.Game.Features.Score.Systems;
 using App.Scripts.Game.Features.ScoreLabels.Systems;
+using App.Scripts.Game.Features.Sound.Systems;
 using App.Scripts.Game.Features.Spawning.Systems;
 using App.Scripts.Game.Features.Win.Systems;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
@@ -77,10 +78,13 @@ namespace App.Scripts.Game.Installers {
             
             Container.Bind<ISystem>().To<SystemWinCheck>().AsSingle();
             
+            Container.Bind<ISystem>().To<SystemPlaySoundCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemPlaySound>().AsSingle();
+
             Container.Bind<ISystem>().To<SystemRemoveBlocks>().AsSingle();
-            
+
             Container.Bind<ISystem>().To<SystemNetwork>().AsSingle();
-            
+
             Container.Bind<ISystem>().To<SystemWin>().AsSingle();
         }
     }

@@ -34,6 +34,8 @@ namespace App.Scripts.Game.Features.Freezing.Systems {
         public override void OnUpdate(float deltaTime) {
             ComponentFreezeActive local = default;
             ComponentFreezeActive remote = default;
+            ResetBlocksFreezing(true);
+            ResetBlocksFreezing(false);
             
             foreach (var entity in _filter.Apply(World)) {
                 var componentFreeze = entity.GetComponent<ComponentFreezeActive>();
@@ -52,7 +54,7 @@ namespace App.Scripts.Game.Features.Freezing.Systems {
                 componentFreeze.CurrentTime += deltaTime;
                 
                 if (componentFreeze.CurrentTime >= componentFreeze.Time) {
-                    ResetBlocksFreezing(componentFreeze);
+                    ResetBlocksFreezing(componentFreeze.IsRemote);
                     entity.RemoveEndOfFrame();
                 }
 
@@ -86,8 +88,8 @@ namespace App.Scripts.Game.Features.Freezing.Systems {
             SetDeltaTimeDivider(freezeActive.IsRemote, freezeActive.Force);
         }
 
-        private void ResetBlocksFreezing(ComponentFreezeActive freezeActive) {
-            SetDeltaTimeDivider(freezeActive.IsRemote, 1);
+        private void ResetBlocksFreezing(bool isRemote) {
+            SetDeltaTimeDivider(isRemote, 1);
         }
 
         private void SetDeltaTimeDivider(bool isRemote, float value) {

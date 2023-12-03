@@ -17,4 +17,4 @@ MonoBehaviour:
   _maxMessageSize: 16384
   _processLimit: 20
   _clientsCount: 2
-  _testNotConnect: 0
+  _testNotConnect: 1

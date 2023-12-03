@@ -1,7 +1,6 @@
 ﻿using App.Scripts.Common.Extensions;
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Cutting.Configs;
-using App.Scripts.Game.Features.Score.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;

@@ -29,11 +29,7 @@ namespace App.Scripts.Splash.Installers {
         }
 
         private void BindFirebaseInitializer() {
-            #if UNITY_EDITOR
-                Container.BindInterfacesTo<FakeFirebaseInitializer>().AsSingle();
-            #else
-                Container.BindInterfacesTo<FirebaseInitializer>().AsSingle();
-            #endif
+            Container.BindInterfacesTo<FirebaseInitializer>().AsSingle();
         }
 
         private void BindProgressReporter() {
