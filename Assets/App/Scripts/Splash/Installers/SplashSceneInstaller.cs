@@ -3,21 +3,32 @@ using App.Scripts.Splash.Features.Progress.Models;
 using App.Scripts.Splash.Features.Progress.ViewModels;
 using App.Scripts.Splash.Services.Firebase;
 using App.Scripts.Splash.Services.Initializer;
+using PhlegmaticOne.Auth.Assets.App.Modules.Auth;
+using PhlegmaticOne.Auth.Assets.App.Modules.Auth.EmailPassword;
 using UnityEngine;
 using Zenject;
 
 namespace App.Scripts.Splash.Installers {
     public class SplashSceneInstaller : MonoInstaller {
         [SerializeField] private SplashBootstrap _bootstrap;
+        [SerializeField] private EmailPasswordAuthWindow _authWindow;
         [Header("Progress Reporter")] 
         [SerializeField] [Range(5, 50)] private int _progressDeltaTime;
         [SerializeField] [Range(0, 1000)] private int _finalProgressDelay;
 
         public override void InstallBindings() {
+            BindAuthWindow();
             BindAppInitializer();
             BindFirebaseInitializer();
             BindProgressReporter();
             BindBootstrap();
+        }
+
+        private void BindAuthWindow()
+        {
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+            Container.Bind<IAuthSource>().FromInstance(_authWindow).AsSingle();
+#endif
         }
 
         private void BindAppInitializer() {

@@ -26,7 +26,7 @@ public class LeaderboardSelectService : ILeaderboadSelectService
 
     private IEnumerable<LeaderboardEntry> ToLeaderboardEntries(DataSnapshot snapshot)
     {
-        return snapshot.Children.Select(x => {
+        return snapshot.Children.Reverse().Select(x => {
             var stateChild = x.Child(nameof(PlayerState));
             var maxScoreChild = stateChild.Child(nameof(PlayerState.MaxScore));
             var nameChild = stateChild.Child(nameof(PlayerState.Name));

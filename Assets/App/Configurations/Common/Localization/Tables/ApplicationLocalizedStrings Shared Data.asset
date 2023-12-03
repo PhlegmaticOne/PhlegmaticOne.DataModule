@@ -55,6 +55,30 @@ MonoBehaviour:
     m_Key: Settings.MuteTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 43639726087131136
+    m_Key: Auth.Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639774116106240
+    m_Key: Auth.Email
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639819188097024
+    m_Key: Auth.Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639871449124864
+    m_Key: Auth.SignUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639962843009024
+    m_Key: Auth.SignIn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43640092480557056
+    m_Key: Common.Submit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

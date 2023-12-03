@@ -25,11 +25,11 @@ namespace App.Scripts.Shared.Progress.Services {
             }
         }
 
-        public int MaxScore => _playerProgress.AsNoTrackable().MaxScore;
+        public int TotalScore => _playerProgress.AsNoTrackable().MaxScore;
 
         public string UserName => _playerProgress.AsNoTrackable().Name;
 
-        public void ChangeMaxScore(int maxScore) {
+        public void ChangeTotalScore(int maxScore) {
             _playerProgress.AsTrackable().ChangeMaxScore(maxScore);
         }
 

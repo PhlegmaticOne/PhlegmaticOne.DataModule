@@ -19,12 +19,6 @@ namespace App.Scripts.Game.Features.Score.Systems {
             _scoreViews = scoreViews;
         }
 
-        public override void OnAwake() {
-            _scoreViews.Local.Initialize(_sessionScoreService.MaxScore);
-            _scoreViews.Remote.Initialize(_sessionScoreService.MaxScore);
-            base.OnAwake();
-        }
-
         protected override IComponentsFilterBuilder SetupLocalFilter(IComponentsFilterBuilder builder) {
             return builder.With<ComponentChangeScore>();
         }

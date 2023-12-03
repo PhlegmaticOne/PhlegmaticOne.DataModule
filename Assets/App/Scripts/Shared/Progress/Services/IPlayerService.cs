@@ -3,9 +3,9 @@
 namespace App.Scripts.Shared.Progress.Services {
     public interface IPlayerService {
         Task InitializeAsync();
-        int MaxScore { get; }
+        int TotalScore { get; }
         string UserName { get; }
-        void ChangeMaxScore(int maxScore);
+        void ChangeTotalScore(int maxScore);
         void ChangeName(string name);
     }
 }

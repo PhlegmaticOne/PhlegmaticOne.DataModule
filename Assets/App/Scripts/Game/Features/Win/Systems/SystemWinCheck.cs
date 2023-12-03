@@ -4,6 +4,7 @@ using App.Scripts.Game.Features.RemoveBlocks.Components;
 using App.Scripts.Game.Features.Score.Services;
 using App.Scripts.Game.Features.Win.Components;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
+using App.Scripts.Shared.Progress.Services;
 
 namespace App.Scripts.Game.Features.Win.Systems {
     public class SystemWinCheck : SystemBase {
@@ -12,13 +13,16 @@ namespace App.Scripts.Game.Features.Win.Systems {
         private readonly ISessionScoreService _sessionScoreService;
         private readonly INetworkService _networkService;
         private readonly IBlockContainer _blockContainer;
+        private readonly IPlayerService _playerService;
 
         public SystemWinCheck(ISessionScoreService sessionScoreService,
             INetworkService networkService,
-            IBlockContainer blockContainer) {
+            IBlockContainer blockContainer,
+            IPlayerService playerService) {
             _sessionScoreService = sessionScoreService;
             _networkService = networkService;
             _blockContainer = blockContainer;
+            _playerService=playerService;
         }
 
         public override void OnUpdate(float deltaTime) {
@@ -28,7 +32,7 @@ namespace App.Scripts.Game.Features.Win.Systems {
             
             var componentWin = new ComponentWin {
                 Score = _sessionScoreService.CurrentScore,
-                PlayerName = _sessionScoreService.CurrentScore.ToString()
+                PlayerName = _playerService.UserName
             };
             
             foreach (var block in _blockContainer) {

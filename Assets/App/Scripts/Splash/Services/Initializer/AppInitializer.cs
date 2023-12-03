@@ -5,6 +5,7 @@ using App.Scripts.Menu.Features.Statistics.Services;
 using App.Scripts.Shared.Progress.Services;
 using App.Scripts.Splash.Services.Firebase;
 using PhlegmaticOne.Auth;
+using PhlegmaticOne.Auth.Assets.App.Modules.Auth;
 
 namespace App.Scripts.Splash.Services.Initializer {
     public class AppInitializer : IAppInitializer {
@@ -12,6 +13,7 @@ namespace App.Scripts.Splash.Services.Initializer {
         private readonly IAuthProvider _authProvider;
         private readonly IPlayerService _playerScoreService;
         private readonly IStatisticsService _statisticsService;
+        private readonly IAuthSource _authSource;
         private readonly ILocalizationProvider _localizationProvider;
 
         public AppInitializer(
@@ -19,18 +21,21 @@ namespace App.Scripts.Splash.Services.Initializer {
             ILocalizationProvider localizationProvider,
             IAuthProvider authProvider,
             IPlayerService playerScoreService,
-            IStatisticsService statisticsService) {
+            IStatisticsService statisticsService,
+            IAuthSource authSource)
+        {
             _firebaseInitializer = firebaseInitializer;
             _authProvider = authProvider;
             _playerScoreService = playerScoreService;
             _statisticsService=statisticsService;
+            _authSource=authSource;
             _localizationProvider = localizationProvider;
         }
 
         public async Task InitializeAsync(CancellationToken cancellationToken) {
             await _localizationProvider.InitializeAsync();
             await _firebaseInitializer.InitializeAsync();
-            await _authProvider.SignInAsync();
+            await _authProvider.SignInAsync(_authSource);
             await _playerScoreService.InitializeAsync();
             await _statisticsService.InitializeAsync();
         }

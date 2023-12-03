@@ -24,6 +24,6 @@ namespace App.Scripts.Menu.Features.Progress.ViewModels {
             yield return MaxScore;
         }
 
-        private void UpdateScore() => MaxScore.Value = _playerScoreService.MaxScore;
+        private void UpdateScore() => MaxScore.Value = _playerScoreService.TotalScore;
     }
 }

@@ -2,6 +2,7 @@
 using Firebase.Analytics;
 using Firebase.Auth;
 using GoogleSignIn;
+using PhlegmaticOne.Auth.Assets.App.Modules.Auth;
 using PhlegmaticOne.Auth.Google.Log;
 using ILogger = PhlegmaticOne.Logger.Base.ILogger;
 
@@ -20,8 +21,9 @@ namespace PhlegmaticOne.Auth.Google {
             _logger = logger;
             SetupGoogleSignIn();
         }
-        
-        public async Task SignInAsync() {
+
+        public async Task SignInAsync(IAuthSource authSource)
+        {
             InitAuthFields();
             var user = await SignInUser();
             _logger.LogObject(new GoogleSingInSucceedLogModel(user));

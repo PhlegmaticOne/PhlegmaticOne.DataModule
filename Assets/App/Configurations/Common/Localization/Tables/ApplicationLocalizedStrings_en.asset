@@ -58,6 +58,30 @@ MonoBehaviour:
     m_Localized: Sound muted
     m_Metadata:
       m_Items: []
+  - m_Id: 43639726087131136
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639774116106240
+    m_Localized: Email
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639819188097024
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639871449124864
+    m_Localized: Sign up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43639962843009024
+    m_Localized: Sign in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43640092480557056
+    m_Localized: Submit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

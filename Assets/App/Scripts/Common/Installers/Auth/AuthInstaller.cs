@@ -1,33 +1,37 @@
-﻿using PhlegmaticOne.Auth.App.Modules.Auth.Editor;
+﻿using PhlegmaticOne.Auth;
+using PhlegmaticOne.Auth.App.Modules.Auth.Editor;
+using PhlegmaticOne.Auth.Assets.App.Modules.Auth;
 using PhlegmaticOne.Auth.Google;
 using UnityEngine;
 using Zenject;
 
-namespace App.Scripts.Common.Installers.Auth {
+namespace App.Scripts.Common.Installers.Auth
+{
     public class AuthInstaller : MonoInstaller {
         [SerializeField] private ApplicationAuthType _authType;
         
         public override void InstallBindings() {
             #if UNITY_EDITOR || UNITY_STANDALONE_WIN
-                BindFakeAuth();
+                BindEditorAuth();
             #else
                 BindAuth();
             #endif
         }
 
-        private void BindFakeAuth() {
-            Container.BindInterfacesTo<EditorAuthProvider>().AsSingle();
+        private void BindEditorAuth() {
+            Container.BindInterfacesTo<EmailPasswordAuthProvider>().AsSingle();
         }
 
         private void BindAuth() {
             switch (_authType) {
-                case ApplicationAuthType.None: BindFakeAuth(); break;
+                case ApplicationAuthType.None: BindEditorAuth(); break;
                 case ApplicationAuthType.Google: BindGoogleAuth(); break;
-                default: BindFakeAuth(); break;
+                default: BindEditorAuth(); break;
             }
         }
 
         private void BindGoogleAuth() {
+            Container.Bind<IAuthSource>().To<EmpryAuthSource>().AsSingle();
             Container.BindInterfacesTo<GoogleAuthProvider>().AsSingle();
             Container.BindInterfacesTo<GoogleAuthOptions>().AsSingle();
         }
