@@ -77,15 +77,17 @@ namespace App.Scripts.Game.Installers {
             Container.Bind<ISystem>().To<SystemBoardStateCheck>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemWinCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemLoseCheck>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemPlaySoundCheck>().AsSingle();
             Container.Bind<ISystem>().To<SystemPlaySound>().AsSingle();
 
             Container.Bind<ISystem>().To<SystemRemoveBlocks>().AsSingle();
 
-            Container.Bind<ISystem>().To<SystemNetwork>().AsSingle();
-
             Container.Bind<ISystem>().To<SystemWin>().AsSingle();
+            Container.Bind<ISystem>().To<SystemLose>().AsSingle();
+            
+            Container.Bind<ISystem>().To<SystemNetwork>().AsSingle();
         }
     }
 }

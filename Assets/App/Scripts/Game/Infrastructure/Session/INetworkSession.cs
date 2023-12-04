@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using App.Scripts.Game.Modes.Base;
+using PhlegmaticOne.FruitNinja.Shared;
 
 namespace App.Scripts.Game.Infrastructure.Session {
     public interface INetworkSession : IDisposable {
-        event Action Disconnected;
-        
         event Action<ArraySegment<byte>> DataReceived;
+        event Action<PlayerEndGameMessage> EndGameMessageReceived;
         Task StartAsync();
+        Task<GameDataBase> ReceiveGameDataAsync();
+        Task<PlayersSyncMessage> ReceiveSyncMessageAsync();
         void Tick();
         void SendMessage(ArraySegment<byte> message);
     }

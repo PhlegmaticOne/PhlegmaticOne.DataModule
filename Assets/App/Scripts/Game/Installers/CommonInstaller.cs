@@ -7,6 +7,8 @@ using App.Scripts.Game.Features.Packages.Services;
 using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
 using App.Scripts.Game.Infrastructure.Session;
+using App.Scripts.Game.Modes.Base;
+using App.Scripts.Game.Modes.ByScore;
 using App.Scripts.Game.States;
 using UnityEngine;
 using Zenject;
@@ -15,6 +17,8 @@ namespace App.Scripts.Game.Installers {
     public class CommonInstaller : MonoInstaller {
         [SerializeField] private Camera _camera;
         [SerializeField] private GameBootstrap _gameBootstrap;
+
+        [SerializeField] private GameModeByScore _gameModeByScore;
         
         public override void InstallBindings() {
             BindCameraProvider();
@@ -24,6 +28,13 @@ namespace App.Scripts.Game.Installers {
             BindNetworkSession();
             BindStates();
             BindBootstrap();
+            BindGameModes();
+        }
+
+        private void BindGameModes()
+        {
+            Container.Bind<IGameMode>().To<GameModeByScore>().FromInstance(_gameModeByScore).AsSingle();
+            Container.Bind<IGameModeProvider>().To<GameModeProvider>().AsSingle();
         }
 
         private void BindBootstrap() {
@@ -36,7 +47,7 @@ namespace App.Scripts.Game.Installers {
 
         private void BindStates() {
             Container.Bind<StateStartGame>().AsSingle();
-            Container.Bind<StateWin>().AsSingle();
+            Container.Bind<StateEndGame>().AsSingle();
         }
 
         private void BindDifficulty() {

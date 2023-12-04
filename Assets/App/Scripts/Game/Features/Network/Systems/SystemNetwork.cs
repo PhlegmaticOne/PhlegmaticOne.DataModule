@@ -28,7 +28,7 @@ namespace App.Scripts.Game.Features.Network.Systems {
         }
 
         public override void OnDispose() {
-            _networkSession.Dispose();
+            //_networkSession.Dispose();
         }
 
         private void OnData(ArraySegment<byte> message) {

@@ -1,5 +1,6 @@
-﻿using App.Scripts.Common.Scenes.Base;
-using App.Scripts.Game.Features.Win.Components;
+﻿using App.Scripts.Common.Input.Base;
+using App.Scripts.Common.Scenes.Base;
+using App.Scripts.Game.Modes.Base;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,17 +13,26 @@ namespace App.Scripts.Game.Features.Win.Views {
         [SerializeField] private Button _exitButton;
         
         private ISceneProvider _sceneProvider;
+        private IInputLocker _inputLocker;
 
         [Inject]
-        private void Construct(ISceneProvider sceneProvider) {
+        private void Construct(ISceneProvider sceneProvider, IInputLocker inputLocker)
+        {
+            _inputLocker = inputLocker;
             _sceneProvider = sceneProvider;
         }
 
-        public void ShowScreen(ComponentWin componentWin) {
+        public void ShowScreenLoading() {
+            _inputLocker.Lock();
             gameObject.SetActive(true);
-            _scoreText.text = componentWin.Score.ToString();
-            _playerNameText.text = componentWin.PlayerName;
             _exitButton.onClick.AddListener(Exit);
+        }
+        
+        public void ShowGameResult(GameEndStateViewModel viewModel)
+        {
+            _scoreText.text = viewModel.Winner.Score.ToString();
+            _playerNameText.text = viewModel.Winner.UserName;
+            _inputLocker.Unlock();
         }
 
         private async void Exit() {
