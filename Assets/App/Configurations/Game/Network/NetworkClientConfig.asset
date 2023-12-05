@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14ccca2290422ea305b0dfdaee3195, type: 3}
   m_Name: NetworkClientConfig
   m_EditorClassIdentifier: 
-  _serverAddress: localhost
-  _serverPort: 8888
   _maxMessageSize: 16384
   _processLimit: 20
-  _clientsCount: 1
-  _testNotConnect: 1
+  _clientsCount: 2

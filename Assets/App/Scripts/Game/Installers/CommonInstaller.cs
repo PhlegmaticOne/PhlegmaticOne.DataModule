@@ -8,6 +8,7 @@ using App.Scripts.Game.Features.Spawning.Factories;
 using App.Scripts.Game.Infrastructure.Input;
 using App.Scripts.Game.Infrastructure.Session;
 using App.Scripts.Game.Modes.Base;
+using App.Scripts.Game.Modes.ByBlocks;
 using App.Scripts.Game.Modes.ByScore;
 using App.Scripts.Game.States;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace App.Scripts.Game.Installers {
         [SerializeField] private GameBootstrap _gameBootstrap;
 
         [SerializeField] private GameModeByScore _gameModeByScore;
+        [SerializeField] private GameModeByBlocks _gameModeByBlocks;
         
         public override void InstallBindings() {
             BindCameraProvider();
@@ -34,6 +36,7 @@ namespace App.Scripts.Game.Installers {
         private void BindGameModes()
         {
             Container.Bind<IGameMode>().To<GameModeByScore>().FromInstance(_gameModeByScore).AsSingle();
+            Container.Bind<IGameMode>().To<GameModeByBlocks>().FromInstance(_gameModeByBlocks).AsSingle();
             Container.Bind<IGameModeProvider>().To<GameModeProvider>().AsSingle();
         }
 

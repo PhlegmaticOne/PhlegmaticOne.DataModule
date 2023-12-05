@@ -11,9 +11,9 @@ using ILogger = PhlegmaticOne.Logger.Base.ILogger;
 
 namespace App.Scripts.Game.Infrastructure.Session {
     public class NetworkSession : INetworkSession {
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings Settings = new()
         {
-            TypeNameHandling = TypeNameHandling.All
+            TypeNameHandling = TypeNameHandling.Objects
         };
         
         private static readonly byte[] SyncStart = Encoding.UTF8.GetBytes("[SYNC]");

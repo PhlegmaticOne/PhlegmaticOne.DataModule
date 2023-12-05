@@ -8,8 +8,12 @@ using Zenject;
 
 namespace App.Scripts.Game.Features.Win.Views {
     public class FinalScreenView : MonoBehaviour {
-        [SerializeField] private TextMeshProUGUI _scoreText;
-        [SerializeField] private TextMeshProUGUI _playerNameText;
+        [SerializeField] private TextMeshProUGUI _scoreTextLoser;
+        [SerializeField] private TextMeshProUGUI _playerNameTextLoser;
+        [SerializeField] private TextMeshProUGUI _scoreTextWinner;
+        [SerializeField] private TextMeshProUGUI _playerNameTextWinner;
+        [SerializeField] private GameObject _isDrawObject;
+        [SerializeField] private GameObject[] _textsObjects;
         [SerializeField] private Button _exitButton;
         
         private ISceneProvider _sceneProvider;
@@ -30,8 +34,19 @@ namespace App.Scripts.Game.Features.Win.Views {
         
         public void ShowGameResult(GameEndStateViewModel viewModel)
         {
-            _scoreText.text = viewModel.Winner.Score.ToString();
-            _playerNameText.text = viewModel.Winner.UserName;
+            _scoreTextLoser.text = viewModel.Loser.Score.ToString();
+            _playerNameTextLoser.text = viewModel.Loser.UserName;
+
+            _scoreTextWinner.text = viewModel.Winner.Score.ToString();
+            _playerNameTextWinner.text = viewModel.Winner.UserName;
+            
+            _isDrawObject.SetActive(viewModel.IsDraw);
+            
+            foreach (var textsObject in _textsObjects)
+            {
+                textsObject.SetActive(!viewModel.IsDraw);
+            }
+            
             _inputLocker.Unlock();
         }
 

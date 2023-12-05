@@ -1,4 +1,5 @@
-﻿using App.Scripts.Game.Features.Score.Services;
+﻿using App.Scripts.Game.Features._Common.Services;
+using App.Scripts.Game.Features.Score.Services;
 using App.Scripts.Game.Features.Score.Views;
 using UnityEngine;
 using Zenject;
@@ -15,7 +16,7 @@ namespace App.Scripts.Game.Features.Score.Installer {
         }
 
         private void BindSessionScoreService() {
-            Container.Bind<ISessionScoreService>().To<SessionScoreService>().AsSingle();
+            Container.Bind<ISessionService>().To<SessionService>().AsSingle();
         }
 
         private void BindScoreViews() {

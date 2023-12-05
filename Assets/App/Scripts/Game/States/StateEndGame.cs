@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Common.Extensions;
+using App.Scripts.Game.Features._Common.Services;
 using App.Scripts.Game.Features.Score.Services;
 using App.Scripts.Game.Features.Win.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Worlds;
@@ -13,7 +14,7 @@ namespace App.Scripts.Game.States {
         private readonly FinalScreenConfig _finalScreenConfig;
         private readonly WorldRunner _worldRunner;
         private readonly IPlayerService _playerService;
-        private readonly ISessionScoreService _sessionScoreService;
+        private readonly ISessionService _sessionService;
         private readonly INetworkSession _networkSession;
         private readonly IGameModeProvider _gameModeProvider;
 
@@ -21,13 +22,13 @@ namespace App.Scripts.Game.States {
             FinalScreenConfig finalScreenConfig,
             WorldRunner worldRunner,
             IPlayerService playerService,
-            ISessionScoreService sessionScoreService,
+            ISessionService sessionService,
             INetworkSession networkSession,
             IGameModeProvider gameModeProvider) {
             _finalScreenConfig = finalScreenConfig;
             _worldRunner = worldRunner;
             _playerService = playerService;
-            _sessionScoreService = sessionScoreService;
+            _sessionService = sessionService;
             _networkSession = networkSession;
             _gameModeProvider = gameModeProvider;
         }
@@ -54,7 +55,7 @@ namespace App.Scripts.Game.States {
         {
             var message = new PlayerEndGameMessage
             {
-                Score = _sessionScoreService.CurrentScore,
+                Score = _sessionService.CurrentScore,
                 IsWin = isWin,
                 UserName = _playerService.UserName,
                 IsBreakGame = _gameModeProvider.IsBreakGame()

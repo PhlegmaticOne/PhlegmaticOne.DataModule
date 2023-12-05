@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Scripts.Game.Features._Common.Services;
 using App.Scripts.Game.Features.Score.Services;
 using App.Scripts.Game.Modes.Base;
 using PhlegmaticOne.FruitNinja.Shared;
@@ -12,29 +13,21 @@ namespace App.Scripts.Game.Modes.ByScore
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         
-        private ISessionScoreService _sessionScoreService;
+        private ISessionService _sessionService;
 
         [Inject]
-        private void Construct(ISessionScoreService sessionScoreService)
+        private void Construct(ISessionService sessionService)
         {
-            _sessionScoreService = sessionScoreService;
+            _sessionService = sessionService;
         }
         
         public override GameModeType GameModeType => GameModeType.ByScore;
         public override bool IsBreakGame => true;
 
-        public override bool IsLocalCompleted() => _sessionScoreService.CurrentScore >= GameDataBase.SessionScore;
+        public override bool IsLocalCompleted() => _sessionService.CurrentScore >= GameDataBase.SessionScore;
         
         public override GameEndStateViewModel BuildGameEndStateViewModel(PlayersSyncMessage playersSyncMessage)
         {
-            if (playersSyncMessage.First == null || playersSyncMessage.Second == null)
-            {
-                return new GameEndStateViewModel(PlayerService)
-                {
-                    IsDraw = true
-                }.SetWinner(playersSyncMessage.First ?? playersSyncMessage.Second);
-            }
-            
             var viewModel = new GameEndStateViewModel(PlayerService)
             {
                 IsDraw = playersSyncMessage.First.Score == playersSyncMessage.Second.Score

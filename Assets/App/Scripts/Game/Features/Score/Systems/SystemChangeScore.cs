@@ -1,4 +1,5 @@
-﻿using App.Scripts.Game.Features.Network.Services;
+﻿using App.Scripts.Game.Features._Common.Services;
+using App.Scripts.Game.Features.Network.Services;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Score.Components;
 using App.Scripts.Game.Features.Score.Services;
@@ -8,14 +9,14 @@ using App.Scripts.Game.Infrastructure.Ecs.Filters;
 
 namespace App.Scripts.Game.Features.Score.Systems {
     public class SystemChangeScore : NetworkSystemBase<ComponentChangeScore> {
-        private readonly ISessionScoreService _sessionScoreService;
+        private readonly ISessionService _sessionService;
         private readonly ScoreViews _scoreViews;
 
         protected SystemChangeScore(
             INetworkService networkService,
-            ISessionScoreService sessionScoreService,
+            ISessionService sessionService,
             ScoreViews scoreViews) : base(networkService) {
-            _sessionScoreService = sessionScoreService;
+            _sessionService = sessionService;
             _scoreViews = scoreViews;
         }
 
@@ -26,7 +27,7 @@ namespace App.Scripts.Game.Features.Score.Systems {
         protected override void OnLocalUpdate(Entity entity, float deltaTime) {
             var componentChangeScore = entity.GetComponent<ComponentChangeScore>();
             var delta = componentChangeScore.ChangeDelta;
-            var newScore = _sessionScoreService.AddScore(delta);
+            var newScore = _sessionService.AddScore(delta);
             
             _scoreViews.Local.SetScoreAnimated(newScore);
             

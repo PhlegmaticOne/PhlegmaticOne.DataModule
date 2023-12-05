@@ -3,6 +3,7 @@ using App.Scripts.Game.Infrastructure.Ecs.Entities;
 using App.Scripts.Game.Infrastructure.Ecs.Filters;
 using App.Scripts.Game.Infrastructure.Ecs.Systems;
 using App.Scripts.Game.States;
+using UnityEngine;
 
 namespace App.Scripts.Game.Features.Win.Systems {
     public class SystemWin : SystemBase {
@@ -27,6 +28,7 @@ namespace App.Scripts.Game.Features.Win.Systems {
             foreach (var entity in _filter.Apply(World)) {
                 _ = _stateEndGame.EnterWin();
                 IsWin = true;
+                Debug.Log("Win");
                 entity.RemoveEndOfFrame();
             }
         }

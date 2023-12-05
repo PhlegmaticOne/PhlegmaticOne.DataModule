@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Common.Extensions;
+using App.Scripts.Game.Features._Common.Services;
 using App.Scripts.Game.Features.Cutting.Components;
 using App.Scripts.Game.Features.Cutting.Configs;
 using App.Scripts.Game.Infrastructure.Ecs.Components;
@@ -10,14 +11,15 @@ using Assets.App.Scripts.Game.Features.Blocks.Models;
 namespace App.Scripts.Game.Features.Cutting.Systems {
     public class SystemCuttingAction : SystemBase {
         private readonly CuttingConfig _config;
-        private readonly IStatisticsService _statisticsService;
+        private readonly ISessionService _sessionService;
 
         private IComponentsFilter _filter;
         private IComponentsFilter _blocksFilter;
 
-        public SystemCuttingAction(CuttingConfig config, IStatisticsService statisticsService) {
+        public SystemCuttingAction(CuttingConfig config, ISessionService sessionService)
+        {
             _config = config;
-            _statisticsService=statisticsService;
+            _sessionService = sessionService;
         }
         
         public override void OnAwake() {
@@ -71,8 +73,7 @@ namespace App.Scripts.Game.Features.Cutting.Systems {
         private void AddCuttedBlockToStatistics(ComponentBlock componentBlock)
         {
             var blockType = componentBlock.BlockData.Type;
-            var statisticsBlockType = BlockTypesMapper.MapFromBlockType(blockType);
-            _statisticsService.AddSlice(statisticsBlockType);
+            _sessionService.AddSlice(blockType);
         }
     }
 }
