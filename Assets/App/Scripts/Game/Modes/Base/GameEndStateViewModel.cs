@@ -24,6 +24,27 @@ namespace App.Scripts.Game.Modes.Base
             Loser = playerEndGameMessage;
             return this;
         }
+        
+        public GameEndStateViewModel SetIsDraw(bool isDraw)
+        {
+            IsDraw = isDraw;
+            return this;
+        }
+        
+        public GameEndStateViewModel SetDefaultsFromPlayers(PlayersSyncMessage playersSyncMessage)
+        {
+            var loser = playersSyncMessage.First.Score > playersSyncMessage.Second.Score
+                ? playersSyncMessage.Second
+                : playersSyncMessage.First;
+            
+            var winner = playersSyncMessage.First.Score > playersSyncMessage.Second.Score
+                ? playersSyncMessage.First
+                : playersSyncMessage.Second;
+
+            return SetLoser(loser)
+                .SetWinner(winner)
+                .SetIsDraw(playersSyncMessage.First.Score == playersSyncMessage.Second.Score);
+        }
 
         public void AddScoreToSelfIfWinner()
         {

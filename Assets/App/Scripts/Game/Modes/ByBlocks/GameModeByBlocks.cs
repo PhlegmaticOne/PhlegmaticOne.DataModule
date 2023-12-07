@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using App.Scripts.Common.Pools;
 using App.Scripts.Game.Features._Common.Services;
 using App.Scripts.Game.Features.Blocks.Models;
 using App.Scripts.Game.Modes.Base;
@@ -46,20 +45,7 @@ namespace App.Scripts.Game.Modes.ByBlocks
 
         public override GameEndStateViewModel BuildGameEndStateViewModel(PlayersSyncMessage playersSyncMessage)
         {
-            var viewModel = new GameEndStateViewModel(PlayerService)
-            {
-                IsDraw = playersSyncMessage.First.Score == playersSyncMessage.Second.Score
-            };
-
-            var winner = playersSyncMessage.First.Score > playersSyncMessage.Second.Score
-                ? playersSyncMessage.First
-                : playersSyncMessage.Second;
-            
-            var loser = playersSyncMessage.First.Score < playersSyncMessage.Second.Score
-                ? playersSyncMessage.First
-                : playersSyncMessage.Second;
-
-            return viewModel.SetWinner(winner).SetLoser(loser);
+            return new GameEndStateViewModel(PlayerService).SetDefaultsFromPlayers(playersSyncMessage);
         }
 
         protected override void ApplyReceivedData()

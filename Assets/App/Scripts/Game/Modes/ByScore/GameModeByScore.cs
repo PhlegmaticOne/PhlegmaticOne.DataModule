@@ -28,20 +28,7 @@ namespace App.Scripts.Game.Modes.ByScore
         
         public override GameEndStateViewModel BuildGameEndStateViewModel(PlayersSyncMessage playersSyncMessage)
         {
-            var viewModel = new GameEndStateViewModel(PlayerService)
-            {
-                IsDraw = playersSyncMessage.First.Score == playersSyncMessage.Second.Score
-            };
-
-            var winner = playersSyncMessage.First.Score > playersSyncMessage.Second.Score
-                ? playersSyncMessage.First
-                : playersSyncMessage.Second;
-            
-            var loser = playersSyncMessage.First.Score < playersSyncMessage.Second.Score
-                ? playersSyncMessage.First
-                : playersSyncMessage.Second;
-
-            return viewModel.SetWinner(winner).SetLoser(loser);
+            return new GameEndStateViewModel(PlayerService).SetDefaultsFromPlayers(playersSyncMessage);
         }
 
         protected override void ApplyReceivedData()

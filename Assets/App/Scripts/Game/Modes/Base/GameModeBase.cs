@@ -8,7 +8,6 @@ namespace App.Scripts.Game.Modes.Base
 {
     public abstract class GameModeBase<T> : MonoBehaviour, IGameMode where T : GameDataBase
     {
-        [SerializeField] private TextMeshProUGUI _otherPlayerText;
         [SerializeField] private TextMeshProUGUI _currentPlayerText;
         
         protected T GameDataBase;
@@ -35,7 +34,6 @@ namespace App.Scripts.Game.Modes.Base
         }
 
         public abstract bool IsLocalCompleted();
-
         public abstract GameEndStateViewModel BuildGameEndStateViewModel(PlayersSyncMessage playersSyncMessage);
         protected virtual void ApplyReceivedData() { }
     }

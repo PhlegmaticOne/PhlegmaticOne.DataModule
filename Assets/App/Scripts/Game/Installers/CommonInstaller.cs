@@ -10,6 +10,7 @@ using App.Scripts.Game.Infrastructure.Session;
 using App.Scripts.Game.Modes.Base;
 using App.Scripts.Game.Modes.ByBlocks;
 using App.Scripts.Game.Modes.ByScore;
+using App.Scripts.Game.Modes.ByTime;
 using App.Scripts.Game.States;
 using UnityEngine;
 using Zenject;
@@ -21,6 +22,7 @@ namespace App.Scripts.Game.Installers {
 
         [SerializeField] private GameModeByScore _gameModeByScore;
         [SerializeField] private GameModeByBlocks _gameModeByBlocks;
+        [SerializeField] private GameModeByTime _gameModeByTime;
         
         public override void InstallBindings() {
             BindCameraProvider();
@@ -37,6 +39,7 @@ namespace App.Scripts.Game.Installers {
         {
             Container.Bind<IGameMode>().To<GameModeByScore>().FromInstance(_gameModeByScore).AsSingle();
             Container.Bind<IGameMode>().To<GameModeByBlocks>().FromInstance(_gameModeByBlocks).AsSingle();
+            Container.Bind<IGameMode>().To<GameModeByTime>().FromInstance(_gameModeByTime).AsSingle();
             Container.Bind<IGameModeProvider>().To<GameModeProvider>().AsSingle();
         }
 

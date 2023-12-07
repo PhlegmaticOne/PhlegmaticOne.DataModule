@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Assets.App.Scripts.Shared.Network;
 using Newtonsoft.Json;
+using PhlegmaticOne.FruitNinja.Server.Messages.Clients;
 using PhlegmaticOne.FruitNinja.Shared;
 using Telepathy;
 using UnityEngine;
@@ -89,7 +90,7 @@ namespace App.Scripts.Game.Infrastructure.Session {
         private void OnData(ArraySegment<byte> message) {
             if (IsMessageOfType(message, SyncStart))
             {
-                var clientsCountMessage = ParseObjectFromMessage<ClientsCountMessage>(message, SyncStart.Length);
+                var clientsCountMessage = ParseObjectFromMessage<ClientsConnectedMessage>(message, SyncStart.Length);
                 UpdateWaitingState(clientsCountMessage.ClientsConnected);
                 return;
             }
