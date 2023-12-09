@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Menu.Bootstrap;
+using App.Scripts.Menu.Features.Leaderboard.ViewModels;
 using App.Scripts.Menu.Features.Progress.ViewModels;
 using App.Scripts.Menu.Features.Statistics.Services;
 using App.Scripts.Menu.Features.Statistics.ViewModels;

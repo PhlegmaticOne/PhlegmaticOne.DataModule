@@ -3,16 +3,20 @@ using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Scripts.Common.Dialogs.Manager;
+using App.Scripts.Menu.Features.Leaderboard.ViewModels;
 
 public class LeaderboardSelectService : ILeaderboadSelectService
 {
+    private readonly IDialogsManager _dialogsManager;
     private readonly FirebaseDatabase _database;
-    public LeaderboardSelectService()
+    public LeaderboardSelectService(IDialogsManager dialogsManager)
     {
+        _dialogsManager = dialogsManager;
         _database = FirebaseDatabase.DefaultInstance;
     }
 
-    public async Task<IReadOnlyList<LeaderboardEntry>> SelectTopPlayersAsync(int count)
+    public async Task<IReadOnlyList<LeaderboardEntryViewModel>> SelectTopPlayersAsync(int count)
     {
         var usersReference = _database.RootReference.Child("users");
 
@@ -21,10 +25,10 @@ public class LeaderboardSelectService : ILeaderboadSelectService
             .LimitToLast(count)
             .GetValueAsync();
 
-        return ToLeaderboardEntries(querySnapshot).ToList();
+        return ToLeaderboardEntries(querySnapshot).OrderByDescending(x => x.GlobalScore).ToList();
     }
 
-    private IEnumerable<LeaderboardEntry> ToLeaderboardEntries(DataSnapshot snapshot)
+    private IEnumerable<LeaderboardEntryViewModel> ToLeaderboardEntries(DataSnapshot snapshot)
     {
         return snapshot.Children.Reverse().Select(x => {
             var stateChild = x.Child(nameof(PlayerState));
@@ -32,7 +36,10 @@ public class LeaderboardSelectService : ILeaderboadSelectService
             var nameChild = stateChild.Child(nameof(PlayerState.Name));
             var maxScore = int.Parse(maxScoreChild.Value.ToString());
             var name = nameChild.Value.ToString();
-            return new LeaderboardEntry(name, maxScore);
+            var userId = x.Key;
+            
+            return new LeaderboardEntryViewModel(_dialogsManager)
+                .WithSetup(name, maxScore, userId);
         });
     }
 }

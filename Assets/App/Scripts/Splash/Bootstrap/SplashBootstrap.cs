@@ -4,6 +4,7 @@ using App.Scripts.Common.ViewModels;
 using App.Scripts.Splash.Features.Progress.Models;
 using App.Scripts.Splash.Services.Initializer;
 using Cysharp.Threading.Tasks;
+using Firebase.Database;
 using UnityEngine;
 using Zenject;
 
@@ -33,6 +34,7 @@ namespace App.Scripts.Splash.Bootstrap {
             await _modelViewsBootstrap.InitializeAsync();
             await AppInitializedAndScreenLoaded();
             await _sceneProvider.LoadSceneAsync(SceneType.Menu);
+            FirebaseDatabase.GetInstance("https://datamodulegame-default-rtdb.firebaseio.com/").SetPersistenceEnabled(false);
             _modelViewsBootstrap.Dispose();
         }
 

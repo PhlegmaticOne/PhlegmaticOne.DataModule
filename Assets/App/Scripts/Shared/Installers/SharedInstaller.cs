@@ -21,6 +21,7 @@ namespace App.Scripts.Shared.Installers {
 
         private void BindPlayerScoreService() {
             Container.Bind<IPlayerService>().To<PlayerService>().AsSingle();
+            Container.Bind<IUserStatisticsService>().To<UserStatisticsService>().AsSingle();
             Container.Bind<IStatisticsService>().To<StatisticsService>().AsSingle();
         }
         

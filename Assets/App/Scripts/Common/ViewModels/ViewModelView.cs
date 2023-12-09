@@ -10,9 +10,9 @@ namespace App.Scripts.Common.ViewModels {
     }
     
     public class ViewModelView<T> : ViewModelView where T : BaseViewModel {
-        protected T ViewModel;
-
         protected void SetupViewModel(T viewModel) => ViewModel = viewModel;
+        
+        public T ViewModel { get; private set; }
 
         public override async Task InitializeAsync() {
             await ViewModel.InitializeAsync();

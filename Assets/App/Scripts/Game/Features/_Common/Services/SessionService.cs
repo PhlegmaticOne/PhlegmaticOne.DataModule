@@ -7,13 +7,13 @@ using Assets.App.Scripts.Game.Features.Blocks.Models;
 namespace App.Scripts.Game.Features.Score.Services
 {
     public class SessionService : ISessionService {
-        private readonly IStatisticsService _statisticsService;
+        private readonly IUserStatisticsService _userStatisticsService;
         private int _sessionScore;
         private readonly Dictionary<BlockType, int> _slices;
 
-        public SessionService(IStatisticsService statisticsService)
+        public SessionService(IUserStatisticsService userStatisticsService)
         {
-            _statisticsService = statisticsService;
+            _userStatisticsService = userStatisticsService;
             _slices = new Dictionary<BlockType, int>();
         }
 
@@ -35,7 +35,7 @@ namespace App.Scripts.Game.Features.Score.Services
                 _slices.Add(blockType, 1);
             }
             
-            _statisticsService.AddSlice(BlockTypesMapper.MapFromBlockType(blockType));
+            _userStatisticsService.AddSlice(BlockTypesMapper.MapFromBlockType(blockType));
         }
 
         public int GetSlicesCount(BlockType blockType)

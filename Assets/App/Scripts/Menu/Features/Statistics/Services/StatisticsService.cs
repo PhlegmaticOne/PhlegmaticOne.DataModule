@@ -1,40 +1,28 @@
-﻿using App.Scripts.Menu.Features.Statistics.Models;
-using App.Scripts.Menu.Features.Statistics.Services;
-using PhlegmaticOne.DataStorage.Storage;
-using PhlegmaticOne.DataStorage.Storage.Base;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using App.Scripts.Menu.Features.Statistics.Models;
+using Firebase.Database;
+using Newtonsoft.Json;
 
-namespace Assets.App.Scripts.Menu.Features.Statistics.Services
+namespace App.Scripts.Menu.Features.Statistics.Services
 {
     public class StatisticsService : IStatisticsService
     {
-        private readonly IDataStorage _dataStorage;
-
-        private IValueSource<StatisticsModel> _statisticsSource;
-
-        public StatisticsService(IDataStorage dataStorage)
+        private readonly FirebaseDatabase _database;
+        public StatisticsService()
         {
-            _dataStorage=dataStorage;
+            _database = FirebaseDatabase.DefaultInstance;
         }
-
-        public void AddSlice(StatisticsBlockType blockType)
+        
+        public async Task<StatisticsModel> LoadStatisticsAsync(string userId)
         {
-            _statisticsSource.AsTrackable().AddSlice(blockType);
-        }
+            var value = await _database.RootReference
+                .Child("users")
+                .Child(userId)
+                .Child(nameof(StatisticsModel))
+                .GetValueAsync();
 
-        public async Task InitializeAsync()
-        {
-            _statisticsSource = await _dataStorage.ReadAsync<StatisticsModel>();
-
-            if (_statisticsSource.NoValue())
-            {
-                _statisticsSource.SetRaw(StatisticsModel.Initial);
-            }
-        }
-
-        public StatisticsModel LoadStatistics()
-        {
-            return _statisticsSource.AsNoTrackable();
+            var json = value.GetRawJsonValue();
+            return JsonConvert.DeserializeObject<StatisticsModel>(json);
         }
     }
 }

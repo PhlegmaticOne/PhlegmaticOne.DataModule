@@ -26,8 +26,13 @@ namespace App.Scripts.Splash.Installers {
 
         private void BindAuthWindow()
         {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR
             _authWindow.SetRawData("editor@gmail.com", "Qwerty!1234");
+#else
+            _authWindow.SetRawData("editor@gmail.com", "Qwerty!1234");
+#endif
+            
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
             Container.Bind<IAuthSource>().FromInstance(_authWindow).AsSingle();
 #endif
         }

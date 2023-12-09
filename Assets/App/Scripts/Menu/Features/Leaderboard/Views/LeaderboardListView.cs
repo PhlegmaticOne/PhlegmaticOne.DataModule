@@ -1,8 +1,12 @@
 using App.Scripts.Common.ViewModels;
+using App.Scripts.Menu.Features.Leaderboard.ViewModels;
 using UnityEngine;
 
-public class LeaderboardListView : ViewModelListView<LeaderboardEntry, LeaderboardEntryView>
+namespace App.Scripts.Menu.Features.Leaderboard.Views
 {
-    [SerializeField] private RectTransform _contentTransform;
-    protected override RectTransform ContentTransform => _contentTransform;
+    public class LeaderboardListView : ViewModelListView<LeaderboardEntryViewModel, LeaderboardEntryView>
+    {
+        [SerializeField] private RectTransform _contentTransform;
+        protected override RectTransform ContentTransform => _contentTransform;
+    }
 }

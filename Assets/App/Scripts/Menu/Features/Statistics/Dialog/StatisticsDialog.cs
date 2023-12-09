@@ -7,8 +7,12 @@ using UnityEngine;
 namespace App.Scripts.Menu.Features.Statistics.Dialog {
     public class StatisticsDialog : BaseDialogController {
         [SerializeField] private ViewModelView<StatisticsViewModel> _statisticsView;
+        
+        public string UserId { get; set; }
 
-        protected override Task OnShowing() {
+        protected override Task OnShowing()
+        {
+            _statisticsView.ViewModel.UserId = UserId;
             return _statisticsView.InitializeAsync();
         }
 

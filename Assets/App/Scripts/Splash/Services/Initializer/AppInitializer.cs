@@ -12,7 +12,7 @@ namespace App.Scripts.Splash.Services.Initializer {
         private readonly IFirebaseInitializer _firebaseInitializer;
         private readonly IAuthProvider _authProvider;
         private readonly IPlayerService _playerScoreService;
-        private readonly IStatisticsService _statisticsService;
+        private readonly IUserStatisticsService _userStatisticsService;
         private readonly IAuthSource _authSource;
         private readonly ILocalizationProvider _localizationProvider;
 
@@ -21,13 +21,13 @@ namespace App.Scripts.Splash.Services.Initializer {
             ILocalizationProvider localizationProvider,
             IAuthProvider authProvider,
             IPlayerService playerScoreService,
-            IStatisticsService statisticsService,
+            IUserStatisticsService userStatisticsService,
             IAuthSource authSource)
         {
             _firebaseInitializer = firebaseInitializer;
             _authProvider = authProvider;
             _playerScoreService = playerScoreService;
-            _statisticsService=statisticsService;
+            _userStatisticsService=userStatisticsService;
             _authSource=authSource;
             _localizationProvider = localizationProvider;
         }
@@ -37,7 +37,7 @@ namespace App.Scripts.Splash.Services.Initializer {
             await _firebaseInitializer.InitializeAsync();
             await _authProvider.SignInAsync(_authSource);
             await _playerScoreService.InitializeAsync();
-            await _statisticsService.InitializeAsync();
+            await _userStatisticsService.InitializeAsync();
         }
     }
 }

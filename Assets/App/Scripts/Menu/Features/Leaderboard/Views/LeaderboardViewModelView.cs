@@ -1,4 +1,6 @@
 ﻿using App.Scripts.Common.ViewModels;
+using App.Scripts.Menu.Features.Leaderboard.ViewModels;
+using App.Scripts.Menu.Features.Leaderboard.Views;
 using UnityEngine;
 
 namespace Assets.App.Scripts.Menu.Features.Leaderboard.Views
