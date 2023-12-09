@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791319450714456055}
+  - component: {fileID: 5484677388367176583}
   m_Layer: 11
   m_Name: Heart
   m_TagString: Untagged
@@ -38,6 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 70, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5484677388367176583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791319450714456052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395eaca41e6e4385bd2086b7a6c8b7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heartImage: {fileID: 809062571299597655}
+  _shadowImage: {fileID: 7128074635803345785}
+  _fadeDuration: 1
 --- !u!1 &4504265175934305756
 GameObject:
   m_ObjectHideFlags: 0

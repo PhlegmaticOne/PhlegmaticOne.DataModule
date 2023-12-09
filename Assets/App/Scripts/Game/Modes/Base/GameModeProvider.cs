@@ -13,7 +13,9 @@ namespace App.Scripts.Game.Modes.Base
         {
             _gameModes = gameModes.ToDictionary(x => x.GameModeType, x => x);
         }
-        
+
+        public GameModeType GameModeType => _currentGameMode.GameModeType;
+
         public void ApplyGameMode(GameDataBase gameDataBase)
         {
             _currentGameMode = _gameModes[gameDataBase.GameModeType];

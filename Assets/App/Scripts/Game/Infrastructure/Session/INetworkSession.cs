@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using App.Scripts.Game.Modes.Base;
 using PhlegmaticOne.FruitNinja.Shared;
 
 namespace App.Scripts.Game.Infrastructure.Session {

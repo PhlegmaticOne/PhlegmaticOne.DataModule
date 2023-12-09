@@ -58,6 +58,15 @@ namespace App.Scripts.Game.Infrastructure.Session {
 
         public Task<GameDataBase> ReceiveGameDataAsync()
         {
+            if(_networkDataProvider.NetworkData.TestNotConnect)
+            {
+                return Task.FromResult(new GameDataByLifes
+                {
+                    LifesCount = 3,
+                    GameModeType = GameModeType.ByLifes
+                } as GameDataBase);
+            }
+
             _gameDataCompletionSource = new TaskCompletionSource<GameDataBase>();
             _cancellationTokenSource = new CancellationTokenSource();
             ListenMessages(_cancellationTokenSource.Token);

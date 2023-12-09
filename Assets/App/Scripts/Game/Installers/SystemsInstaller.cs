@@ -7,6 +7,7 @@ using App.Scripts.Game.Features.Combo.Systems;
 using App.Scripts.Game.Features.Cutting.Systems;
 using App.Scripts.Game.Features.Freezing.Systems;
 using App.Scripts.Game.Features.FruitBasket.Systems;
+using App.Scripts.Game.Features.Health.Systems;
 using App.Scripts.Game.Features.Magnet.Systems;
 using App.Scripts.Game.Features.Network.Systems;
 using App.Scripts.Game.Features.Packages.Systems;
@@ -73,6 +74,9 @@ namespace App.Scripts.Game.Installers {
             
             Container.Bind<ISystem>().To<SystemCuttingCheckSplitBlocks>().AsSingle();
             Container.Bind<ISystem>().To<SystemCuttingSplitBlock>().AsSingle();
+
+            Container.Bind<ISystem>().To<SystemHealthCheck>().AsSingle();
+            Container.Bind<ISystem>().To<SystemHealthAction>().AsSingle();
             
             Container.Bind<ISystem>().To<SystemBoardStateCheck>().AsSingle();
             
