@@ -46,9 +46,9 @@ namespace App.Scripts.Game.Features.Bomb.Systems {
             foreach (var entity in _blocksFilter.Apply(World)) {
                 var block = entity.GetComponent<ComponentBlock>().Block;
                 
-                if (block.IsRemote != componentThrowBlocks.IsRemote) {
-                    continue;
-                }
+                // if (block.IsRemote != componentThrowBlocks.IsRemote) {
+                //     continue;
+                // }
                 
                 var gravity = entity.GetComponent<ComponentGravity>();
                 var direction = block.transform.position - destroyingBlockPosition;
