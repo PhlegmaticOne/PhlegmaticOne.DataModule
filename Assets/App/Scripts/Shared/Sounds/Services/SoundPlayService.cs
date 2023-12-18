@@ -5,6 +5,7 @@ namespace App.Scripts.Shared.Sounds.Services
 {
     public class SoundPlayService : ISoundPlayService
     {
+        private static bool _isMuted;
         private readonly AudioSource _audioSource;
         private readonly SoundSystemConfig _soundSystemConfig;
 
@@ -15,7 +16,7 @@ namespace App.Scripts.Shared.Sounds.Services
             IsMuted = false;
         }
 
-        public bool IsMuted { get; private set; }
+        public bool IsMuted { get => _isMuted; private set => _isMuted = value; }
 
         public void PlaySound(SoundType soundType)
         {

@@ -22,7 +22,6 @@ namespace Assets.App.Scripts.Menu.Features.Settings.ViewModel
         }
 
         public IRelayCommand SaveNameCommand { get; }
-
         public ReactiveProperty<string> UserName { get; }
         public ReactiveProperty<bool> MuteSound { get; }
 
